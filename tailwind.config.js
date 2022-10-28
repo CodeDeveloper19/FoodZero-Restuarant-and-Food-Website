@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/App.js', './src/components/Homepage/homepage.js', './src/components/Homepage/pricelist.js', './public/index.html'],
+  content: ['./src/App.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
+  './src/components/Homepage/pricelist.js', './src/components/Homepage/cuisinelisting.js', './src/components/Homepage/reviewlisting.js', 
+  './src/components/Homepage/producelisting.js',  './public/index.html'],
   theme: {
     extend: {},
     colors: {
@@ -20,17 +22,17 @@ module.exports = {
     },
     fontSize: {
       sm: '0.875rem', //14px
-      xxxsm: '1.125rem', //18px
-      xxsm: '1.25rem', //20px
-      xsm: '1.375rem', //22px
-      base: '11px', //24px
-      xl: '1.625rem', //26px
-      xxl: '2rem', //32px
-      xxxl: '20px', //48px
+      xxxsm: '10px', //18px
+      xxsm: '11px', //20px
+      xsm: '12px', //22px
+      base: '13px', //24px
+      xl: '14px', //26px
+      xxl: '20px', //32px
+      xxxl: '25px', //48px
       xxxxl: '4.125rem', //66px
       xxxxxl: '30px', //68px
       xxxxxxl: '5.5rem', //88px
-      xxxxxxxl: '47px', //108px
+      xxxxxxxl: '49px', //108px
       xxxxxxxxl: '65px', //148px
     }
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import logo from '../../images/Logo.svg';
 import navbutton from '../../images/NaviOpen.svg';
 import spice1 from '../../images/Spices/spices1.png';
@@ -7,15 +7,26 @@ import spice3 from '../../images/Spices/spices3.png';
 import saltpepper from '../../images/Spices/salt_pepper.png';
 import cuisine1 from '../../images/cuisine_homepage.png';
 import cuisine2 from '../../images/cuisine2_homepage.png';
+import cuisine3 from '../../images/cuisine3_homepage.png';
+import cuisine4 from '../../images/cuisine4_homepage.png';
+import cuisine5 from '../../images/cuisine5_homepage.png';
 import leaves from '../../images/green_leaves.png';
 import manseasoning from '../../images/man_seasoning.png'; 
 import leaf from '../../images/SeasoningsAndFruits/LeafBlack.svg'; 
 import leaf2 from '../../images/SeasoningsAndFruits/LeafBlack2.svg'; 
 import Pricelist from './pricelist';
 import Producelisting from './producelisting';
+import Postlisting from './postlisting';
+import Cuisinelisting from './cuisinelisting';
+import Reviewlisting from './reviewlisting';
 import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
 import lemon from '../../images/Icons/lemondark.svg';
+import postimage1 from '../../images/postimage1.png';
+import postimage2 from '../../images/postimage2.png';
+import author1 from '../../images/author1.png';
+import author2 from '../../images/author2.png';
+import reviewer1 from '../../images/reviewer1.png';
 
 const priceListData = [
     {
@@ -62,7 +73,78 @@ const produceListData = [
     },
 ]
 
+const postListData = [
+    {
+        id: 'post1',
+        imageUrl: postimage1,
+        postAuthor: 'Julie Christie',
+        authorImage: author1,
+        postDate: 'October 17,2022',
+        postTime: '3:33 pm',
+        numberOfComments: 2,
+        postTitle: 'Fruit and vegetables and protection against diseases',
+        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    },
+    {
+        id: 'post2',
+        imageUrl: postimage2,
+        postAuthor: 'Dianne Russell',
+        authorImage: author2,
+        postDate: 'October 17,2022',
+        postTime: '3:33 pm',
+        numberOfComments: 2,
+        postTitle: "Asparagus Spring Salad with Rocket, Goat's Cheese",
+        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    }
+]
+
+const cuisineListData = [
+    {
+        id: 'cusine1',
+        imageUrl: cuisine3,
+        cuisineType: 'Starters'
+    },
+    {
+        id: 'cusine2',
+        imageUrl: cuisine4,
+        cuisineType: 'Mains'
+    }, 
+    {
+        id: 'cusine3',
+        imageUrl: cuisine5,
+        cuisineType: 'Soups'
+    }
+]
+
+const reviewListData = [
+    {
+        id: 'review1',
+        reviewAuthor: 'John Doe',
+        occupation: 'Blogger',
+        reviewerImage: reviewer1,
+        pageNumber: '1/3'
+    },
+    {
+        id: 'review2',
+        reviewAuthor: 'Michael Downson',
+        occupation: 'Food Critic',
+        reviewerImage: reviewer1,
+        pageNumber: '2/3'
+    },
+    {
+        id: 'review3',
+        reviewAuthor: 'Dutch Grimshaw',
+        occupation: 'Blogger',
+        reviewerImage: reviewer1,
+        pageNumber: '3/3'
+    },
+]
+
+export const SliderPositionContext = createContext();
+
 export default function Homepage(){
+    const [sliderPosition, setSliderPosition] = useState('0px');
+
     return (
         <>
         <header className='w-full h-[90px] pl-[30px] pr-[60px] pt-[30px] flex flex-row justify-between'>
@@ -130,8 +212,8 @@ export default function Homepage(){
                 </div>
             </section>
             <section className='relative flex flex-col justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-lightwhite'>
-                <img className='absolute w-[450px] h-[450px] z-10 -bottom-[40px] left-[80px]' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
-                <img className='absolute w-[200px] h-[200px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
+                <img className='absolute w-[450px] h-[450px] z-10 -bottom-[40px] left-[47px]' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
+                <img className='absolute w-[200px] h-[200px] left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
                 <div className='absolute flex flex-col justify-between w-fit h-fit min-h-[180px] right-[150px]'>
                     <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-[250px]'>
                         Excellent cook
@@ -142,13 +224,83 @@ export default function Homepage(){
                 </div>
                 <img className='absolute w-[250px] h-[250px] right-[160px] bottom-0' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
             </section>
-            <section className='relative flex flex-col justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-white'>
-                <div className='flex flex-row justify-between w-full h-2/5'>
+            <section className='w-full h-fit py-[120px] px-[60px] bg-white'>
+                <div className='flex flex-row justify-between w-full h-full'>
                     {
                         produceListData.map((produceListData) => {
                             return <Producelisting key={produceListData.id} {...produceListData} />
                         })
                     }   
+                </div>
+            </section>
+            <section className='flex flex-row justify-between w-full h-fit pt-[50px] pb-[70px] px-[60px] bg-white'>
+                {
+                    postListData.map((postListData) => {
+                        return <Postlisting key={postListData.id} {...postListData} />
+                    })
+                }   
+            </section>
+            <section className='flex flex-col items-center w-full h-fit py-[150px] px-[60px] bg-lightwhite'>
+                <h2 className='font-rufina font-bold text-xxxxxxxl'>Make a Reservation</h2>
+                <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
+                <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
+                    <div className='mt-[70px] mb-[100px] w-full h-[50px] flex flex-row justify-between'>
+                        <input className='h-full w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base' type='date' aria-label='reservation date' required></input>
+                        <div className='h-full w-1/4 border bg-lightwhite px-[20px]'>
+                            <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
+                                <option value="">Time for Reservation</option>
+                                <option value="08:00am">08:00am</option>
+                                <option value="09:00am">09:00am</option>
+                                <option value="10:00am">10:00am</option>
+                                <option value="11:00am">11:00am</option>
+                                <option value="12:00pm">12:00pm</option>
+                                <option value="01:00pm">01:00pm</option>
+                                <option value="02:00pm">02:00pm</option>
+                                <option value="03:00pm">03:00pm</option>
+                                <option value="04:00pm">04:00pm</option>
+                                <option value="05:00pm">05:00pm</option>
+                                <option value="06:00pm">06:00pm</option>
+                                <option value="07:00pm">07:00pm</option>
+                                <option value="08:00pm">08:00pm</option>
+                                <option value="09:00pm">09:00pm</option>
+                                <option value="10:00pm">10:00pm</option>
+                                <option value="11:00pm">11:00pm</option>
+                            </select>
+                        </div>
+                        <div className='h-full w-1/4 border bg-lightwhite px-[20px]'>
+                            <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='number of persons' required>
+                                <option value="">Number Of Persons</option>
+                                <option value="1 person">1 person</option>
+                                <option value="2 persons">2 persoms</option>
+                                <option value="3 persons">3 persons</option>
+                                <option value="4 persons">4 persons</option>
+                                <option value="5 persons">5 persons</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <input className='bg-darkgreen w-[200px] h-[50px] text-white' type='submit' value='BOOK NOW'></input>     
+                </form>
+            </section>
+            <section className='flex flex-col items-center w-full h-fit min-h-[500px] py-[60px] px-[60px] bg-white'>
+                <h2 className='font-rufina font-bold text-xxxxxxxl text-center w-[365px]'>Calories Energy Balance</h2>
+                <p className='font-lato font-normal text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div className='w-full h-[450px] mt-[100px] flex flex-row justify-between'>
+                    {
+                        cuisineListData.map((cuisineListData) => {
+                            return <Cuisinelisting key={cuisineListData.id} {...cuisineListData}/>
+                        })
+                    }
+                </div>
+            </section>
+            <section className='w-full min-h-[500px] h-fit bg-white overflow-x-hidden'>
+                <div className='flex flex-row w-fit h-full bg-white relative' style={{left: sliderPosition}}>
+                    {/* <SliderPositionContext.Provider value={[setSliderPosition]}> */}
+                        {
+                            reviewListData.map((reviewListData) => {
+                                return <Reviewlisting key={reviewListData.key} {...reviewListData}/>
+                            })
+                        }
+                    {/* </SliderPositionContext.Provider> */}
                 </div>
             </section>
         </main>
