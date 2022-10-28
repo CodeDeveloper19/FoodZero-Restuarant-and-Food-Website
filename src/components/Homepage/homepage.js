@@ -12,6 +12,10 @@ import manseasoning from '../../images/man_seasoning.png';
 import leaf from '../../images/SeasoningsAndFruits/LeafBlack.svg'; 
 import leaf2 from '../../images/SeasoningsAndFruits/LeafBlack2.svg'; 
 import Pricelist from './pricelist';
+import Producelisting from './producelisting';
+import fish from '../../images/Icons/fishdark.svg';
+import carrot from '../../images/Icons/carrotdark.svg';
+import lemon from '../../images/Icons/lemondark.svg';
 
 const priceListData = [
     {
@@ -32,6 +36,30 @@ const priceListData = [
         dish2: 'Natural Wine Pairing',
         dish_description2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     }
+]
+
+const produceListData = [
+    {
+        id: 'fish',
+        title: 'Premium Quality',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu',
+        imageUrl: fish,
+        imagedescription: 'ilustration of a fish'
+    },
+    {
+        id: 'carrot',
+        title: 'Seasonal Vegetables',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu',
+        imageUrl: carrot,
+        imagedescription: 'ilustration of a carrot'
+    },
+    {
+        id: 'lemon',
+        title: 'Fresh Fruit',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu',
+        imageUrl: lemon,
+        imagedescription: 'ilustration of a lemon'
+    },
 ]
 
 export default function Homepage(){
@@ -115,6 +143,13 @@ export default function Homepage(){
                 <img className='absolute w-[250px] h-[250px] right-[160px] bottom-0' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
             </section>
             <section className='relative flex flex-col justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-white'>
+                <div className='flex flex-row justify-between w-full h-2/5'>
+                    {
+                        produceListData.map((produceListData) => {
+                            return <Producelisting key={produceListData.id} {...produceListData} />
+                        })
+                    }   
+                </div>
             </section>
         </main>
         <footer>
