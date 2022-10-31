@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext} from 'react';
 import logo from '../../images/Logo.svg';
 import navbutton from '../../images/NaviOpen.svg';
 import spice1 from '../../images/Spices/spices1.png';
@@ -19,6 +19,7 @@ import Producelisting from './producelisting';
 import Postlisting from './postlisting';
 import Cuisinelisting from './cuisinelisting';
 import Reviewlisting from './reviewlisting';
+import Navigation from './navigation';
 import Footer from '../footer';
 import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
@@ -142,45 +143,56 @@ const reviewListData = [
 ]
 
 export const SliderPositionContext = createContext();
+export const NavigationContext = createContext();
 
 export default function Homepage(){
     const [sliderPosition, setSliderPosition] = useState('0px');
+    const [showNavigation, setShowNavigation] = useState(false);
 
     return (
         <>
-        <header className='w-full h-[90px] pl-[30px] pr-[60px] pt-[30px] flex flex-row justify-between'>
-            <div className='flex flex-row justify-between items-center h-full w-fit'>
-                <img className='h-full w-[200px]' src={logo} alt="logo of the FoodZero business" aria-hidden='true'/>
-                <button className='w-[50px] h-[50px]'>
-                    <img className='w-full h-full' src={navbutton} alt='hamburger icon image' aria-hidden='true'/>
-                </button>
+        <header className='relative w-full h-fit min-h-screen flex flex-col'>
+            <NavigationContext.Provider value={[[showNavigation]]}>
+                <Navigation />
+            </NavigationContext.Provider>
+            <div className='w-full h-[90px] pl-[30px] pr-[60px] pt-[30px] flex flex-row justify-between'>
+                <div className='flex flex-row justify-between items-center h-full w-fit'>
+                    <img className='h-full w-[200px]' src={logo} alt="logo of the FoodZero business" aria-hidden='true'/>
+                    <button className='w-[50px] h-[50px]' onClick={
+                        () => {
+                            setShowNavigation(true);
+                        }
+                    }>
+                        <img className='w-full h-full' src={navbutton} alt='hamburger icon image' aria-hidden='true'/>
+                    </button>
+                </div>
+                <div className='flex flex-row justify-between items-center w-[350px] h-[50px]'>
+                    <p className='text-white font-inter'>+86 852 346 000</p>
+                    <button className='text-white font-rufina border border-white w-2/4 h-full'>
+                        Reservations
+                    </button>
+                </div>
             </div>
-            <div className='flex flex-row justify-between items-center w-[350px] h-[50px]'>
-                <p className='text-white font-inter'>+86 852 346 000</p>
-                <button className='text-white font-rufina border border-white w-2/4 h-full'>
-                    Reservations
-                </button>
+            <div className='flex flex-row relative w-full h-fit min-h-[500px] mt-[50px] px-[60px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+                    <div className='flex flex-col justify-between w-[500px] h-[290px] z-10'>
+                        <h1 className='text-white font-rufina text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
+                        <p className='text-white font-lato text-base w-3/5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu</p>
+                    </div>
+                    <div className='absolute w-fit h-fit flex flex-row items-center rotate-90 bottom-[75px] -left-[30px]'>
+                        <p className='text-white font-rufina text-xxxl'>Scroll</p>
+                        <hr className='text-white border-dashed w-[130px]'/>
+                    </div>
+                    <div className='absolute top-[50px] right-[60px] flex flex-col'>
+                        <img className='w-[350px] h-[400px]' src={cuisine1} alt='image of a cuisine' aria-hidden='true'/>            
+                        <div className='absolute -left-[150px] -bottom-[20px] flex flex-row justify-between w-[350px]'>
+                            <img className='w-[100px] h-[95px]' src={spice1} alt='image of a spice' aria-hidden='true'/>
+                            <img className='w-[100px] h-[95px]' src={spice2} alt='image of a spice' aria-hidden='true'/>
+                            <img className='w-[100px] h-[95px]' src={spice3} alt='image of a spice' aria-hidden='true'/>
+                        </div>
+                    </div>
             </div>
         </header>
-        <main className='overflow-hidden w-full h-fit flex flex-col'>
-            <section className='flex flex-row relative w-full h-fit min-h-[500px] mt-[50px] px-[60px]'>
-                <div className='flex flex-col justify-between w-[500px] h-[290px] z-10'>
-                    <h1 className='text-white font-rufina text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
-                    <p className='text-white font-lato text-base w-3/5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu</p>
-                </div>
-                <div className='absolute w-fit h-fit flex flex-row items-center rotate-90 bottom-[75px] -left-[35px]'>
-                    <p className='text-white font-rufina text-xxxl'>Scroll</p>
-                    <hr className='text-white border-dashed w-[150px]'/>
-                </div>
-                <div className='absolute top-[50px] right-[60px] flex flex-col'>
-                    <img className='w-[350px] h-[400px]' src={cuisine1} alt='image of a cuisine' aria-hidden='true'/>            
-                    <div className='absolute -left-[150px] -bottom-[20px] flex flex-row justify-between w-[350px]'>
-                        <img className='w-[100px] h-[95px]' src={spice1} alt='image of a spice' aria-hidden='true'/>
-                        <img className='w-[100px] h-[95px]' src={spice2} alt='image of a spice' aria-hidden='true'/>
-                        <img className='w-[100px] h-[95px]' src={spice3} alt='image of a spice' aria-hidden='true'/>
-                    </div>
-                </div>
-            </section>
+        <main className='overflow-hidden w-full h-fit flex flex-col' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <section className='flex flex-row justify-between w-full h-fit min-h-[500px] mt-[80px] px-[60px]'>
                 <div className='flex flex-col justify-between w-[490px] h-[470px]'>
                     <img className='w-full h-[300px]' src={cuisine2} alt='image of a cuisine' aria-hidden='true'/>
@@ -204,7 +216,7 @@ export default function Homepage(){
                     <h2 className='text-black font-rufina text-xxxxxxxl font-bold'>Our Menu</h2>
                     <p className='text-black font-lato text-base font-normal'>This is a section of your menu. Give your section a brief description</p>
                 </div>
-                <div className='flex flex-col justify-between w-full h-[400px] mt-[50px]'>
+                <div className='flex flex-col justify-between w-full h-[400px] my-[50px]'>
                     {
                         priceListData.map((priceListData) => {
                             return <Pricelist key={priceListData.id} {...priceListData}/>
@@ -279,7 +291,7 @@ export default function Homepage(){
                             </select>
                         </div>
                     </div> 
-                    <input className='bg-darkgreen w-[200px] h-[50px] text-white' type='submit' value='BOOK NOW'></input>     
+                    <button className='bg-darkgreen w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</button>     
                 </form>
             </section>
             <section className='flex flex-col items-center w-full h-fit min-h-[500px] py-[60px] px-[60px] bg-white'>
@@ -305,7 +317,9 @@ export default function Homepage(){
                 </div>
             </section>
         </main>
-        <Footer />
+        <NavigationContext.Provider value={[[showNavigation]]}>
+            <Footer />
+        </NavigationContext.Provider>
         </>
     )
 }

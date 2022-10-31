@@ -21,7 +21,7 @@ module.exports = {
       inter: ['Inter', 'sans-serif']
     },
     fontSize: {
-      sm: '0.875rem', //14px
+      sm: '8px', //14px
       xxxsm: '10px', //18px
       xxsm: '11px', //20px
       xsm: '12px', //22px
@@ -30,7 +30,7 @@ module.exports = {
       xxl: '20px', //32px
       xxxl: '25px', //48px
       xxxxl: '4.125rem', //66px
-      xxxxxl: '30px', //68px
+      xxxxxl: '35px', //68px
       xxxxxxl: '5.5rem', //88px
       xxxxxxxl: '49px', //108px
       xxxxxxxxl: '65px', //148px
