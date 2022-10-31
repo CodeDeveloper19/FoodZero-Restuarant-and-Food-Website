@@ -5,7 +5,11 @@ import rightarrowblack from '../../images/Icons/rightarrowblack.svg';
 import leftarrowblack from '../../images/Icons/leftarrowblack.svg';
 
 export default function Reviewlisting(props){
-    // const [[setSliderPosition]] = useContext(SliderPositionContext);
+    const [[sliderPosition, setSliderPosition]] = useContext(SliderPositionContext);
+
+    const settingPosition = () => {
+        setSliderPosition('500px')
+    }
 
     return(
         <>
@@ -23,7 +27,7 @@ export default function Reviewlisting(props){
                     <div className='w-2/4 h-[100px] flex flex-row items-center justify-end'>
                         <button 
                         onClick={() => {
-                            alert("A")
+                            settingPosition();
                         }}>
                             <img className='w-[30px] h-[30px]' src={leftarrowblack} alt="reviewers's image" aria-hidden='true'/>
                         </button>

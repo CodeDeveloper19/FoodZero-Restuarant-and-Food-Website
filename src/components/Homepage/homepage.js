@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import logo from '../../images/Logo.svg';
 import navbutton from '../../images/NaviOpen.svg';
 import spice1 from '../../images/Spices/spices1.png';
@@ -19,6 +19,7 @@ import Producelisting from './producelisting';
 import Postlisting from './postlisting';
 import Cuisinelisting from './cuisinelisting';
 import Reviewlisting from './reviewlisting';
+import Footer from '../footer';
 import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
 import lemon from '../../images/Icons/lemondark.svg';
@@ -294,19 +295,17 @@ export default function Homepage(){
             </section>
             <section className='w-full min-h-[500px] h-fit bg-white overflow-x-hidden'>
                 <div className='flex flex-row w-fit h-full bg-white relative' style={{left: sliderPosition}}>
-                    {/* <SliderPositionContext.Provider value={[setSliderPosition]}> */}
+                    <SliderPositionContext.Provider value={[sliderPosition, setSliderPosition]}>
                         {
                             reviewListData.map((reviewListData) => {
-                                return <Reviewlisting key={reviewListData.key} {...reviewListData}/>
+                                return <Reviewlisting key={reviewListData.id} {...reviewListData}/>
                             })
                         }
-                    {/* </SliderPositionContext.Provider> */}
+                    </SliderPositionContext.Provider>
                 </div>
             </section>
         </main>
-        <footer>
-            
-        </footer>
+        <Footer />
         </>
     )
 }
