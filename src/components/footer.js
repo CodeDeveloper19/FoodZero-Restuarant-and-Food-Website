@@ -10,7 +10,7 @@ export default function Footer(){
 
     return(
         <>
-            <footer className='w-full h-fit bg-darkgreen flex flex-col' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <footer className='w-full normal:w-[1349px] h-fit bg-darkgreen flex flex-col' style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <div className='w-full h-fit min-h-[280px] px-[60px] flex flex-row justify-between items-center border-b border-dashed border-b-white'>
                     <h2 className='text-white font-rufina font-bold text-xxxxxl w-[100px]'>Food Zero</h2>
                     <div className='flex flex-col h-fit w-fit'>

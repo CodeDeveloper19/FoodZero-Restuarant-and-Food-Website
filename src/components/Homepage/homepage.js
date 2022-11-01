@@ -1,6 +1,4 @@
 import React, { useState, createContext} from 'react';
-import logo from '../../images/Logo.svg';
-import navbutton from '../../images/NaviOpen.svg';
 import spice1 from '../../images/Spices/spices1.png';
 import spice2 from '../../images/Spices/spices2.png';
 import spice3 from '../../images/Spices/spices3.png';
@@ -21,6 +19,7 @@ import Cuisinelisting from './cuisinelisting';
 import Reviewlisting from './reviewlisting';
 import Navigation from './navigation';
 import Footer from '../footer';
+import Header from '../header';
 import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
 import lemon from '../../images/Icons/lemondark.svg';
@@ -151,28 +150,10 @@ export default function Homepage(){
 
     return (
         <>
-        <header className='relative w-full h-fit min-h-screen flex flex-col'>
-            <NavigationContext.Provider value={[[showNavigation]]}>
-                <Navigation />
+        <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen'>
+            <NavigationContext.Provider value={[[showNavigation, setShowNavigation]]}>
+                <Header />
             </NavigationContext.Provider>
-            <div className='w-full h-[90px] pl-[30px] pr-[60px] pt-[30px] flex flex-row justify-between'>
-                <div className='flex flex-row justify-between items-center h-full w-fit'>
-                    <img className='h-full w-[200px]' src={logo} alt="logo of the FoodZero business" aria-hidden='true'/>
-                    <button className='w-[50px] h-[50px]' onClick={
-                        () => {
-                            setShowNavigation(true);
-                        }
-                    }>
-                        <img className='w-full h-full' src={navbutton} alt='hamburger icon image' aria-hidden='true'/>
-                    </button>
-                </div>
-                <div className='flex flex-row justify-between items-center w-[350px] h-[50px]'>
-                    <p className='text-white font-inter'>+86 852 346 000</p>
-                    <button className='text-white font-rufina border border-white w-2/4 h-full'>
-                        Reservations
-                    </button>
-                </div>
-            </div>
             <div className='flex flex-row relative w-full h-fit min-h-[500px] mt-[50px] px-[60px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
                     <div className='flex flex-col justify-between w-[500px] h-[290px] z-10'>
                         <h1 className='text-white font-rufina text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
@@ -192,7 +173,10 @@ export default function Homepage(){
                     </div>
             </div>
         </header>
-        <main className='overflow-hidden w-full h-fit flex flex-col' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+        <NavigationContext.Provider value={[[showNavigation, setShowNavigation]]}>
+                <Navigation />
+        </NavigationContext.Provider>
+        <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <section className='flex flex-row justify-between w-full h-fit min-h-[500px] mt-[80px] px-[60px]'>
                 <div className='flex flex-col justify-between w-[490px] h-[470px]'>
                     <img className='w-full h-[300px]' src={cuisine2} alt='image of a cuisine' aria-hidden='true'/>
@@ -253,7 +237,7 @@ export default function Homepage(){
                     })
                 }   
             </section>
-            <section className='flex flex-col items-center w-full h-fit py-[150px] px-[60px] bg-lightwhite'>
+            <section id='reservation' className='flex flex-col items-center w-full h-fit py-[150px] px-[60px] bg-lightwhite'>
                 <h2 className='font-rufina font-bold text-xxxxxxxl'>Make a Reservation</h2>
                 <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
                 <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
