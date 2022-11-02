@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/App.js', './src/components/Menupage/menupage.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
+  content: ['./src/App.js', './src/components/Aboutpage/aboutpage.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
   './src/components/Homepage/pricelist.js', './src/components/Homepage/navigation.js', './src/components/Homepage/cuisinelisting.js',
-   './src/components/footer.js', './src/components/header.js', './src/components/Homepage/reviewlisting.js', 
+   './src/components/footer.js', './src/components/header.js', './src/components/reservation.js', './src/components/Homepage/reviewlisting.js', 
   './src/components/Homepage/producelisting.js',  './public/index.html'],
   theme: {
     extend: {},

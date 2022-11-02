@@ -1,18 +1,82 @@
-import React, { useState, createContext } from 'react';
+import React from 'react';
 import Header from '../header';
+import Footer from '../footer';
+import Reservation from '../reservation';
+import Menucuisines from './menucuisines';
+import Navigation from '../Homepage/navigation';
+import HeaderImage from '../../images/Menupage/header_image.png';
+import Drinks from '../../images/Menupage/drinks_image.png'; 
+import Starters from '../../images/Menupage/starters_image.png'; 
+import Mains from '../../images/Menupage/mains_image.png'; 
+import BlueberryImage from '../../images/SeasoningsAndFruits/BlueberryBlack.svg';
 
-export const NavigationContextTwo = createContext();
+const menuCuisineData = [
+    {
+        id: 'Starters',
+        imageUrl: Starters,
+        titleDescription: 'This is a section of your menu. Give your section a brief description',
+        price: '$20',
+        dish: 'Grilled Okra and Tomatoes',
+        dish_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        price2: '$18',
+        dish2: 'Cucumber Salad',
+        dish_description2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        price3: '$12',
+        dish3: ' Basil Pancakes',
+        dish_description3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+        id: 'Mains',
+        imageUrl: Mains,
+        titleDescription: 'This is a section of your menu. Give your section a brief description',
+        price: '$20',
+        dish: 'Deep Sea Snow White Cod Fillet',
+        dish_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        price2: '$22',
+        dish2: 'Steak With Rosemary Butter',
+        dish_description2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        price3: '$20',
+        dish3: 'Steaks with Grilled Kimchi',
+        dish_description3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+        id: 'Pastries & Drinks',
+        imageUrl: Drinks,
+        titleDescription: 'This is a section of your menu. Give your section a brief description',
+        price: '$158',
+        dish: 'Wine Pairing',
+        dish_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        price2: '$168',
+        dish2: 'Natural Wine Pairing',
+        dish_description2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        price3: '$90',
+        dish3: 'Whisky Flyer',
+        dish_description3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    }
+]
 
 export default function Menupage(){
-    const [showNavigation, setShowNavigation] = useState(false);
-
     return(
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen'>
-            <NavigationContextTwo.Provider value={[[showNavigation, setShowNavigation]]}>
-                <Header />
-            </NavigationContextTwo.Provider>
+        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+            <Header/>
+            <img className='absolute w-full h-full object-cover' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
+            <div className='flex flex-col h-fit w-fit z-10 mt-[100px] px-[60px]'>
+                <h1 className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-[400px]'>View Our New Menu</h1>
+                <p className='text-white font-rufina font-bold text-xxl'>The freshest ingredients for you every day</p>
+            </div>
         </header>
+        <Navigation/>
+        <main className='relative overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[80px]'>
+            <img className='absolute -top-[20px] right-[50px] h-[250px] w-[270px]' src={BlueberryImage} alt='illustration of a blueberry' aria-hidden='true'/>
+            {
+                menuCuisineData.map((menuCuisineData) => {
+                    return <Menucuisines key={menuCuisineData.id} {...menuCuisineData}/>
+                })
+            }
+            <Reservation />
+        </main>
+        <Footer/>
         </>
     )
 }

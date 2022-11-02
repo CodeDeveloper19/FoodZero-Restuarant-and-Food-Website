@@ -1,4 +1,5 @@
-import React, { useState, createContext} from 'react';
+import React, { useState, useContext, createContext} from 'react';
+import { NavigationContext } from '../../App';
 import spice1 from '../../images/Spices/spices1.png';
 import spice2 from '../../images/Spices/spices2.png';
 import spice3 from '../../images/Spices/spices3.png';
@@ -20,6 +21,7 @@ import Reviewlisting from './reviewlisting';
 import Navigation from './navigation';
 import Footer from '../footer';
 import Header from '../header';
+import Reservation from '../reservation';
 import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
 import lemon from '../../images/Icons/lemondark.svg';
@@ -142,18 +144,16 @@ const reviewListData = [
 ]
 
 export const SliderPositionContext = createContext();
-export const NavigationContext = createContext();
 
 export default function Homepage(){
     const [sliderPosition, setSliderPosition] = useState('0px');
-    const [showNavigation, setShowNavigation] = useState(false);
+
+    const [[showNavigation]] = useContext(NavigationContext);
 
     return (
         <>
         <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen'>
-            <NavigationContext.Provider value={[[showNavigation, setShowNavigation]]}>
-                <Header />
-            </NavigationContext.Provider>
+            <Header />
             <div className='flex flex-row relative w-full h-fit min-h-[500px] mt-[50px] px-[60px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
                     <div className='flex flex-col justify-between w-[500px] h-[290px] z-10'>
                         <h1 className='text-white font-rufina text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
@@ -173,9 +173,7 @@ export default function Homepage(){
                     </div>
             </div>
         </header>
-        <NavigationContext.Provider value={[[showNavigation, setShowNavigation]]}>
-                <Navigation />
-        </NavigationContext.Provider>
+            <Navigation />
         <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <section className='flex flex-row justify-between w-full h-fit min-h-[500px] mt-[80px] px-[60px]'>
                 <div className='flex flex-col justify-between w-[490px] h-[470px]'>
@@ -237,47 +235,7 @@ export default function Homepage(){
                     })
                 }   
             </section>
-            <section id='reservation' className='flex flex-col items-center w-full h-fit py-[150px] px-[60px] bg-lightwhite'>
-                <h2 className='font-rufina font-bold text-xxxxxxxl'>Make a Reservation</h2>
-                <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
-                <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
-                    <div className='mt-[70px] mb-[100px] w-full h-[50px] flex flex-row justify-between'>
-                        <input className='h-full w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base' type='date' aria-label='reservation date' required></input>
-                        <div className='h-full w-1/4 border bg-lightwhite px-[20px]'>
-                            <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
-                                <option value="">Time for Reservation</option>
-                                <option value="08:00am">08:00am</option>
-                                <option value="09:00am">09:00am</option>
-                                <option value="10:00am">10:00am</option>
-                                <option value="11:00am">11:00am</option>
-                                <option value="12:00pm">12:00pm</option>
-                                <option value="01:00pm">01:00pm</option>
-                                <option value="02:00pm">02:00pm</option>
-                                <option value="03:00pm">03:00pm</option>
-                                <option value="04:00pm">04:00pm</option>
-                                <option value="05:00pm">05:00pm</option>
-                                <option value="06:00pm">06:00pm</option>
-                                <option value="07:00pm">07:00pm</option>
-                                <option value="08:00pm">08:00pm</option>
-                                <option value="09:00pm">09:00pm</option>
-                                <option value="10:00pm">10:00pm</option>
-                                <option value="11:00pm">11:00pm</option>
-                            </select>
-                        </div>
-                        <div className='h-full w-1/4 border bg-lightwhite px-[20px]'>
-                            <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='number of persons' required>
-                                <option value="">Number Of Persons</option>
-                                <option value="1 person">1 person</option>
-                                <option value="2 persons">2 persoms</option>
-                                <option value="3 persons">3 persons</option>
-                                <option value="4 persons">4 persons</option>
-                                <option value="5 persons">5 persons</option>
-                            </select>
-                        </div>
-                    </div> 
-                    <button className='bg-darkgreen w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</button>     
-                </form>
-            </section>
+            <Reservation />
             <section className='flex flex-col items-center w-full h-fit min-h-[500px] py-[60px] px-[60px] bg-white'>
                 <h2 className='font-rufina font-bold text-xxxxxxxl text-center w-[365px]'>Calories Energy Balance</h2>
                 <p className='font-lato font-normal text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -301,9 +259,7 @@ export default function Homepage(){
                 </div>
             </section>
         </main>
-        <NavigationContext.Provider value={[[showNavigation]]}>
-            <Footer />
-        </NavigationContext.Provider>
+        <Footer />
         </>
     )
 }

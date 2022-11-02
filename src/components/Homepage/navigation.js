@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { NavigationContext } from './homepage';
+import { NavigationContext } from '../../App';
 import navigationbg from '../../images/navigation_background.png'
 import xicon from '../../images/NaviClose.svg';
 import twitter from '../../images/Icons/Icon_twitter.svg';
@@ -14,7 +14,7 @@ export default function Navigation(){
 
     return(
         <>
-            <section className='absolute h-screen w-full flex justify-center items-center bottom-0' style={{display : (showNavigation) ? 'flex' : 'none'}}>
+            <section className='absolute h-screen w-full flex justify-center items-center bottom-0 z-30' style={{display : (showNavigation) ? 'flex' : 'none'}}>
                 <img className='object-cover absolute w-full h-full' src={navigationbg} alt='image of a flower' aria-hidden='true'/>
                 <div className='absolute w-full h-full bg-darkgreen/80'></div>
                 <button className='absolute w-[50px] h-[50px] top-[20px] left-[20px]' aria-label='close navigation button' onClick={() => setShowNavigation(false)}>

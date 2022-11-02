@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavigationContext } from './Homepage/homepage';
+import { NavigationContext } from '../App';
 import twitter from '../images/Icons/Icon_twitter.svg';
 import instagram from '../images/Icons/Icon_instagram.svg';
 import facebook from '../images/Icons/Icon_facebook.svg';
@@ -25,7 +25,7 @@ export default function Footer(){
                         <h3 className='text-white font-rufina font-bold text-xxl'>Never Miss a Recipe</h3>
                         <form className='flex flex-row justify-between w-full h-[50px] mt-[35px] mb-[10px]' onSubmit={(e) => {e.preventDefault()}}>
                             <input className='w-[55%] bg-darkgreen border border-white outline-none text-white font-lato py-[10px] px-[20px]' type='email' placeholder='Email Address' required></input>
-                            <button className='w-[40%] bg-green text-white font-rufina text-xxl' type='submit'>Subscribe</button>
+                            <button className='w-[40%] bg-green hover:bg-lightgreen text-white font-rufina text-xxl' type='submit'>Subscribe</button>
                         </form>
                         <p className='text-white font-normal font-lato text-sm'>Join our subscribers and get best recipe delivered each week!</p>
                     </div>

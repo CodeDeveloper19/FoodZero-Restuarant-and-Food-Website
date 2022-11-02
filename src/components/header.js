@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { NavigationContext } from './Homepage/homepage';
-import { NavigationContextTwo } from './Menupage/menupage';
+import { NavigationContext } from '../App';
 import logo from '../images/Logo.svg';
 import navbutton from '../images/NaviOpen.svg';
 
@@ -9,7 +8,7 @@ export default function Header(){
 
     return(
         <>
-            <div className='w-full h-[90px] pl-[30px] pr-[60px] pt-[30px] flex flex-row justify-between' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <div className='w-full h-[90px] pl-[30px] pr-[60px] pt-[30px] flex flex-row justify-between z-10' style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <div className='flex flex-row justify-between items-center h-full w-fit'>
                     <img className='h-full w-[200px]' src={logo} alt="logo of the FoodZero business" aria-hidden='true'/>
                     <button className='w-[50px] h-[50px]' onClick={
