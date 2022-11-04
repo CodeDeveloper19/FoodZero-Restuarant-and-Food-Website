@@ -14,7 +14,7 @@ export default function Contactpage(){
         <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
             <Header/>
             <img className='absolute w-full h-full object-cover' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
-            <div className='flex flex-row justify-between z-10 pt-[150px] px-[60px] h-fit min-h-[450px]'>
+            <div className='absolute top-0 bottom-0 my-auto flex flex-row justify-between items-center z-10 px-[60px] h-fit min-h-[450px] w-full'>
                 <div className='flex flex-col h-fit w-2/5'>
                     <h1 className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-[400px]'>Get in Touch</h1>
                     <p className='text-white font-rufina font-bold text-xxl'>The freshest ingredients for you every day</p>
@@ -58,7 +58,7 @@ export default function Contactpage(){
             <section className='h-fit w-full flex flex-row justify-between items-center px-[60px] my-[150px]'>
                 <div className='h-full w-[45%] flex flex-col'>
                     <p className='font-rufina font-bold text-xxl'>We are located in 1959 Sepulveda Blvd. Culver City, CA, 90230</p>
-                    <button className='w-[200px] h-[60px] border-2 font-rufina font-bold text-xxl mt-[50px] hover:bg-green'>View in maps</button>
+                    <button className='w-[200px] h-[60px] border-2 font-rufina font-bold text-xxl mt-[50px] hover:bg-lightwhite'>View in maps</button>
                 </div>
                 <img className='w-[45%] h-[650px] object-cover' src={RestuarantImage} alt='image of the restuarant' aria-hidden='true'/>
             </section>       

@@ -103,17 +103,17 @@ const postListData = [
 
 const cuisineListData = [
     {
-        id: 'cusine1',
+        id: 'cuisine1',
         imageUrl: cuisine3,
         cuisineType: 'Starters'
     },
     {
-        id: 'cusine2',
+        id: 'cuisine2',
         imageUrl: cuisine4,
         cuisineType: 'Mains'
     }, 
     {
-        id: 'cusine3',
+        id: 'cuisine3',
         imageUrl: cuisine5,
         cuisineType: 'Soups'
     }
@@ -154,51 +154,51 @@ export default function Homepage(){
         <>
         <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen'>
             <Header />
-            <div className='flex flex-row relative w-full h-fit min-h-[500px] mt-[50px] px-[60px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-                    <div className='flex flex-col justify-between w-[500px] h-[290px] z-10'>
-                        <h1 className='text-white font-rufina text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
+            <div className='flex flex-col relative w-full h-fit min-h-[750px] minTablet:min-h-[500px] mt-[50px] px-[60px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+                    <div className='flex flex-col justify-between w-full minTablet:w-[500px] mb-[70px] minTablet:mb-0 h-fit z-10'>
+                        <h1 className='text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl leading-tight break-all microPhone:break-normal'>Healthy Eating is important part of lifestyle</h1>
                         <p className='text-white font-lato text-base w-3/5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu</p>
                     </div>
-                    <div className='absolute w-fit h-fit flex flex-row items-center rotate-90 bottom-[75px] -left-[30px]'>
+                    <div className='relative minTablet:absolute w-fit h-fit hidden microPhone:flex flex-row items-center rotate-90 -bottom-[85px] smartPhone:-bottom-[115px] minTablet:bottom-[70px] -left-[60px] smartPhone:-left-[90px] minTablet:-left-[30px]'>
                         <p className='text-white font-rufina text-xxxl'>Scroll</p>
-                        <hr className='text-white border-dashed w-[130px]'/>
+                        <hr className='text-white border-dashed w-[60px] smartPhone:w-[120px] ml-[10px]'/>
                     </div>
-                    <div className='absolute top-[50px] right-[60px] flex flex-col'>
-                        <img className='w-[350px] h-[400px]' src={cuisine1} alt='image of a cuisine' aria-hidden='true'/>            
-                        <div className='absolute -left-[150px] -bottom-[20px] flex flex-row justify-between w-[350px]'>
-                            <img className='w-[100px] h-[95px]' src={spice1} alt='image of a spice' aria-hidden='true'/>
-                            <img className='w-[100px] h-[95px]' src={spice2} alt='image of a spice' aria-hidden='true'/>
-                            <img className='w-[100px] h-[95px]' src={spice3} alt='image of a spice' aria-hidden='true'/>
+                    <div className='relative minTablet:absolute minTablet:top-[50px] minTablet:right-[60px] items-end flex flex-col w-full minTablet:w-fit'>
+                        <img className='w-[70%] h-[30%] minTablet:w-[350px] minTablet:h-[400px] object-cover' src={cuisine1} alt='image of a cuisine' aria-hidden='true'/>            
+                        <div className='absolute -bottom-[15px] smartPhone:-bottom-[20px] minTablet:-bottom-[20px] minTablet:absolute minTablet:-left-[150px] flex flex-row minTablet:justify-between w-full minTablet:w-[350px] mr-[0px]'>
+                            <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px]' src={spice1} alt='image of a spice' aria-hidden='true'/>
+                            <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px] mx-[20px] minTablet:mx-0' src={spice2} alt='image of a spice' aria-hidden='true'/>
+                            <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px]' src={spice3} alt='image of a spice' aria-hidden='true'/>
                         </div>
                     </div>
             </div>
         </header>
             <Navigation />
         <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-            <section className='flex flex-row justify-between w-full h-fit min-h-[500px] mt-[80px] px-[60px]'>
-                <div className='flex flex-col justify-between w-[490px] h-[470px]'>
-                    <img className='w-full h-[300px]' src={cuisine2} alt='image of a cuisine' aria-hidden='true'/>
-                    <h2 className='text-white font-rufina text-xxxxxl w-[220px]'>
+            <section className='flex flex-col tablet:flex-row justify-between w-full h-fit min-h-[500px] mt-[80px] px-[60px]'>
+                <div className='flex flex-col justify-between w-full minTablet:w-[490px] h-fit smartPhone:h-[470px]'>
+                    <img className='w-full h-[200px] smartPhone:h-[300px] object-cover' src={cuisine2} alt='image of a cuisine' aria-hidden='true'/>
+                    <h2 className='text-white font-rufina text-xxxxxl w-full smartPhone:w-[220px]'>
                         Start to plan your diet today
                     </h2>
-                    <p className='text-white font-lato text-base w-[250px]'>
+                    <p className='text-white font-lato text-base w-full smartPhone:w-[250px]'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu
                     </p>
                 </div>
-                <div className='flex flex-col justify-between w-[260px] h-[450px]'>
-                    <p className='text-white font-lato text-base w-[200px]'>
+                <div className='flex flex-col justify-between w-[70%] smartPhone:w-[260px] h-fit smartPhone:h-[450px] mt-[100px] tablet:mt-0'>
+                    <p className='text-white font-lato text-base w-full smartPhone:w-[200px]'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu
                     </p>
-                    <img className='w-full h-[370px]' src={saltpepper} alt='image of a cuisine' aria-hidden='true'/>
+                    <img className='w-full h-[300px] smartPhone:h-[370px] object-cover mt-[20px] smartPhone:mt-0' src={saltpepper} alt='image of a cuisine' aria-hidden='true'/>
                 </div>
             </section>
-            <section className='relative flex flex-col justify-between w-full h-fit min-h-[700px] mt-[80px] px-[60px] bg-white'>
+            <section className='relative flex flex-col justify-between w-full h-fit min-h-[700px] mt-[80px] px-[60px] bg-white pb-[80px]'>
                 <img className='absolute top-0 right-0 w-[500px] h-[550px]' src={leaves} alt='image of green leaves' aria-hidden='true'/>
-                <div className='mt-[100px] w-[235px] h-[100px]'>
+                <div className='mt-[100px] w-full smartPhone:w-[235px] h-fit'>
                     <h2 className='text-black font-rufina text-xxxxxxxl font-bold'>Our Menu</h2>
                     <p className='text-black font-lato text-base font-normal'>This is a section of your menu. Give your section a brief description</p>
                 </div>
-                <div className='flex flex-col justify-between w-full h-[400px] my-[50px]'>
+                <div className='flex flex-col justify-between w-full h-fit laptop:h-[400px] my-[50px]'>
                     {
                         priceListData.map((priceListData) => {
                             return <Pricelist key={priceListData.id} {...priceListData}/>
@@ -206,21 +206,23 @@ export default function Homepage(){
                     }
                 </div>
             </section>
-            <section className='relative flex flex-col justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-lightwhite'>
-                <img className='absolute w-[450px] h-[450px] z-10 -bottom-[40px] left-[47px]' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
-                <img className='absolute w-[200px] h-[200px] left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
-                <div className='absolute flex flex-col justify-between w-fit h-fit min-h-[180px] right-[150px]'>
-                    <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-[250px]'>
+            <section className='relative flex flex-col minLaptop:flex-row justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-lightwhite'>
+                <div className='relative flex flex-col w-full minTablet:w-fit h-fit'>
+                    <img className='relative w-full minTablet:w-[450px] h-[450px] z-10 -bottom-[40px] left-[47px] object-cover' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
+                    <img className='absolute w-[200px] h-[200px] left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
+                </div>
+                <div className='relative flex flex-col items-end justify-between w-fit h-fit mr-[100px] mt-[100px] minLaptop:mt-0'>
+                    <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-[250px] mr-[40px]'>
                         Excellent cook
                     </h2>
                     <p className='font-lato font-normal text-base w-[290px]'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc. 
                     </p>
+                    <img className='w-[250px] h-[250px] mt-[20px] ml-[70px]' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
                 </div>
-                <img className='absolute w-[250px] h-[250px] right-[160px] bottom-0' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
             </section>
             <section className='w-full h-fit py-[120px] px-[60px] bg-white'>
-                <div className='flex flex-row justify-between w-full h-full'>
+                <div className='flex flex-col minTablet:flex-row justify-between w-full h-fit'>
                     {
                         produceListData.map((produceListData) => {
                             return <Producelisting key={produceListData.id} {...produceListData} />
@@ -228,7 +230,7 @@ export default function Homepage(){
                     }   
                 </div>
             </section>
-            <section className='flex flex-row justify-between w-full h-fit pt-[50px] pb-[70px] px-[60px] bg-white'>
+            <section className='flex flex-col laptop:flex-row justify-between items-center w-full h-fit pt-[50px] pb-[150px] px-[60px] bg-white'>
                 {
                     postListData.map((postListData) => {
                         return <Postlisting key={postListData.id} {...postListData} />
@@ -237,9 +239,9 @@ export default function Homepage(){
             </section>
             <Reservation />
             <section className='flex flex-col items-center w-full h-fit min-h-[500px] py-[60px] px-[60px] bg-white'>
-                <h2 className='font-rufina font-bold text-xxxxxxxl text-center w-[365px]'>Calories Energy Balance</h2>
-                <p className='font-lato font-normal text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <div className='w-full h-[450px] mt-[100px] flex flex-row justify-between'>
+                <h2 className='font-rufina font-bold text-xxxxxxxl text-center w-full smartPhone:w-[365px]'>Calories Energy Balance</h2>
+                <p className='font-lato font-normal text-base text-center'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div className='w-full h-fit laptop:mt-[100px] flex flex-col laptop:flex-row justify-between'>
                     {
                         cuisineListData.map((cuisineListData) => {
                             return <Cuisinelisting key={cuisineListData.id} {...cuisineListData}/>

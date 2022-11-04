@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/App.js', './src/components/Aboutpage/aboutpage.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
+  content: ['./src/App.js', './src/components/Portfoliopage/portfoliopage.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
   './src/components/Homepage/pricelist.js', './src/components/Homepage/navigation.js', './src/components/Homepage/cuisinelisting.js',
    './src/components/footer.js', './src/components/header.js', './src/components/reservation.js', './src/components/Homepage/reviewlisting.js', 
   './src/components/Homepage/producelisting.js',  './public/index.html'],
+  mode: 'jit',
   theme: {
     extend: {},
     colors: {
@@ -32,12 +33,19 @@ module.exports = {
       xxxl: '25px', //48px
       xxxxl: '32px', //66px
       xxxxxl: '35px', //68px
-      xxxxxxl: '5.5rem', //88px
+      xxxxxxl: '42px', //88px
       xxxxxxxl: '49px', //108px
       xxxxxxxxl: '65px', //148px
     },
     screens: {
-      normal: '1367px'
+      normal: '1367px',
+      laptop: '1200px',
+      minLaptop: '1000px',
+      tablet: '900px',
+      minTablet: '650px',
+      phone: '500px',
+      smartPhone: '400px',
+      microPhone: '300px'
     }
   },
   plugins: [],

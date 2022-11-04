@@ -61,7 +61,7 @@ export default function Menupage(){
         <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
             <Header/>
             <img className='absolute w-full h-full object-cover' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
-            <div className='flex flex-col h-fit w-fit z-10 mt-[100px] px-[60px]'>
+            <div className='absolute top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px]'>
                 <h1 className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-[400px]'>View Our New Menu</h1>
                 <p className='text-white font-rufina font-bold text-xxl'>The freshest ingredients for you every day</p>
             </div>

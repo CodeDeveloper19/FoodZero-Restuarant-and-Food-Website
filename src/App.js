@@ -5,6 +5,7 @@ import Homepage from './components/Homepage/homepage'
 import Menupage  from './components/Menupage/menupage';
 import Contactpage from './components/Contactpage/contactpage';
 import Aboutpage from './components/Aboutpage/aboutpage';
+import Portfoliopage from './components/Portfoliopage/portfoliopage';
 
 function App() {
   const [showNavigation, setShowNavigation] = useState(false);
@@ -18,6 +19,7 @@ function App() {
           <Route exact path='/menu' element={<Menupage/>}/>
           <Route exact path='/contact' element={<Contactpage/>}/>
           <Route exact path='/about' element={<Aboutpage/>}/>
+          <Route exact path='/portfolio' element={<Portfoliopage/>}/>
         </Routes>
       </Router>
     </NavigationContext.Provider>
