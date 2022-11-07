@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Reservation from '../reservation';
@@ -9,6 +9,7 @@ import Drinks from '../../images/Menupage/drinks_image.png';
 import Starters from '../../images/Menupage/starters_image.png'; 
 import Mains from '../../images/Menupage/mains_image.png'; 
 import BlueberryImage from '../../images/SeasoningsAndFruits/BlueberryBlack.svg';
+import { NavigationContext } from '../../App';
 
 const menuCuisineData = [
     {
@@ -56,9 +57,11 @@ const menuCuisineData = [
 ]
 
 export default function Menupage(){
+    const [[showNavigation]] = useContext(NavigationContext);
+    
     return(
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <Header/>
             <img className='absolute w-full h-full object-cover' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
             <div className='absolute top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px]'>
@@ -67,7 +70,7 @@ export default function Menupage(){
             </div>
         </header>
         <Navigation/>
-        <main className='relative overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[80px]'>
+        <main className='relative overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[80px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <img className='absolute -top-[20px] right-[50px] h-[250px] w-[270px]' src={BlueberryImage} alt='illustration of a blueberry' aria-hidden='true'/>
             {
                 menuCuisineData.map((menuCuisineData) => {

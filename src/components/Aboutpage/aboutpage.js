@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Employees from './employees';
@@ -17,6 +17,7 @@ import GrilledMeat from '../../images/Aboutpage/grilling_meat.png';
 import SeasonedMeat from '../../images/Aboutpage/seasoned_meat.png';
 import RosemaryRight from '../../images/../images/SeasoningsAndFruits/rosemary_right.svg';
 import RosemaryLeft from '../../images/../images/SeasoningsAndFruits/rosemary_left.svg';
+import { NavigationContext } from '../../App';
 
 const employeesData = [
     {
@@ -39,6 +40,8 @@ export default function Aboutpage(){
     const [play, setPlay] = useState(false);
     const videoPlayer = useRef(null);
 
+    const [[showNavigation]] = useContext(NavigationContext);
+
     useEffect(() => {
         if (play){
             videoPlayer.current.play();
@@ -49,7 +52,7 @@ export default function Aboutpage(){
 
     return(
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <Header/>
             <img className='absolute w-full h-full object-cover' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
             <div className='absolute top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px] self-end'>
@@ -59,7 +62,7 @@ export default function Aboutpage(){
             </div>
         </header>
         <Navigation/>
-        <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[100px]'>
+        <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <section className='relative flex flex-row justify-between items-center w-full h-fit px-[60px] py-[100px]'>
                 <img className='absolute top-0 left-[38%]  w-[200px] h-[170px] object-cover' src={TomatoBlack} alt='illustration of a tomato' aria-hidden='true'/>
                 <div className='w-[40%] h-fit flex flex-col'>

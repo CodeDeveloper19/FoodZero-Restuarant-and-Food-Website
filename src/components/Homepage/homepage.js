@@ -152,11 +152,11 @@ export default function Homepage(){
 
     return (
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen'>
+        <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <Header />
-            <div className='flex flex-col relative w-full h-fit min-h-[750px] minTablet:min-h-[500px] mt-[50px] px-[60px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <div className='flex flex-col relative w-full h-fit min-h-[750px] minTablet:min-h-[500px] mt-[50px] px-[60px]'>
                     <div className='flex flex-col justify-between w-full minTablet:w-[500px] mb-[70px] minTablet:mb-0 h-fit z-10'>
-                        <h1 className='text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl leading-tight break-all microPhone:break-normal'>Healthy Eating is important part of lifestyle</h1>
+                        <h1 className='text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
                         <p className='text-white font-lato text-base w-3/5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu</p>
                     </div>
                     <div className='relative minTablet:absolute w-fit h-fit hidden microPhone:flex flex-row items-center rotate-90 -bottom-[85px] smartPhone:-bottom-[115px] minTablet:bottom-[70px] -left-[60px] smartPhone:-left-[90px] minTablet:-left-[30px]'>
@@ -185,7 +185,7 @@ export default function Homepage(){
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu
                     </p>
                 </div>
-                <div className='flex flex-col justify-between w-[70%] smartPhone:w-[260px] h-fit smartPhone:h-[450px] mt-[100px] tablet:mt-0'>
+                <div className='flex flex-col justify-between w-[70%] smartPhone:w-[260px] h-fit smartPhone:h-[450px] mt-[100px] tablet:mt-0 self-end tablet:self-center'>
                     <p className='text-white font-lato text-base w-full smartPhone:w-[200px]'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu
                     </p>
@@ -208,17 +208,17 @@ export default function Homepage(){
             </section>
             <section className='relative flex flex-col minLaptop:flex-row justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-lightwhite'>
                 <div className='relative flex flex-col w-full minTablet:w-fit h-fit'>
-                    <img className='relative w-full minTablet:w-[450px] h-[450px] z-10 -bottom-[40px] left-[47px] object-cover' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
-                    <img className='absolute w-[200px] h-[200px] left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
+                    <img className='relative w-full minTablet:w-[450px] h:-[200px] microPhone:h-[250px] smartPhone:h-[300px] phone:h-[450px] z-10 -bottom-[40px] left-[47px] object-cover' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
+                    <img className='absolute w-[100px] microPhone:w-[150px] smartPhone:w-[200px] h-[100px] microPhone:h-[150px] smartPhone:h-[200px] left-[40px] phone:left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
                 </div>
-                <div className='relative flex flex-col items-end justify-between w-fit h-fit mr-[100px] mt-[100px] minLaptop:mt-0'>
-                    <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-[250px] mr-[40px]'>
+                <div className='relative flex flex-col items-end justify-between w-full smartPhone:w-fit h-fit mr-[100px] mt-[100px] minLaptop:mt-0'>
+                    <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-full smartPhone:w-[250px] mr-0 smartPhone:mr-[40px]'>
                         Excellent cook
                     </h2>
-                    <p className='font-lato font-normal text-base w-[290px]'>
+                    <p className='font-lato font-normal text-base w-full smartPhone:w-[290px]'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc. 
                     </p>
-                    <img className='w-[250px] h-[250px] mt-[20px] ml-[70px]' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
+                    <img className='w-[150px] microPhone:w-[200px] smartPhone:w-[250px] h-[150px] microPhone:h-[200px] smartPhone:h-[250px] mt-[20px] ml-0 smartPhone:ml-[70px]' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
                 </div>
             </section>
             <section className='w-full h-fit py-[120px] px-[60px] bg-white'>

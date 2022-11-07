@@ -25,14 +25,14 @@ export default function Footer(){
                         <h3 className='text-white font-rufina font-bold text-xxl'>Never Miss a Recipe</h3>
                         <form className='flex flex-col minTablet:flex-row justify-between w-full h-fit mt-[35px] mb-[10px]' onSubmit={(e) => {e.preventDefault()}}>
                             <input className='w-full minTablet:w-[55%] bg-darkgreen border border-white outline-none text-white font-lato py-[10px] px-[20px]' type='email' placeholder='Email Address' required></input>
-                            <button className='w-full minTablet:w-[40%] bg-green hover:bg-lightgreen text-white font-rufina text-xxl mt-[20px] minTablet:mt-0' type='submit'>Subscribe</button>
+                            <button className='w-full minTablet:w-[40%] bg-green hover:bg-lightgreen text-white font-rufina text-xxl mt-[20px] minTablet:mt-0 px-[10px]' type='submit'>Subscribe</button>
                         </form>
                         <p className='text-white font-normal font-lato text-sm'>Join our subscribers and get best recipe delivered each week!</p>
                     </div>
                 </div>
                 <div className='w-full h-fit min-h-[100px] px-[60px] flex flex-col minTablet:flex-row justify-between pt-[30px] pb-[30px] minTablet:pb-0'>
                     <p className='font-lato font-normal text-base text-white'>© 2022 Zero Inc. All rights Reserved</p>
-                    <div className='flex flex-row justify-between h-[20px] w-[120px] mr-[50px] mt-[20px] minTablet:mt-0'>
+                    <div className='flex flex-row justify-between h-[20px] w-[70%] microPhone:w-[120px] mr-[50px] mt-[20px] minTablet:mt-0'>
                         <a href='https://www.instagram.com/' target='_blank' rel="noopener noreferrer"><img className='w-[20px] h-full' src={instagram} alt="instagram logo"/></a>
                         <a href='https://www.twitter.com/' target='_blank' rel="noopener noreferrer"><img className='w-[20px] h-full' src={twitter} alt="twitter logo"/></a>
                         <a href='https://www.facebook.com/' target='_blank' rel="noopener noreferrer"><img className='w-[20px] h-full' src={facebook} alt="facebook logo"/></a>
