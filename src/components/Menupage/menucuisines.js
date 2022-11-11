@@ -29,12 +29,12 @@ export default function Menucuisines(props){
         <>
             <section className='flex flex-col items-center w-full h-fit px-[60px] pb-[80px]'>
                 <div>
-                    <h2 className='font-rufina font-bold text-xxxxxxxl text-center'>{props.id}</h2>
-                    <p className='font-lato font-normal text-base text-center'>{props.titleDescription}</p>
+                    <h2 className='font-bold text-center font-rufina text-xxxxxxxl'>{props.id}</h2>
+                    <p className='text-base font-normal text-center font-lato'>{props.titleDescription}</p>
                 </div>
-                <div className='flex h-[600px] w-full mt-[50px] mb-[50px] justify-between' style={{flexDirection: (id === 'Mains') ? 'row-reverse' : 'row'}}>
-                    <img className='h-full w-[45%]' src={props.imageUrl} alt='image of cuisines' aria-hidden='true'/>
-                    <div className='h-full w-[45%] flex flex-col'>
+                <div className='flex MaxTablet:!flex-col MaxTablet:h-fit h-[500px] laptop:h-[600px] w-full mt-[50px] mb-[50px] justify-between' style={{flexDirection: (id === 'Mains') ? 'row-reverse' : 'row'}}>
+                    <img className='h-[250px] smartPhone:h-[300px] phone:h-[350px] minTablet:h-[500px] tablet:h-full MaxTablet:w-full w-[45%] object-cover' src={props.imageUrl} alt='image of cuisines' aria-hidden='true'/>
+                    <div className='h-fit tablet:h-full MaxTablet:w-full w-[45%] flex flex-col MaxTablet:mt-[50px] mt-0'>
                         {
                             MenuCuisinesListingData.map((MenuCuisinesListingData) => {
                                 return <Menucuisineslisting key={MenuCuisinesListingData.id} {...MenuCuisinesListingData}/>

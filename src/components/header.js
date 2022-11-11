@@ -20,8 +20,8 @@ export default function Header(){
                     </button>
                 </div>
                 <div className='flex flex-row justify-between items-center w-full microPhone:w-fit tablet:w-[350px] h-[50px] mt-[30px] ml-[30px] minTablet:mt-0 minTablet:ml-0'>
-                    <p className='text-white font-inter hidden tablet:flex'>+86 852 346 000</p>
-                    <button className='text-white font-rufina border border-white w-full microPhone:w-[175px] h-full hover:bg-darkwhite px-[10px]'>
+                    <p className='hidden text-white font-inter tablet:flex'>+86 852 346 000</p>
+                    <button className='text-white font-rufina border border-white w-full microPhone:w-[175px] min-h-[50px] h-fit hover:bg-darkwhite px-[10px]'>
                         <a href='#reservation'>Reservations</a>
                     </button>
                 </div>

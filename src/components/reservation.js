@@ -8,7 +8,9 @@ export default function Reservation(){
                 <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
                 <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
                     <div className='mt-[70px] mb-[100px] w-full h-fit flex flex-col tablet:flex-row justify-between'>
-                        <input className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base' type='date' aria-label='reservation date' required></input>
+                        <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base'>
+                            <input className='w-full h-full bg-lightwhite outline-0' type='date' aria-label='reservation date' required></input>
+                        </div>
                         <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] my-[50px] tablet:my-0'>
                             <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
                                 <option value="">Time for Reservation</option>

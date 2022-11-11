@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/App.js', './src/components/Portfoliopage/portfoliopage.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
+  content: ['./src/App.js', './src/components/Portfoliopage/portfoliopage.js', './src/components/Portfoliopage/dishes.js', './src/components/Portfoliopage/dish.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
   './src/components/Homepage/pricelist.js', './src/components/Homepage/navigation.js', './src/components/Homepage/cuisinelisting.js',
    './src/components/footer.js', './src/components/header.js', './src/components/reservation.js', './src/components/Homepage/reviewlisting.js', 
   './src/components/Homepage/producelisting.js',  './public/index.html'],
@@ -38,15 +38,17 @@ module.exports = {
       xxxxxxxxl: '65px', //148px
     },
     screens: {
-      normal: '1367px',
-      laptop: '1200px',
-      minLaptop: '1000px',
-      tablet: '900px',
-      minTablet: '650px',
-      phone: '500px',
+      microPhone: '300px',      
       smartPhone: '400px',
-      microPhone: '300px'
-    }
+      phone: '500px',
+      minTablet: '650px',
+      maxTablet: {max: '649px'},
+      MaxTablet: {max: '899px'},
+      tablet: '900px',
+      minLaptop: '1000px',
+      laptop: '1200px',
+      normal: '1367px',
+    },
   },
   plugins: [],
 }

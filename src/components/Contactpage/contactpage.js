@@ -66,26 +66,28 @@ export default function Contactpage(){
                 <img className='w-[90%] phone:w-[70%] minTablet:w-[50%] tablet:w-[45%] h-[400px] phone:h-[500px] tablet:h-[650px] object-cover' src={RestuarantImage} alt='image of the restuarant' aria-hidden='true'/>
             </section>       
             <section id='reservation' className='relative h-fit w-full px-[60px] pt-[150px] pb-[100px] bg-lightwhite flex flex-col items-center'>
-                <img className='absolute w-[300px] h-[203px] object-cover top-[60px] left-[270px]' src={MintBlack} alt='illustration of a mint leaf in black' aria-hidden='true'/>
+                <img className='absolute w-[222px] minLaptop:w-[300px] h-[150px] minLaptop:h-[203px] object-cover top-[100px] min:Laptop:top-[60px] left-0 phone:left-[60px] tablet:left-[100px] minLaptop:left-[270px]' src={MintBlack} alt='illustration of a mint leaf in black' aria-hidden='true'/>
                 <div className='h-fit'>
                     <h2 className='font-rufina font-bold text-xxxxxxxl'>Make a Reservation</h2>
                     <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
                 </div>
                 <form className='w-full h-fit flex flex-col items-center mt-[100px]' onSubmit={(e) => {e.preventDefault()}}>
-                    <div className='w-full h-[50px] font-lato font-normal text-base flex flex-row justify-between'>
-                        <input type='text' className='w-[48%] h-full outline-0 border px-[20px] bg-lightwhite' placeholder='First Name' aria-label='reservation first name' required>
+                    <div className='w-full h-fit font-lato font-normal text-base flex flex-col phone:flex-row justify-between'>
+                        <input type='text' className='w-full phone:w-[48%] h-[50px] outline-0 border px-[20px] bg-lightwhite' placeholder='First Name' aria-label='reservation first name' required>
                         </input>                    
-                        <input type='text' className='w-[48%] h-full outline-0 border px-[20px] bg-lightwhite' placeholder='Last Name' aria-label='reservation last name' required>
+                        <input type='text' className='w-full phone:w-[48%] h-[50px] outline-0 border px-[20px] bg-lightwhite mt-[30px] phone:mt-0' placeholder='Last Name' aria-label='reservation last name' required>
                         </input>
                     </div>
                     <input type='email' className='w-full h-[50px] outline-0 border px-[20px] font-lato font-normal text-base mt-[30px] bg-lightwhite' placeholder='Email' aria-label='reservation email' required>
                     </input>
                     <input type='tel' className='w-full h-[50px] outline-0 border px-[20px] font-lato font-normal text-base mt-[30px] bg-lightwhite' placeholder='Phone Number' aria-label='reservation phone number' required>
                     </input>
-                    <div className='w-full h-[50px] font-lato font-normal text-base flex flex-row justify-between mt-[30px]'>
-                        <input type='date' className='w-[48%] h-full outline-0 border px-[20px] bg-lightwhite' placeholder='First Name' aria-label='reservation first name' required>
-                        </input>        
-                        <div className='w-[48%] h-full outline-0 border px-[20px] bg-lightwhite'>
+                    <div className='w-full h-fit font-lato font-normal text-base flex flex-col phone:flex-row justify-between mt-[30px]'>
+                        <div className='w-full phone:w-[48%] h-[50px] outline-0 border px-[20px] bg-lightwhite'>
+                            <input type='date' className='w-full h-full bg-lightwhite outline-0' placeholder='First Name' aria-label='reservation first name' required>
+                            </input> 
+                        </div>       
+                        <div className='w-full phone:w-[48%] h-[50px] outline-0 border px-[20px] bg-lightwhite mt-[30px] phone:mt-0'>
                             <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
                                 <option value="">Time for Reservation</option>
                                 <option value="08:00am">08:00am</option>
