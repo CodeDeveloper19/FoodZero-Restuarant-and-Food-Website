@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import { Link } from "react-router-dom";
 import { NavigationContext } from '../../App';
 import navigationbg from '../../images/navigation_background.png'
 import xicon from '../../images/NaviClose.svg';
@@ -6,6 +7,7 @@ import twitter from '../../images/Icons/Icon_twitter.svg';
 import instagram from '../../images/Icons/Icon_instagram.svg';
 import facebook from '../../images/Icons/Icon_facebook.svg';
 import youtube from '../../images/Icons/Icon_youtube.svg';
+import { motion } from 'framer-motion';
 
 export default function Navigation(){
     const [[showNavigation, setShowNavigation]] = useContext(NavigationContext);
@@ -23,16 +25,16 @@ export default function Navigation(){
                 <div className='z-10 h-fit w-full phone:w-[1000px] flex flex-col phone:flex-row justify-between px-[100px] my-[100px]'>
                     <nav className='w-full phone:w-2/5 h-fit mb-[100px] phone:mb-0'>
                         <ul className='flex flex-col justify-between w-full font-bold text-white uppercase list-disc font-rufina text-xxxxl h-fit'>
-                            <li className='hover:text-lightgreen'><a href="/">Home</a></li>
-                            <li className='hover:text-lightgreen mt-[15px]'><a href="/menu">Menu</a></li>
-                            <li className='hover:text-lightgreen mt-[15px]'><button onClick={() => (showBlog) ? setShowBlog(false) : setShowBlog(true)}>BLOGS</button></li>
+                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/'>Home</Link></motion.li>
+                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/menu'>Menu</Link></motion.li>
+                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]'><button onClick={() => (showBlog) ? setShowBlog(false) : setShowBlog(true)}>BLOGS</button></motion.li>
                             <div className='h-[65px] flex flex-col' style={{display: (showBlog) ? 'flex' : 'none', height: (showBlog) ? 'fit-content' : '0px'}}>
-                                <p className='text-base font-normal hover:text-lightgreen'><a href="/blog/1_column">1 Column</a></p>
-                                <p className='text-base font-normal hover:text-lightgreen'><a href="/blog/2_column">2 Column</a></p>
-                                <p className='text-base font-normal hover:text-lightgreen'><a href="/blog/sidebar_post">Sidebar Post</a></p>
+                                <motion.p whileHover={{ scale: 1.1, originX: 0}} className='text-base font-normal hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/blog/1_column'>1 Column</Link></motion.p>
+                                <motion.p whileHover={{ scale: 1.1, originX: 0}} className='text-base font-normal hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/blog/2_column'>2 Column</Link></motion.p>
+                                <motion.p whileHover={{ scale: 1.1, originX: 0}} className='text-base font-normal hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/blog/sidebar_post'>Sidebar Post</Link></motion.p>
                             </div>
-                            <li className='hover:text-lightgreen mt-[15px]'><a href="/about">About</a></li>
-                            <li className='hover:text-lightgreen mt-[15px]'><a href="/contact">Contact</a></li>
+                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/about'>About</Link></motion.li>
+                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/contact'>Contact</Link></motion.li>
                         </ul>
                     </nav>
                     <div className='w-full phone:w-1/5 h-fit min-h-[180px] self-end flex flex-col justify-between'>

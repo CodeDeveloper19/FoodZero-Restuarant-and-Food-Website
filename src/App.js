@@ -1,4 +1,4 @@
-import React, { useState, createContext} from 'react';
+import React, { useState, useEffect, createContext} from 'react';
 import './css/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage/homepage'
@@ -7,12 +7,30 @@ import Contactpage from './components/Contactpage/contactpage';
 import Aboutpage from './components/Aboutpage/aboutpage';
 import Portfoliopage from './components/Portfoliopage/portfoliopage';
 
+const getWindowSize = () => {
+  const {innerWidth, innerHeight} = window;
+  return {innerWidth, innerHeight};
+}
+
 function App() {
   const [showNavigation, setShowNavigation] = useState(false);
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+      const handleWindowResize = () => {
+          setWindowSize(getWindowSize());
+      }
+    
+      window.addEventListener('resize', handleWindowResize); 
+
+      return () => {
+          window.removeEventListener('resize', handleWindowResize);
+      };
+  }, [])
 
   return (
     <>
-    <NavigationContext.Provider value={[[showNavigation, setShowNavigation]]}>
+    <NavigationContext.Provider value={[[showNavigation, setShowNavigation], [windowSize]]}>
       <Router>
         <Routes>
           <Route exact path='/' element={<Homepage/>}/>

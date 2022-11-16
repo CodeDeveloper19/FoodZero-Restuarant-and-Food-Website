@@ -10,6 +10,8 @@ import Starters from '../../images/Menupage/starters_image.png';
 import Mains from '../../images/Menupage/mains_image.png'; 
 import BlueberryImage from '../../images/SeasoningsAndFruits/BlueberryBlack.svg';
 import { NavigationContext } from '../../App';
+import { motion } from 'framer-motion';
+
 
 const menuCuisineData = [
     {
@@ -64,10 +66,11 @@ export default function Menupage(){
         <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <Header/>
             <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
-            <div className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px] py-[100px]'>
+            <motion.div initial={{left: -500 }}  whileInView={{ x: 500 }} transition={{ duration: .5, delay:  1}} viewport={{ once: true }}
+            className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px] py-[100px]'>
                 <h1 className='text-white font-rufina font-bold text-xxxxxxxxl h-fit max-w-[400px] w-full'>View Our New Menu</h1>
                 <p className='font-bold text-white font-rufina text-xxl'>The freshest ingredients for you every day</p>
-            </div>
+            </motion.div>
         </header>
         <Navigation/>
         <main className='relative overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[80px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>

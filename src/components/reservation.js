@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Reservation(){
     return(
@@ -43,7 +44,8 @@ export default function Reservation(){
                             </select>
                         </div>
                     </div> 
-                    <button className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</button>     
+                    <motion.button whileHover={{ scale: 1.2 }}
+                    className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</motion.button>     
                 </form>
             </section>
         </>

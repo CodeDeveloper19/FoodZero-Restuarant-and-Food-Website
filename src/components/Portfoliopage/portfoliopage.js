@@ -261,14 +261,12 @@ export default function Portfoliopage(){
                     </ul>
                 </nav>
                 <section className="w-full h-fit">
-                    <div id='screen' className="w-full h-fit overflow-hidden">
-                        <div id='container' className="relative w-fit flex flex-row h-fit" style={{left: positionOfContainer}}>
-                            {
-                                dataComponents.map((dataComponents) => {
-                                    return <Dishes key={dataComponents.id} {...dataComponents}/>
-                                })
-                            }
-                        </div>
+                    <div id='container' className="relative w-fit flex flex-row h-fit" style={{left: positionOfContainer}}>
+                        {
+                            dataComponents.map((dataComponents) => {
+                                return <Dishes key={dataComponents.id} {...dataComponents}/>
+                            })
+                        }
                     </div>
                 </section>
             </main>
