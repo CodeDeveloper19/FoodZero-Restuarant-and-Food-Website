@@ -27,14 +27,14 @@ const employeesData = [
         id: 1,
         position: 'Restuarant Manager',
         name: 'Carson Hugn',
-        aboutEmployee: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et in sed in pellentesque ornare nunc nisl.',
+        aboutEmployee: 'Started his journey with us five years ago as the manager of our great establishment where he oversees our growth and success.',
         imageUrl: Manager
     },
     {
         id: 2,
         position: 'Executive Chef',
-        name: 'Jane Cooper',
-        aboutEmployee: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et in sed in pellentesque ornare nunc nisl. Augue habitant accumsan, ut parturient orci ac etiam congue mi.',
+        name: 'Alex Cooper',
+        aboutEmployee: 'The founder and master chef of FoodZero. He has over twenty years of expereince in the culinary and cooking industry.',
         imageUrl: ExecutiveChef
     }
 ]
@@ -94,14 +94,14 @@ export default function Aboutpage(){
             <Header/>
             <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
             <div className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 py-[100px] px-[60px] self-end'>
-                <h1 ref={text} className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-full minTablet:w-[400px]'></h1>
+                <h1 ref={text} className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-full minTablet:w-[400px]'>Who We Are</h1>
                 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
                 className='text-white font-rufina font-bold text-xxl w-full minTablet:w-[500px]'>
-                    The most important thing for us is to give you the comfortable dining experience
+                    The most important thing for us is to give you the comfortable dining experience you deserve
                 </motion.p>
                 <motion.button initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
                 className='hover:!scale-105 w-full microPhone:w-[200px] px-[20px] h-fit min-h-[60px] border-2 border-white text-white font-rufina font-bold text-xxl mt-[20px] hover:bg-darkwhite'>
-                    <Link to='/portfolio'>Our Portfolio</Link>
+                    <Link to='/about/portfolio'>Our Portfolio</Link>
                 </motion.button>
             </div>
         </header>
@@ -113,7 +113,7 @@ export default function Aboutpage(){
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2}} viewport={{ once: true }} 
                 className='w-full minTablet:w-[40%] h-fit flex flex-col'>
                     <h2 ref={text2} className='font-bold font-rufina text-xxxxxxxl'></h2>
-                    <p className='font-normal font-lato text-base w-full minLaptop:w-[360px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc.</p>
+                    <p className='font-normal font-lato text-base w-full minLaptop:w-[360px]'>We started as a one man business where our founder, Alex, served the best European and African cuisines from his little kitchen. Ten years down the line, FoodZero has grown to become one of the best restaurants in Canada with over fifty employees.</p>
                 </motion.div>
                 <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1}} viewport={{ once: true }} 
                 className='w-full minTablet:w-[50%] h-[200px] smartPhone:h-[250px] phone:h-[300px] laptop:h-[400px] object-cover mt-[100px] minTablet:mt-0' src={ChefSeasoning} alt='image of a cuisine' aria-hidden='true'/>
@@ -133,7 +133,7 @@ export default function Aboutpage(){
                 </video>
                 <div className='absolute text-center text-white h-fit'>
                     <h2 className='font-bold font-rufina text-xxxxxxxl'>It looks delicious</h2>
-                    <p className='text-base font-normal font-lato'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p className='text-base font-normal font-lato'>Who wouldn't want a taste of class?</p>
                     <button className='w-[100px] h-[100px] mt-[50px]' onClick={() => {(play || play === undefined) ? setPlay(false) : setPlay(true)}}>
                         <img className='w-full h-full' src={(play || play === undefined) ? PauseButton : PlayButton} alt='play/pause button icon' aria-hidden='true'/>
                     </button>

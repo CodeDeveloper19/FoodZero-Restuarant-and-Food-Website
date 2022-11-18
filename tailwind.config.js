@@ -1,12 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/App.js', './src/components/Portfoliopage/portfoliopage.js', './src/components/Portfoliopage/dishes.js', './src/components/Portfoliopage/dish.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
+  content: ['./src/App.js', './src/components/Blogpage/blogpage.js', './src/components/Blogpage/article.js', './src/components/Portfoliopage/portfoliopage.js', './src/components/Portfoliopage/dishdescription.js', './src/components/Portfoliopage/dishes.js', './src/components/Portfoliopage/dish.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
   './src/components/Homepage/pricelist.js', './src/components/Homepage/navigation.js', './src/components/Homepage/cuisinelisting.js',
    './src/components/footer.js', './src/components/header.js', './src/components/reservation.js', './src/components/Homepage/reviewlisting.js', 
   './src/components/Homepage/producelisting.js',  './public/index.html'],
   mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+      transitionDuration: {
+        '3000': '3000ms',
+      },
+      gridTemplateColumns:{
+        '450': '500px 500px',
+        'full': '1fr',
+        '70': '60% 30%',
+        '100': '100%',
+        '40': '40% 40%',
+      },
+      spacing: {
+        '10': '10px',
+      }
+    },
     colors: {
       white: '#FFFFFF',
       darkwhite: '#B0B0B0',

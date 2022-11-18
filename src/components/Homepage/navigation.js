@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext } from 'react';
 import { Link } from "react-router-dom";
 import { NavigationContext } from '../../App';
 import navigationbg from '../../images/navigation_background.png'
@@ -11,8 +11,6 @@ import { motion } from 'framer-motion';
 
 export default function Navigation(){
     const [[showNavigation, setShowNavigation]] = useContext(NavigationContext);
-
-    const [showBlog, setShowBlog] = useState(false);
 
     return(
         <>
@@ -27,12 +25,7 @@ export default function Navigation(){
                         <ul className='flex flex-col justify-between w-full font-bold text-white uppercase list-disc font-rufina text-xxxxl h-fit'>
                             <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/'>Home</Link></motion.li>
                             <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/menu'>Menu</Link></motion.li>
-                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]'><button onClick={() => (showBlog) ? setShowBlog(false) : setShowBlog(true)}>BLOGS</button></motion.li>
-                            <div className='h-[65px] flex flex-col' style={{display: (showBlog) ? 'flex' : 'none', height: (showBlog) ? 'fit-content' : '0px'}}>
-                                <motion.p whileHover={{ scale: 1.1, originX: 0}} className='text-base font-normal hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/blog/1_column'>1 Column</Link></motion.p>
-                                <motion.p whileHover={{ scale: 1.1, originX: 0}} className='text-base font-normal hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/blog/2_column'>2 Column</Link></motion.p>
-                                <motion.p whileHover={{ scale: 1.1, originX: 0}} className='text-base font-normal hover:text-lightgreen' onClick={() => setShowNavigation(false)}><Link to='/blog/sidebar_post'>Sidebar Post</Link></motion.p>
-                            </div>
+                            <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/blog'>Blogs</Link></motion.li>
                             <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/about'>About</Link></motion.li>
                             <motion.li whileHover={{ scale: 1.2, originX: 0}} className='hover:text-lightgreen mt-[15px]' onClick={() => setShowNavigation(false)}><Link to='/contact'>Contact</Link></motion.li>
                         </ul>

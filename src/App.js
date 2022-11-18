@@ -6,6 +6,9 @@ import Menupage  from './components/Menupage/menupage';
 import Contactpage from './components/Contactpage/contactpage';
 import Aboutpage from './components/Aboutpage/aboutpage';
 import Portfoliopage from './components/Portfoliopage/portfoliopage';
+import Blogpage from './components/Blogpage/blogpage';
+import Dishdescription from './components/Portfoliopage/dishdescription';
+import Article from './components/Blogpage/article';
 
 const getWindowSize = () => {
   const {innerWidth, innerHeight} = window;
@@ -37,7 +40,10 @@ function App() {
           <Route exact path='/menu' element={<Menupage/>}/>
           <Route exact path='/contact' element={<Contactpage/>}/>
           <Route exact path='/about' element={<Aboutpage/>}/>
-          <Route exact path='/portfolio' element={<Portfoliopage/>}/>
+          <Route exact path='/about/portfolio' element={<Portfoliopage/>}/>
+          <Route path='/about/portfolio/:dishname' element={<Dishdescription/>}/>
+          <Route exact path='/blog' element={<Blogpage/>}/>
+          <Route path='/blog/:articletitle' element={<Article/>}/>
         </Routes>
       </Router>
     </NavigationContext.Provider>

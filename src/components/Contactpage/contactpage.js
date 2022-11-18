@@ -127,7 +127,8 @@ export default function Contactpage(){
                             <option value="5 persons">5 persons</option>
                         </select>
                     </div>
-                    <button className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</button>   
+                    <motion.button whileHover={{ scale: 1.2 }}
+                    className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</motion.button>  
                 </form>
             </section>     
         </main>

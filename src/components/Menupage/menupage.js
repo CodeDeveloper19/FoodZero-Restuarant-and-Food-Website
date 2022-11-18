@@ -17,7 +17,7 @@ const menuCuisineData = [
     {
         id: 'Starters',
         imageUrl: Starters,
-        titleDescription: 'This is a section of your menu. Give your section a brief description',
+        titleDescription: 'Get your meal started with some of our best appetizers',
         price: '$20',
         dish: 'Grilled Okra and Tomatoes',
         dish_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -31,7 +31,7 @@ const menuCuisineData = [
     {
         id: 'Mains',
         imageUrl: Mains,
-        titleDescription: 'This is a section of your menu. Give your section a brief description',
+        titleDescription: 'The main dishes of course, cooked to perfection',
         price: '$20',
         dish: 'Deep Sea Snow White Cod Fillet',
         dish_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -45,7 +45,7 @@ const menuCuisineData = [
     {
         id: 'Pastries & Drinks',
         imageUrl: Drinks,
-        titleDescription: 'This is a section of your menu. Give your section a brief description',
+        titleDescription: 'Complement the mouth-watering dishes with a glass of wine or desert',
         price: '$158',
         dish: 'Wine Pairing',
         dish_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

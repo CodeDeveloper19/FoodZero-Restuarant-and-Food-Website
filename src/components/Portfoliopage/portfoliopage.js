@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import Header from "../header";
 import Navigation from "../Homepage/navigation";
 import Footer from "../footer";
@@ -12,6 +12,7 @@ import dish3 from '../../images/Portfoliopage/dish3.png';
 import dish4 from '../../images/Portfoliopage/dish4.png';
 import dish5 from '../../images/Portfoliopage/dish5.png';
 import dish6 from '../../images/Portfoliopage/dish6.png';
+import Typed from 'typed.js';
 
 const dataComponents = [
     {
@@ -217,6 +218,29 @@ export default function Portfoliopage(){
     const [positionOfContainer, setPositionOfContainer] = useState('0');
     const [collapseNav, setCollapseNav] = useState(false);
 
+    const text = useRef(null);
+    const typed = useRef(null);
+
+    useEffect(() => {
+        const options = {
+            strings: [
+            'Our Portfolio',
+            'Our Works',
+          ],
+          startDelay: 1000,
+          typeSpeed: 200,
+          backSpeed: 100,
+          showCursor: false,
+          loop: true
+        };
+        
+        typed.current = new Typed(text.current, options);
+        
+        return () => {
+          typed.current.destroy();
+        }
+      }, [])
+
     const resetBorders = () => {
         setClickedOnAll(null);
         setClickedOnFruits(null);
@@ -238,7 +262,8 @@ export default function Portfoliopage(){
             <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <Header/>
                 <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
-                <h1 className='realtive top-0 bottom-0 left-0 right-0 z-10 mx-auto my-auto font-bold text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl h-fit w-fit text-center pb-[50px] px-[30px]'>Our Portfolio</h1>
+                <h1 ref={text}
+                className='flex relative top-0 bottom-0 left-0 right-0 z-10 mx-auto my-auto font-bold text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl h-fit w-fit text-center pb-[50px] px-[30px]'>Our Portfolio</h1>
                 <div className='relative w-fit h-fit flex flex-row items-center rotate-90 bottom-[-20px] left-0 right-0 mx-auto'>
                     <p className='text-white font-rufina text-xxxl'>Scroll</p>
                     <hr className='text-white border-dashed w-[120px] ml-[10px]'/>
@@ -261,7 +286,7 @@ export default function Portfoliopage(){
                     </ul>
                 </nav>
                 <section className="w-full h-fit">
-                    <div id='container' className="relative w-fit flex flex-row h-fit" style={{left: positionOfContainer}}>
+                    <div id='container' className="relative w-fit flex flex-row h-fit transition-[left] duration-1000" style={{left: positionOfContainer}}>
                         {
                             dataComponents.map((dataComponents) => {
                                 return <Dishes key={dataComponents.id} {...dataComponents}/>
