@@ -83,26 +83,27 @@ const postListData = [
 
 export default function Blogpage(){
     const [[showNavigation]] = useContext(NavigationContext);
+
     return(
         <>
             <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <Header/>
                 <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
-                <div className="top-0 bottom-0 left-0 right-0 my-auto mx-auto z-10 h-fit w-full flex flex-col text-white">
-                    <h1 className="font-bold text-white text-center font-rufina text-xxxxxxxxl h-fit w-full">Our Blog</h1>
-                    <p className="font-lato font-normal text-center text-base text-white h-fit w-full">Come and learn how we do some of our cooking</p>
+                <div className="top-0 bottom-0 left-0 right-0 z-10 flex flex-col w-full mx-auto my-auto text-white h-fit">
+                    <h1 className="w-full font-bold text-center text-white font-rufina text-xxxxxxxxl h-fit">Our Blog</h1>
+                    <p className="w-full text-base font-normal text-center text-white font-lato h-fit">Come and learn how we do some of our cooking</p>
                 </div>
             </header>
             <Navigation/>
             <main className="w-full normal:w-[1349px] h-fit flex flex-col items-center my-[100px] px-[60px]" style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <nav className="w-full h-fit">
-                    <ul className="flex h-fit w-full flex flex-row font-normal font-lato text-base">
+                    <ul className="flex flex-row w-full text-base font-normal h-fit font-lato">
                         <li className="text-darkwhite hover:underline"><Link to='/'>Home</Link></li>
                         <p className="text-darkwhite mx-[5px]">/</p>
                         <li className="text-darkerwhite hover:underline"><Link to='/blog'>Blog</Link></li>
                     </ul>
                 </nav>
-                <section className="w-full h-fit grid grid-cols-full laptop:grid-cols-450 justify-between">
+                <section className="grid justify-between w-full h-fit grid-cols-full laptop:grid-cols-450">
                     {
                         postListData.map((postListData) => {
                             return <Postlisting key={postListData.id} {...postListData} />

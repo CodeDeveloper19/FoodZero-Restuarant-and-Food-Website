@@ -22,7 +22,7 @@ export default function Reviewlisting(props){
         <>
             <div className='relative py-[100px] px-[120px] h-full w-screen normal:w-[1349px]'>
                 <img className='absolute right-[80px] minTablet:right-[160px] w-[90px] h-[70px] minTablet:w-[170px] minTablet:h-[150px]' src={quote} alt='semi-transparent illustration of a double quotation mark' aria-hidden='true'/>
-                <h2 className='font-rufina font-bold text-xxxl w-full laptop:w-[620px]'>“ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus  Lorem ipsum dolor sit amet.</h2>
+                <q className='font-rufina font-bold text-xxxl w-full laptop:w-[620px]'>{props.review}</q>
                 <div className='mt-[50px] w-full h-fit flex flex-col tablet:flex-row items-center phone:items-start'>
                     <div className='flex flex-col phone:flex-row items-center w-fit tablet:w-2/4 h-fit min-h-[100px]'>
                         <img className='w-[100px] h-full' src={props.reviewerImage} alt="reviewers's image" aria-hidden='true'/>

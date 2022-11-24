@@ -1,7 +1,48 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Reservation(){
+    const time = useRef(null);
+    const numberOfPersons = useRef(null);
+    const date = useRef(null);
+    const navigate = useNavigate();
+
+    const [customURL, setCustomURL] = useState(undefined);
+
+    useEffect(() => {
+        if (customURL){
+            navigate(`/contact/${customURL}`);
+        }
+    }, [customURL])
+
+    const checkIfComplete = (e) => {
+        if (customURL === undefined){
+            e.preventDefault();
+        }
+        if (time.current.value && date.current.value && numberOfPersons.current.value){
+            setCustomURL(`${date.current.value}_${time.current.value}_${numberOfPersons.current.value}`);
+        }
+    }
+
+    useEffect(() => {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear();
+
+        if (dd < 10) {
+        dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+        mm = '0' + mm;
+        } 
+            
+        today = yyyy + '-' + mm + '-' + dd;
+        date.current.setAttribute("min", today);
+    }, [])
+
     return(
         <>
             <section id='reservation' className='flex flex-col items-center w-full h-fit py-[150px] px-[60px] bg-lightwhite'>
@@ -10,10 +51,10 @@ export default function Reservation(){
                 <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
                     <div className='mt-[70px] mb-[100px] w-full h-fit flex flex-col tablet:flex-row justify-between'>
                         <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base'>
-                            <input className='w-full h-full bg-lightwhite outline-0' type='date' aria-label='reservation date' required></input>
+                            <input ref={date} className='w-full h-full bg-lightwhite outline-0' type='date' aria-label='reservation date' required></input>
                         </div>
                         <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] my-[50px] tablet:my-0'>
-                            <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
+                            <select ref={time} className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
                                 <option value="">Time for Reservation</option>
                                 <option value="08:00am">08:00am</option>
                                 <option value="09:00am">09:00am</option>
@@ -34,7 +75,7 @@ export default function Reservation(){
                             </select>
                         </div>
                         <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px]'>
-                            <select className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='number of persons' required>
+                            <select ref={numberOfPersons} className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='number of persons' required>
                                 <option value="">Number Of Persons</option>
                                 <option value="1 person">1 person</option>
                                 <option value="2 persons">2 persons</option>
@@ -43,9 +84,12 @@ export default function Reservation(){
                                 <option value="5 persons">5 persons</option>
                             </select>
                         </div>
-                    </div> 
-                    <motion.button whileHover={{ scale: 1.2 }}
-                    className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</motion.button>     
+                    </div>
+                    <Link
+                    onClick={(e) => checkIfComplete(e)}>
+                        <motion.button whileHover={{ scale: 1.2 }}
+                        className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</motion.button>   
+                    </Link>  
                 </form>
             </section>
         </>

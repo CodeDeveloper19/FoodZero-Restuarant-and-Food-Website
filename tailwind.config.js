@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/App.js', './src/components/Blogpage/blogpage.js', './src/components/Blogpage/article.js', './src/components/Portfoliopage/portfoliopage.js', './src/components/Portfoliopage/dishdescription.js', './src/components/Portfoliopage/dishes.js', './src/components/Portfoliopage/dish.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
+  content: ['./src/App.js', './src/components/Reservation/mainreservation.js', './src/components/Blogpage/blogpage.js', './src/components/Blogpage/tags.js', './src/components/Blogpage/recentposts.js', './src/components/Blogpage/morearticles.js', './src/components/Blogpage/recentcomments.js', 
+  './src/components/Blogpage/comment.js', './src/components/Blogpage/categories.js', './src/components/Blogpage/archives.js', './src/components/Blogpage/article.js', 
+  './src/components/Portfoliopage/portfoliopage.js', './src/components/Portfoliopage/dishdescription.js', './src/components/Portfoliopage/dishes.js', 
+  './src/components/Portfoliopage/dish.js', './src/components/Aboutpage/aboutpage.js', './src/components/Aboutpage/employees.js', './src/components/Contactpage/contactpage.js', 
+  './src/components/Menupage/menupage.js', './src/components/Menupage/menucuisines.js', './src/components/Homepage/homepage.js', './src/components/Homepage/postlisting.js', 
   './src/components/Homepage/pricelist.js', './src/components/Homepage/navigation.js', './src/components/Homepage/cuisinelisting.js',
-   './src/components/footer.js', './src/components/header.js', './src/components/reservation.js', './src/components/Homepage/reviewlisting.js', 
+  './src/components/footer.js', './src/components/header.js', './src/components/reservation.js', './src/components/Homepage/reviewlisting.js', 
   './src/components/Homepage/producelisting.js',  './public/index.html'],
   mode: 'jit',
   theme: {
@@ -13,13 +17,8 @@ module.exports = {
       gridTemplateColumns:{
         '450': '500px 500px',
         'full': '1fr',
-        '70': '60% 30%',
-        '100': '100%',
-        '40': '40% 40%',
+        '60': '65% 30%',
       },
-      spacing: {
-        '10': '10px',
-      }
     },
     colors: {
       white: '#FFFFFF',
@@ -44,6 +43,7 @@ module.exports = {
       base: '13px', //24px
       xl: '14px', //26px
       xxl: '20px', //32px
+      xr: '22px', //38px
       xxxl: '25px', //48px
       xxxxl: '32px', //66px
       xxxxxl: '35px', //68px

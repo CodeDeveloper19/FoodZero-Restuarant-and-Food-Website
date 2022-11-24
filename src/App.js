@@ -9,6 +9,7 @@ import Portfoliopage from './components/Portfoliopage/portfoliopage';
 import Blogpage from './components/Blogpage/blogpage';
 import Dishdescription from './components/Portfoliopage/dishdescription';
 import Article from './components/Blogpage/article';
+import Mainreservation from './components/Reservation/mainreservation';
 
 const getWindowSize = () => {
   const {innerWidth, innerHeight} = window;
@@ -18,6 +19,7 @@ const getWindowSize = () => {
 function App() {
   const [showNavigation, setShowNavigation] = useState(false);
   const [windowSize, setWindowSize] = useState(getWindowSize());
+  const [reservationDetails, setReservationDetails] = useState(undefined)
 
   useEffect(() => {
       const handleWindowResize = () => {
@@ -33,12 +35,14 @@ function App() {
 
   return (
     <>
-    <NavigationContext.Provider value={[[showNavigation, setShowNavigation], [windowSize]]}>
+    <NavigationContext.Provider value={[[showNavigation, setShowNavigation], [windowSize], [reservationDetails, setReservationDetails]]}>
       <Router>
         <Routes>
           <Route exact path='/' element={<Homepage/>}/>
           <Route exact path='/menu' element={<Menupage/>}/>
           <Route exact path='/contact' element={<Contactpage/>}/>
+          <Route exact path='/contact/:reservationdetails' element={<Contactpage/>}/>
+          <Route exact path='/reservation' element={<Mainreservation/>}/>
           <Route exact path='/about' element={<Aboutpage/>}/>
           <Route exact path='/about/portfolio' element={<Portfoliopage/>}/>
           <Route path='/about/portfolio/:dishname' element={<Dishdescription/>}/>

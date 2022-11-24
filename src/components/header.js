@@ -24,7 +24,7 @@ export default function Header(){
                     <p className='hidden text-white font-inter tablet:flex'>+86 852 346 000</p>
                     <motion.button whileHover={{scale: 1.05}}
                     className='text-white font-rufina border border-white w-full microPhone:w-[175px] min-h-[50px] h-fit hover:bg-darkwhite px-[10px]'>
-                        <a href='#reservation'>Reservations</a>
+                        <a href='/reservation'>Reservations</a>
                     </motion.button>
                 </div>
             </motion.div>

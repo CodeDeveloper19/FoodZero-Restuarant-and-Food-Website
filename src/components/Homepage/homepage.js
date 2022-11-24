@@ -38,22 +38,22 @@ const priceListData = [
         id: 'top',
         price1: '$20',
         dish1: 'Deep Sea Snow White Cod Fillet',
-        dish_description1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        dish_description1: 'No other cod comes close to ours!',
         delayy: 2,
         price2: '$22',
         dish2: 'Steak With Rosemary Butter',
-        dish_description2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        dish_description2: "Making a great piece of barbecue meat is no beginner's luck",
         delayy2: 2.5
     },
     {
         id: 'bottom',
         price1: '$18',
         dish1: 'Cucumber Salad',
-        dish_description1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        dish_description1: 'All it takes is a few minutes of marination time to soften and flavour our greens',
         delayy: 2.5,
         price2: '$90',
         dish2: 'Natural Wine Pairing',
-        dish_description2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        dish_description2: 'Top off or start your meals with our sparkling natural wine',
         delayy2: 3
     }
 ]
@@ -62,7 +62,7 @@ const produceListData = [
     {
         id: 'fish',
         title: 'Premium Quality',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu',
+        description: 'We use the freshest and top-quality ingredients and kitchen utensils to make our meals',
         imageUrl: fish,
         imagedescription: 'ilustration of a fish',
         delayy: 0
@@ -70,7 +70,7 @@ const produceListData = [
     {
         id: 'carrot',
         title: 'Seasonal Vegetables',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu',
+        description: 'Some greens and vegetables are accessible once in a while but that is an exception at our restaurant',
         imageUrl: carrot,
         imagedescription: 'ilustration of a carrot',
         delayy: .5
@@ -78,7 +78,7 @@ const produceListData = [
     {
         id: 'lemon',
         title: 'Fresh Fruit',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu',
+        description: "You won't find the juiciest and sweetest of fruits anywhere else",
         imageUrl: lemon,
         imagedescription: 'ilustration of a lemon',
         delayy: 1
@@ -137,21 +137,24 @@ const reviewListData = [
         reviewAuthor: 'John Doe',
         occupation: 'Blogger',
         reviewerImage: reviewer1,
-        pageNumber: '1/3'
+        pageNumber: '1/3',
+        review: "Oh my God! So good! Everything from the starters to the entrees to the desserts meshed perfectly with my flavor-profile. I found the ambiance to be very charming. The waitress did an excellent job. They got a new customer for life!"
     },
     {
         id: 'review2',
         reviewAuthor: 'Michael Downson',
         occupation: 'Food Critic',
         reviewerImage: reviewer1,
-        pageNumber: '2/3'
+        pageNumber: '2/3',
+        review: "Yumm-o! The entrees are simply to die for. The waiter did an excellent job"
     },
     {
         id: 'review3',
         reviewAuthor: 'Dutch Grimshaw',
         occupation: 'Blogger',
         reviewerImage: reviewer1,
-        pageNumber: '3/3'
+        pageNumber: '3/3',
+        review: "Best experience ever! This was one of the best mouth-watering steaks I've had grace my taste buds in a long time. Everything was just so yummy. Try out the huge selection of incredible appetizers. Everything I tried was bursting with flavor. I would eat here every day if I could afford it!"
     },
 ]
 
@@ -173,25 +176,25 @@ export default function Homepage(){
         setsliderPosition('0px');
     }, [windowSize]);
 
-    useEffect(() => {
-        console.log("A");
-        console.log(nextSlide)
-        let repeatMovementOfSlider; 
-        const initialDelay = setTimeout(() => {
-            repeatMovementOfSlider = setInterval(() => {
-                sliderShift();
-                if (nextSlide !== undefined) {
-                    setsliderPosition(nextSlide);
-                }
-                console.log(nextSlide)
-            }, 1000);
-        }, 1000);
-        return () => {clearInterval(repeatMovementOfSlider); clearTimeout(initialDelay)};
-    }, [sliderPosition])
-
     // useEffect(() => {
-    //     sliderShift();
+    //     // console.log("A");
+    //     // console.log(nextSlide)
+    //     let repeatMovementOfSlider; 
+    //     const initialDelay = setTimeout(() => {
+    //         repeatMovementOfSlider = setInterval(() => {
+    //             sliderShift();
+    //             if (nextSlide !== undefined) {
+    //                 setsliderPosition(nextSlide);
+    //             }
+    //             // console.log(nextSlide)
+    //         }, 1000);
+    //     }, 1000);
+    //     return () => {clearInterval(repeatMovementOfSlider); clearTimeout(initialDelay)};
     // }, [sliderPosition])
+
+    useEffect(() => {
+        sliderShift();
+    }, [sliderPosition])
 
     let positionOfSlider = -parseInt(sliderPosition.slice(1, sliderPosition.length - 2));
 
@@ -250,8 +253,8 @@ export default function Homepage(){
             <Header />
             <div className='flex flex-col relative w-full h-fit min-h-[750px] minTablet:min-h-[500px] mt-[50px] px-[60px]'>
                     <motion.div animate={{ x: 600 }} initial={{ left: -600 }} transition={{ delay: 1, type: 'spring'}} className='relative flex flex-col justify-between w-full minTablet:w-[500px] mb-[70px] minTablet:mb-0 h-fit z-10'>
-                        <h1 className='text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl leading-tight'>Healthy Eating is important part of lifestyle</h1>
-                        <p className='text-white font-lato text-base w-3/5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu</p>
+                        <h1 className='leading-tight text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl'>Healthy Eating is important part of lifestyle</h1>
+                        <p className='w-3/5 text-base text-white font-lato'>By taking healthy meals, fruits and vegetables that are full of nutrients, we reduce the chances of diseases</p>
                     </motion.div>
                     <motion.div animate={{ opacity: 1}} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 2}} className='relative minTablet:absolute w-fit h-fit hidden microPhone:flex flex-row items-center rotate-90 -bottom-[85px] smartPhone:-bottom-[115px] minTablet:bottom-[70px] -left-[60px] smartPhone:-left-[90px] minTablet:-left-[30px]'>
                         <p className='text-white font-rufina text-xxxl'>Scroll</p>
@@ -277,13 +280,13 @@ export default function Homepage(){
                         Start to plan your diet today
                     </h2>
                     <p className='text-white font-lato text-base w-full smartPhone:w-[250px]'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu
+                        Our menus are well-designed to help you eat healthy
                     </p>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }} viewport={{ once: true }} 
                 className='flex flex-col justify-between w-[70%] smartPhone:w-[260px] h-fit smartPhone:h-[450px] mt-[100px] tablet:mt-0 self-end tablet:self-center'>
                     <p className='text-white font-lato text-base w-full smartPhone:w-[200px]'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque congue arcu
+                        Get that peppery taste and tanginess in our meals made with specially curated spices and pepper
                     </p>
                     <img className='w-full h-[300px] smartPhone:h-[370px] object-cover mt-[20px] smartPhone:mt-0' src={saltpepper} alt='image of a cuisine' aria-hidden='true'/>
                 </motion.div>
@@ -292,8 +295,8 @@ export default function Homepage(){
                 <img className='absolute top-0 right-0 w-[500px] h-[550px]' src={leaves} alt='image of green leaves' aria-hidden='true'/>
                 <motion.div initial={{ top: -200 }}  whileInView={{ y: 200 }} transition={{ duration: 2 }} viewport={{ once: true }}
                 className='relative mt-[100px] w-full smartPhone:w-[235px] h-fit'>
-                    <h2 className='text-black font-rufina text-xxxxxxxl font-bold'>Our Menu</h2>
-                    <p className='text-black font-lato text-base font-normal'>This is a section of your menu. Give your section a brief description</p>
+                    <h2 className='font-bold text-black font-rufina text-xxxxxxxl'>Our Menu</h2>
+                    <p className='text-base font-normal text-black font-lato'>Designed by only the best dieticians and master chefs one can find</p>
                 </motion.div>
                 <div className='flex flex-col justify-between w-full h-fit laptop:h-[400px] my-[50px]'>
                     {
@@ -315,13 +318,13 @@ export default function Homepage(){
                         Excellent cook
                     </h2>
                     <p className='font-lato font-normal text-base w-full smartPhone:w-[290px]'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc. 
+                        Cooking is an art where every meal or dish made has a story to tell about the way of life of the people it represents. 
                     </p>
                     <img className='w-[150px] microPhone:w-[200px] smartPhone:w-[250px] h-[150px] microPhone:h-[200px] smartPhone:h-[250px] mt-[20px] ml-0 smartPhone:ml-[70px]' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
                 </motion.div>
             </section>
             <section className='w-full h-fit py-[120px] px-[60px] bg-white'>
-                <div className='flex flex-col minTablet:flex-row justify-between w-full h-fit'>
+                <div className='flex flex-col justify-between w-full minTablet:flex-row h-fit'>
                     {
                         produceListData.map((produceListData) => {
                             return <Producelisting key={produceListData.id} {...produceListData} />
@@ -343,8 +346,8 @@ export default function Homepage(){
                     Calories Energy Balance
                 </motion.h2>
                 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2}} viewport={{ once: true }}  
-                className='font-lato font-normal text-base text-center'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                className='text-base font-normal text-center font-lato'>
+                    We get the energy to perfom our daily tasks through nutritious meals
                 </motion.p>
                 <div className='overflow-hidden w-full h-fit laptop:mt-[100px] flex flex-col laptop:flex-row justify-between'>
                     <WindowSizeContext.Provider value={[[windowSize]]}>

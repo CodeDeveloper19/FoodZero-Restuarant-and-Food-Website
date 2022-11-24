@@ -94,7 +94,7 @@ export default function Aboutpage(){
             <Header/>
             <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
             <div className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 py-[100px] px-[60px] self-end'>
-                <h1 ref={text} className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-full minTablet:w-[400px]'>Who We Are</h1>
+                <h1 ref={text} className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-full minTablet:w-[400px]' aria-label='Who We Are'></h1>
                 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
                 className='text-white font-rufina font-bold text-xxl w-full minTablet:w-[500px]'>
                     The most important thing for us is to give you the comfortable dining experience you deserve
@@ -113,7 +113,7 @@ export default function Aboutpage(){
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2}} viewport={{ once: true }} 
                 className='w-full minTablet:w-[40%] h-fit flex flex-col'>
                     <h2 ref={text2} className='font-bold font-rufina text-xxxxxxxl'></h2>
-                    <p className='font-normal font-lato text-base w-full minLaptop:w-[360px]'>We started as a one man business where our founder, Alex, served the best European and African cuisines from his little kitchen. Ten years down the line, FoodZero has grown to become one of the best restaurants in Canada with over fifty employees.</p>
+                    <p className='font-normal font-lato text-base w-full minLaptop:w-[360px]'>We started as a one man business where our founder, Alex, served the best European, Asian and African cuisines from his little kitchen.<p> Ten years down the line, FoodZero has grown to become one of the best restaurants in Canada with over hundred employees and ten major outlets around Canada</p></p>
                 </motion.div>
                 <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1}} viewport={{ once: true }} 
                 className='w-full minTablet:w-[50%] h-[200px] smartPhone:h-[250px] phone:h-[300px] laptop:h-[400px] object-cover mt-[100px] minTablet:mt-0' src={ChefSeasoning} alt='image of a cuisine' aria-hidden='true'/>
@@ -150,8 +150,8 @@ export default function Aboutpage(){
                         <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1.5 }} viewport={{ once: true }}
                         className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>01.Slice</motion.h3>
                         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2 }} viewport={{ once: true }}
-                        className='text-base font-normal text-left font-lato'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc. Convallis pellentesque quis fringilla sagittis. Egestas in risus sit nunc nunc, arcu donec nam etiam. 
+                        className='text-base font-normal text-left font-lato'>         
+                            Every excellent cooking starts with a good slicing technique. Just like our chefs, it is best advised to chefs use the knuckle of your middle finger as a width guide for slices. But be careful not to cut yourself   
                         </motion.p>
                     </div>
                 </div>
@@ -166,7 +166,7 @@ export default function Aboutpage(){
                             </motion.h3>
                             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 3 }} viewport={{ once: true }}
                             className='text-base font-normal text-left font-lato'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. 
+                                Baking is a culinary art that requires the best attention to detail and precise measurement of ingredients such as flour. Any one can be a master in such arts with time and practice.
                             </motion.p>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ export default function Aboutpage(){
                             </motion.h3>
                             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2 }} viewport={{ once: true }}
                             className='font-lato font-normal text-base text-left w-full minTablet:w-[230px]'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet.
+                                Using the right and wrong seasoning can make and break a dish. The right amount of seasoning is what it takes to make your dish top-tier like ours. Check and use the right type of salt when cooking.
                             </motion.p>
                         </div>
                     </div>
