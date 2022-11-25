@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { NavigationContext } from "../../App";
 import Header from "../header";
 import Navigation from "../Homepage/navigation";
@@ -9,8 +9,13 @@ import { Countdown } from "../countdownhook";
 
 export default function Mainreservation(){
     const [[showNavigation], [], [reservationDetails]] = useContext(NavigationContext);
+    const months = useRef(null);
+    const days = useRef(null);
+    const hours = useRef(null);
+    const minutes = useRef(null);
+    const seconds = useRef(null);
+    Countdown([months, days, hours, minutes, seconds]);
 
-    // const dummy = Countdown(`${}_${time}`);
 
     useEffect(() => {
         let reservationdetails;
@@ -26,13 +31,14 @@ export default function Mainreservation(){
             localStorage.setItem('time', reservationdetails[1]);
             localStorage.setItem('numberofpersons', reservationdetails[2]);
         }
+
     }, []);
 
 
 
     return (
         <>
-            <section className='relative bottom-0 z-30 flex flex-col items-center w-full h-screen'>
+            <section className='relative bottom-0 z-30 flex flex-col items-center w-full h-fit min-h-screen'>
                 <header className='w-full normal:w-[1349px] h-fit flex flex-col pb-[100px]' style={{display : (showNavigation) ? 'none' : 'flex'}}>
                     <Header/>
                 </header>
@@ -44,23 +50,23 @@ export default function Mainreservation(){
                     <hr className="text-white border-dashed border w-full mt-[20px]"></hr>
                     <div className="w-full h-fit flex flex-col phone:flex-row justify-between items-center mt-[20px] mb-[70px]">
                         <div className="w-fit h-fit text-white">
-                            <p className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p ref={months} className="font-bold font-rufina text-xxxxxxl">02</p>
                             <p className="font-lato font-normal text-base text-center">Month</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p ref={days} className="font-bold font-rufina text-xxxxxxl">02</p>
                             <p className="font-lato font-normal text-base text-center">Days</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p ref={hours} className="font-bold font-rufina text-xxxxxxl">02</p>
                             <p className="font-lato font-normal text-base text-center">Hours</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p ref={minutes} className="font-bold font-rufina text-xxxxxxl">02</p>
                             <p className="font-lato font-normal text-base text-center">Minutes</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p ref={seconds} className="font-bold font-rufina text-xxxxxxl">02</p>
                             <p className="font-lato font-normal text-base text-center">Second</p>
                         </div>
                     </div>

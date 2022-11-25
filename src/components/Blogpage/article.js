@@ -341,14 +341,14 @@ export default function Article(){
                     </div>
                 </aside>
             </main>
-            <section className="flex flex-row justify-between w-full normal:w-[1349px] h-fit bg-lightwhite mb-[100px]">
+            <section className="flex flex-row justify-between w-full normal:w-[1349px] h-fit bg-lightwhite mb-[100px]" style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
                     {
                         changeArticleData.map((changeArticleData) => {
                             return <Morearticles key={changeArticleData.arrow} {...changeArticleData}/>
                         })
                     }
             </section>
-            <section className="flex justify-center w-full normal:w-[1349px] h-fit mb-[180px]">
+            <section className="flex justify-center w-full normal:w-[1349px] h-fit mb-[180px]" style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
                 <div className="h-fit flex-col w-full max-w-[900px] mx-[50px]">
                     <h2 className="w-full font-bold text-center h-fit font-rufina text-xxxl">5 Comments</h2>
                     <div className="flex flex-col w-full h-fit pb-[100px] pt-[70px]">

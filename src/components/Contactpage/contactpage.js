@@ -10,6 +10,7 @@ import Navigation from '../Homepage/navigation';
 import { NavigationContext } from '../../App';
 import { motion } from 'framer-motion';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Setdatehook } from '../setdatehook';
 
 export default function Contactpage(){
     const [[showNavigation], [], [reservationDetails, setReservationDetails]] = useContext(NavigationContext);
@@ -22,6 +23,7 @@ export default function Contactpage(){
     const firstName = useRef(null);
     const lastName = useRef(null);
     const params = useParams();
+    Setdatehook(date);
 
     useEffect(() => {
         if (params.reservationdetails){
@@ -31,6 +33,7 @@ export default function Contactpage(){
             numberOfPersons.current.value = reservationdetails[2];
         }
     }, []);
+
 
     useEffect(() => {
         let storedfirstname = localStorage.getItem('firstname');

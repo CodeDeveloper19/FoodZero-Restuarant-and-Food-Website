@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
+import { Setdatehook } from './setdatehook';
 
 export default function Reservation(){
     const time = useRef(null);
     const numberOfPersons = useRef(null);
     const date = useRef(null);
     const navigate = useNavigate();
+    Setdatehook(date);
 
     const [customURL, setCustomURL] = useState(undefined);
 
@@ -24,24 +26,6 @@ export default function Reservation(){
             setCustomURL(`${date.current.value}_${time.current.value}_${numberOfPersons.current.value}`);
         }
     }
-
-    useEffect(() => {
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1;
-        let yyyy = today.getFullYear();
-
-        if (dd < 10) {
-        dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-        mm = '0' + mm;
-        } 
-            
-        today = yyyy + '-' + mm + '-' + dd;
-        date.current.setAttribute("min", today);
-    }, [])
 
     return(
         <>
