@@ -1,20 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, createContext } from "react";
 import Header from "../header";
 import Footer from "../footer";
 import Navigation from "../Homepage/navigation";
 import { useParams, Link } from "react-router-dom";
 import { NavigationContext } from "../../App";
 import HeaderImage from '../../images/Blogpage/Article1/article1headerimage.png';
-import cuisine1 from '../../images/Blogpage/Article1/cuisine1.png';
-import cuisine2 from '../../images/Blogpage/Article1/cuisine2.png';
-import cuisine3 from '../../images/Blogpage/Article1/cuisine3.png';
 import { motion } from "framer-motion";
-import authorImage from '../../images/author1.png';
 import quote from '../../images/quote.png';
 import nextArticle from '../../images/Blogpage/Article1/nextArticle.png';
-import prevArticle from '../../images/Blogpage/Article1/prevArticle.png';
-import rightArrow from '../../images/Icons/Icon_arrow-right.svg';
-import leftArrow from '../../images/Icons/Icon_arrow-left.svg';
 import Morearticles from "./morearticles";
 import Comment from "./comment";
 import dummyImage from '../../images/Blogpage/dummyImage.jpg';
@@ -26,21 +19,9 @@ import Recentposts from "./recentposts";
 import Tags from "./tags";
 import threeBars from '../../images/Icons/bars-solid.svg';
 import xicon from '../../images/NaviClose.svg';
-
-const changeArticleData = [
-    {
-        imageUrl: prevArticle,
-        arrow: leftArrow,
-        text: 'PREVIOUS POST',
-        title: '7 Reasons to Start Your Day With Lemon Water'
-    },
-    {
-        imageUrl: nextArticle,
-        arrow: rightArrow,
-        text: 'NEXT POST',
-        title: "12 Sparkling Wines We're Loving This Summer"
-    }
-]
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 const comments = [
     {
@@ -175,7 +156,70 @@ const tag = [
 export default function Article(){
     const [showNavigation] = useContext(NavigationContext);
     const params = useParams();
+    const [callData, setCallData] = useState(false);
     const [showAside, setShowAside] = useState(false);
+    const [articleTitle, setArticleTitle] = useState([]);
+    const [articleImages, setArticleImages] = useState([]);
+    const [authorDetails, setAuthorDetails] = useState([]);
+    const [changeArticleData, setChangeArticleData] = useState([]);
+    const [articleText, setArticleText] = useState([]);
+
+    useEffect(() => {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQdDX4ns83jUlnl9c_S2x13tFDCRdaFgs",
+            authDomain: "food-zero-restaurant.firebaseapp.com",
+            databaseURL: "https://food-zero-restaurant-default-rtdb.firebaseio.com",
+            projectId: "food-zero-restaurant",
+            storageBucket: "food-zero-restaurant.appspot.com",
+            messagingSenderId: "433094515434",
+            appId: "1:433094515434:web:68a5ef8b2d4600d38c1593",
+            measurementId: "G-PH4Z3MYKGQ"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        
+        const auth = getAuth();
+        signInAnonymously(auth)
+            .then(() => {
+                retrieveAndOutputDatabase();
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+        
+        const retrieveAndOutputDatabase = () => {
+            const dbRef = ref(getDatabase());
+            let path = ["articleTitle", "articleImages", "authorDetails", "changeArticleData", "articleText"];
+            for (let i = 0, z = path.length; i < z; i++){
+                get(child(dbRef, `/AllArticles/${params.articletitle}/${path[i]}`)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        switch(path[i]){
+                            case "articleTitle":
+                                setArticleTitle(Object.values(snapshot.val()));
+                                console.log(Object.values(snapshot.val()))
+                                break;
+                            case "articleImages":
+                                setArticleImages(Object.values(snapshot.val()));
+                                break;
+                            case "authorDetails":
+                                setAuthorDetails(Object.values(snapshot.val()));
+                                break;
+                            case "changeArticleData":
+                                setChangeArticleData(Object.values(snapshot.val()));
+                                break;
+                            case "articleText":
+                                setArticleText(Object.values(snapshot.val()));
+                                console.log(Object.values(snapshot.val()))
+                                break;
+                        }
+                        setCallData(false)
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                });
+            }
+        }
+    }, [callData])
 
     return(
         <>
@@ -184,19 +228,19 @@ export default function Article(){
                 <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
                 <div className="top-0 bottom-0 left-0 right-0 z-10 flex flex-col mx-[50px] minTablet:mx-auto my-[100px] minTablet:my-auto text-white h-fit w-fit">
                     <div className='w-[120px] h-[40px] border border-white flex justify-center items-center px-[10px] minTablet:ml-0 ml-[10px]'>
-                        <p className='text-xl text-white font-rufina'>Food</p>
+                        <p className='text-xl text-white font-rufina'>{articleTitle[2]}</p>
                     </div>
                     <h1 className="font-rufina text-white font-bold text-xxxxxxl mt-[30px] mb-[10px] w-full max-w-[550px]">{params.articletitle}</h1>
                     <motion.div
-                    className='flex flex-col phone:flex-row justify-between items-start phone:items-center h-fit w-full max-w-[350px]'>
-                        <img className='h-[70px] w-[70px]' src={authorImage} alt='image of the author' aria-hidden='true'/> 
-                        <p className='text-white font-lato text-xxxsm mt-[7px] phone:mt-0'>Julie Christie</p>
-                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0'>October 17,2022</p>
-                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0'>3:33 pm</p>
-                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0'>3 comments</p>
+                    className='flex flex-col phone:flex-row justify-between items-start phone:items-center h-fit w-full max-w-fit'>
+                        <img className='h-[70px] w-[70px] rounded-full object-cover' src={articleTitle[0]} alt='image of the author' aria-hidden='true'/> 
+                        <p className='text-white font-lato text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[1]}</p>
+                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
+                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[4]}</p>
+                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
+                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[5]}</p>
+                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
+                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{`${articleTitle[3]} comments`}</p>
                     </motion.div>
                 </div>
             </header>
@@ -220,44 +264,28 @@ export default function Article(){
                         </button>
                     </nav>
                     <p className="font-lato font-normal h-fit w-full text-base my-[50px]"> 
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Purus lorem id penatibus imperdiet. 
-                        Turpis egestas ultricies purus auctor tincidunt lacus nunc. 
-                        Convallis pellentesque quis fringilla sagittis. 
-                        Egestas in risus sit nunc nunc, arcu donec nam etiam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc.
+                    {articleText[0]}
                     </p>
-                    <div className="grid justify-between w-full h-fit grid-cols-60">
-                        <div className="col-start-1 col-end-2 row-start-1 row-end-5">
-                            <img className="w-full h-full object-cover" src={cuisine1} alt='image of a cuisine' aria-hidden='true'/> 
+                    <div className="grid justify-between w-full h-[150px] smartPhone:h-[200px] phone:h-[300px] minTablet:h-[400px] minLaptop:h-[500px] grid-cols-60">
+                        <div className="col-start-1 col-end-2 row-start-1 row-end-5 h-[150px] smartPhone:h-[200px] phone:h-[300px] minTablet:h-[400px] minLaptop:h-[500px]">
+                            <img className="w-full h-full object-cover" src={articleImages[0]} alt='image of a cuisine' aria-hidden='true'/> 
                         </div>
-                        <div className="col-start-2 col-end-3 row-start-1 row-end-3 mb-[20px]">
-                            <img className='w-full h-full object-cover'  src={cuisine2} alt='image of a cuisine' aria-hidden='true'/> 
+                        <div className="col-start-2 col-end-3 row-start-1 row-end-3 h-[65px] smartPhone:h-[80px] phone:h-[130px] minTablet:h-[180px] minLaptop:h-[230px]">
+                            <img className='w-full h-full object-cover'  src={articleImages[1]} alt='image of a cuisine' aria-hidden='true'/> 
                         </div>
-                        <div className="col-start-2 col-end-3 row-start-3 row-end-5 mt-[20px]">
-                            <img className='w-full h-full object-cover' src={cuisine3} alt='image of a cuisine' aria-hidden='true'/> 
+                        <div className="col-start-2 col-end-3 row-start-3 row-end-5 h-[65px] smartPhone:h-[80px] phone:h-[130px] minTablet:h-[180px] minLaptop:h-[230px] self-end">
+                            <img className='w-full h-full object-cover' src={articleImages[2]} alt='image of a cuisine' aria-hidden='true'/> 
                         </div>
                     </div>
                     <p className="font-lato font-normal h-fit w-full max-w-[650px] text-base my-[50px]">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Purus lorem id penatibus imperdiet. 
-                        urpis egestas ultricies purus auctor tincidunt lacus nunc. 
-                        Convallis pellentesque quis fringilla sagittis. 
-                        Egestas in risus sit nunc nunc, arcu donec nam etiam. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                        {articleText[1]}
                     </p>
                     <div className="relative w-full h-fit min-h-[100px] py-[100px] flex justify-center">
                         <img className='absolute right-[80px] minTablet:right-[0px] w-[90px] h-[70px] minTablet:w-[170px] minTablet:h-[150px]' src={quote} alt='semi-transparent illustration of a double quotation mark' aria-hidden='true'/>
-                        <p className="font-bold font-lato text-xr italic text-green w-full max-w-[700px]"><q>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc.</q></p>
+                        <p className="font-bold font-lato text-xr italic text-green w-full max-w-[700px]"><q>{articleText[3]}</q></p>
                     </div>
                     <p className="font-lato font-normal h-fit w-full text-base mt-[50px] mb-[100px]">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc. 
-                        Convallis pellentesque quis fringilla sagittis. Egestas in risus sit nunc nunc, arcu donec nam etiam. 
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Purus lorem id penatibus imperdiet. Turpis egestas ultricies purus auctor tincidunt lacus nunc. 
-                        Convallis pellentesque quis fringilla sagittis. Egestas in risus sit nunc nunc, arcu donec nam etiam. 
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Purus lorem id penatibus imperdiet. 
+                        {articleText[2]}
                     </p>
                     <div className="flex flex-col smartPhone:flex-row items-start smartPhone:items-end w-full h-fit">
                         <h2 className="font-bold font-rufina text-xxl mr-[10px]">Tags:</h2>
@@ -270,13 +298,13 @@ export default function Article(){
                         </div>
                     </div>
                     <div className="flex flex-col phone:flex-row w-full h-fit my-[30px] items-center">
-                        <img className='h-[150px] w-[150px] self-start object-cover' src={authorImage} alt='image of the author' aria-hidden='true'/> 
-                        <div className="flex flex-col w-full h-fit px-0 phone:px-[30px] mt-[20px] phone:mt-0">
+                        <img className='h-[150px] w-[150px] rounded-full self-start object-cover' src={authorDetails[0]} alt='image of the author' aria-hidden='true'/> 
+                        <div className="flex flex-col w-fit h-fit px-0 phone:px-[30px] mt-[20px] phone:mt-0">
                             <h3 className="font-bold font-rufina text-xxl">
-                                Julie Christie
+                                {authorDetails[2]}
                             </h3>
                             <p className="text-base font-normal font-lato mt-[10px]">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet. 
+                                {authorDetails[1]}
                             </p>
                         </div>
                     </div>
@@ -342,15 +370,17 @@ export default function Article(){
                 </aside>
             </main>
             <section className="flex flex-row justify-between w-full normal:w-[1349px] h-fit bg-lightwhite mb-[100px]" style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
+                <CallDataContext.Provider value={[setCallData]}>
                     {
                         changeArticleData.map((changeArticleData) => {
                             return <Morearticles key={changeArticleData.arrow} {...changeArticleData}/>
                         })
                     }
+                </CallDataContext.Provider>
             </section>
             <section className="flex justify-center w-full normal:w-[1349px] h-fit mb-[180px]" style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
                 <div className="h-fit flex-col w-full max-w-[900px] mx-[50px]">
-                    <h2 className="w-full font-bold text-center h-fit font-rufina text-xxxl">5 Comments</h2>
+                    <h2 className="w-full font-bold text-center h-fit font-rufina text-xxxl">{`${articleTitle[3]} comments`}</h2>
                     <div className="flex flex-col w-full h-fit pb-[100px] pt-[70px]">
                         {
                             comments.map((comments) => {
@@ -378,3 +408,4 @@ export default function Article(){
         </>
     )
 }
+export const CallDataContext = createContext();
