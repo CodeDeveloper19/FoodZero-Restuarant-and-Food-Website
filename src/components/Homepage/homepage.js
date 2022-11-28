@@ -27,11 +27,10 @@ import Reservation from '../reservation';
 import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
 import lemon from '../../images/Icons/lemondark.svg';
-import postimage1 from '../../images/postimage1.png';
-import postimage2 from '../../images/postimage2.png';
-import author1 from '../../images/author1.png';
-import author2 from '../../images/author2.png';
 import reviewer1 from '../../images/reviewer1.png';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 const priceListData = [
     {
@@ -83,31 +82,6 @@ const produceListData = [
         imagedescription: 'ilustration of a lemon',
         delayy: 1
     },
-]
-
-const postListData = [
-    {
-        id: 'post1',
-        imageUrl: postimage1,
-        postAuthor: 'Julie Christie',
-        authorImage: author1,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: 'Fruit and vegetables and protection against diseases',
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        id: 'post2',
-        imageUrl: postimage2,
-        postAuthor: 'Dianne Russell',
-        authorImage: author2,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: "Asparagus Spring Salad with Rocket, Goat's Cheese",
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    }
 ]
 
 const cuisineListData = [
@@ -165,6 +139,47 @@ export default function Homepage(){
     const [sliderPosition, setsliderPosition] = useState('0px');
     const [nextSlide, setNextSlide] = useState(undefined);
     const [prevSlide, setPrevSlide] = useState(undefined);
+    const [postListData, setPostListData] = useState([]);
+
+    useEffect(() => {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQdDX4ns83jUlnl9c_S2x13tFDCRdaFgs",
+            authDomain: "food-zero-restaurant.firebaseapp.com",
+            databaseURL: "https://food-zero-restaurant-default-rtdb.firebaseio.com",
+            projectId: "food-zero-restaurant",
+            storageBucket: "food-zero-restaurant.appspot.com",
+            messagingSenderId: "433094515434",
+            appId: "1:433094515434:web:68a5ef8b2d4600d38c1593",
+            measurementId: "G-PH4Z3MYKGQ"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        
+        const auth = getAuth();
+        signInAnonymously(auth)
+            .then(() => {
+                retrieveAndOutputDatabase();
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+        
+        const retrieveAndOutputDatabase = () => {
+            const dbRef = ref(getDatabase());
+            get(child(dbRef, `/ListofArticles`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    populatePostListData(snapshot.val());
+                }
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+    
+        const populatePostListData = (data) => {
+            let info = Object.values(data);
+            setPostListData([info[0], info[1]])
+        }
+    }, [])
 
     // const [isOnScreen, setIsOnScreen] = useState(false);
 
@@ -332,7 +347,7 @@ export default function Homepage(){
                     }   
                 </div>
             </section>
-            <section className='flex flex-col laptop:flex-row justify-between items-center w-full h-fit pt-[50px] pb-[150px] px-[60px] bg-white'>
+            <section className='grid justify-between w-full h-fit grid-cols-full laptop:grid-cols-450 pt-[50px] pb-[150px] px-[60px] bg-white'>
                 {
                     postListData.map((postListData) => {
                         return <Postlisting key={postListData.id} {...postListData} />

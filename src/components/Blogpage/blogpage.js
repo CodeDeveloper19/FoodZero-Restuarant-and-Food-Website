@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Header from "../header";
 import Footer from "../footer";
 import Navigation from "../Homepage/navigation";
@@ -6,83 +6,55 @@ import { NavigationContext } from "../../App";
 import HeaderImage from '../../images/Blogpage/HeaderImage.png'
 import { Link } from "react-router-dom";
 import Postlisting from "../Homepage/postlisting";
-import postimage1 from '../../images/postimage1.png';
-import postimage2 from '../../images/postimage2.png';
-import author1 from '../../images/author1.png';
-import author2 from '../../images/author2.png';
-
-const postListData = [
-    {
-        id: 'post1',
-        imageUrl: postimage1,
-        postAuthor: 'Julie Christie',
-        authorImage: author1,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: 'Fruit and vegetables and protection against diseases',
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        id: 'post2',
-        imageUrl: postimage2,
-        postAuthor: 'Dianne Russell',
-        authorImage: author2,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: "Asparagus Spring Salad with Rocket, Goat's Cheese",
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        id: 'post3',
-        imageUrl: postimage2,
-        postAuthor: 'Jenifier Lopez',
-        authorImage: author2,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2, 
-        postTitle: "The Best Style of Dough for Dumplings",
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        id: 'post4',
-        imageUrl: postimage2,
-        postAuthor: 'Theresa Webb',
-        authorImage: author2,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: "7 Reasons to Start Your Day With Lemon Water",
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        id: 'post5',
-        imageUrl: postimage2,
-        postAuthor: 'Cody Fisher',
-        authorImage: author2,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: "Three Ideas for Cooking Goat Meat at Home",
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        id: 'post6',
-        imageUrl: postimage2,
-        postAuthor: 'Dianne Russell',
-        authorImage: author2,
-        postDate: 'October 17,2022',
-        postTime: '3:33 pm',
-        numberOfComments: 2,
-        postTitle: "12 Sparkling Wines We're Loving This Summer",
-        postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    }
-]
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 
 export default function Blogpage(){
     const [[showNavigation]] = useContext(NavigationContext);
+    const [postListData, setPostListData] = useState([]);
+
+    useEffect(() => {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQdDX4ns83jUlnl9c_S2x13tFDCRdaFgs",
+            authDomain: "food-zero-restaurant.firebaseapp.com",
+            databaseURL: "https://food-zero-restaurant-default-rtdb.firebaseio.com",
+            projectId: "food-zero-restaurant",
+            storageBucket: "food-zero-restaurant.appspot.com",
+            messagingSenderId: "433094515434",
+            appId: "1:433094515434:web:68a5ef8b2d4600d38c1593",
+            measurementId: "G-PH4Z3MYKGQ"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        
+        const auth = getAuth();
+        signInAnonymously(auth)
+            .then(() => {
+                retrieveAndOutputDatabase();
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+        
+        const retrieveAndOutputDatabase = () => {
+            const dbRef = ref(getDatabase());
+            get(child(dbRef, `/ListofArticles`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    populatePostListData(snapshot.val());
+                }
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+    
+        const populatePostListData = (data) => {
+            let info = Object.values(data);
+            setPostListData([...info])
+        }
+    }, [])
+
 
     return(
         <>
@@ -106,7 +78,7 @@ export default function Blogpage(){
                 <section className="grid justify-between w-full h-fit grid-cols-full laptop:grid-cols-450">
                     {
                         postListData.map((postListData) => {
-                            return <Postlisting key={postListData.id} {...postListData} />
+                            return <Postlisting key={postListData.postTitle} {...postListData} />
                         })
                     }  
                 </section>
