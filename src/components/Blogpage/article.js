@@ -4,7 +4,6 @@ import Footer from "../footer";
 import Navigation from "../Homepage/navigation";
 import { useParams, Link } from "react-router-dom";
 import { NavigationContext } from "../../App";
-import HeaderImage from '../../images/Blogpage/Article1/article1headerimage.png';
 import { motion } from "framer-motion";
 import quote from '../../images/quote.png';
 import nextArticle from '../../images/Blogpage/Article1/nextArticle.png';
@@ -81,20 +80,20 @@ const recentComments = [
     }
 ]
 
-const archives = [
-    {
-        date: 'November, 2022',
-        number: 15
-    },
-    {
-        date: 'October, 2022',
-        number: 2
-    },
-    {
-        date: 'September, 2022',
-        number: 10
-    },
-]
+// const archives = [
+//     {
+//         date: 'November, 2022',
+//         number: 15
+//     },
+//     {
+//         date: 'October, 2022',
+//         number: 2
+//     },
+//     {
+//         date: 'September, 2022',
+//         number: 10
+//     },
+// ]
 
 const recentposts = [
     {
@@ -163,6 +162,7 @@ export default function Article(){
     const [authorDetails, setAuthorDetails] = useState([]);
     const [changeArticleData, setChangeArticleData] = useState([]);
     const [articleText, setArticleText] = useState([]);
+    const [archives, setArchives] = useState([])
 
     useEffect(() => {
         const firebaseConfig = {
@@ -196,7 +196,6 @@ export default function Article(){
                         switch(path[i]){
                             case "articleTitle":
                                 setArticleTitle(Object.values(snapshot.val()));
-                                console.log(Object.values(snapshot.val()))
                                 break;
                             case "articleImages":
                                 setArticleImages(Object.values(snapshot.val()));
@@ -209,7 +208,6 @@ export default function Article(){
                                 break;
                             case "articleText":
                                 setArticleText(Object.values(snapshot.val()));
-                                console.log(Object.values(snapshot.val()))
                                 break;
                         }
                         setCallData(false)
@@ -218,6 +216,13 @@ export default function Article(){
                     console.log(error)
                 });
             }
+            get(child(dbRef, '/Archives')).then((snapshot) => {
+                if (snapshot.exists()) {
+                    setArchives(snapshot.val());
+                }
+            }).catch((error) => {
+                console.log(error)
+            });
         }
     }, [callData])
 
@@ -225,7 +230,7 @@ export default function Article(){
         <>
             <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
                 <Header/>
-                <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
+                <img className='absolute object-cover w-full h-full' src={articleImages[3]} alt='image of a cuisine' aria-hidden='true'/>
                 <div className="top-0 bottom-0 left-0 right-0 z-10 flex flex-col mx-[50px] minTablet:mx-auto my-[100px] minTablet:my-auto text-white h-fit w-fit">
                     <div className='w-[120px] h-[40px] border border-white flex justify-center items-center px-[10px] minTablet:ml-0 ml-[10px]'>
                         <p className='text-xl text-white font-rufina'>{articleTitle[2]}</p>
