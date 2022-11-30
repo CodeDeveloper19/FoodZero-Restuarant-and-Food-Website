@@ -31,7 +31,7 @@ export default function Menucuisines(props){
 
     return(
         <>
-            <section className='flex flex-col items-center w-full h-fit px-[60px] pb-[80px]'>
+            <section className='flex flex-col items-center w-full h-fit px-[60px] pb-[80px]' id={props.id}>
                 <motion.div initial={{opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5}} viewport={{ once: true }}>
                     <h2 className='font-bold text-center font-rufina text-xxxxxxxl'>{props.id}</h2>
                     <p className='text-base font-normal text-center font-lato'>{props.titleDescription}</p>

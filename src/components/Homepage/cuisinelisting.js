@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import rightarrowblack from '../../images/Icons/rightarrowblack.svg';
 import { motion } from 'framer-motion';
 import { WindowSizeContext } from './homepage';
+import { Link } from 'react-router-dom';
 
 export default function Cuisinelisting(props){
     const [[windowSize]] = useContext(WindowSizeContext);
@@ -21,7 +22,7 @@ export default function Cuisinelisting(props){
                 <img className='w-full h-full object-cover' src={props.imageUrl} alt='image of a cuisine' aria-hidden='true'/>
                 <div className='absolute top-[20px] flex flex-row justify-between w-full px-[20px]'>
                     <h3 className='font-rufina font-bold text-xxxl'>{props.cuisineType}</h3>
-                    <button><img className='w-[30px] h-[30px]' src={rightarrowblack} alt='vector ilustraion of a black right arrow' aria-hidden='true'/></button>
+                    <Link to='/menu/'><button><img className='w-[30px] h-[30px]' src={rightarrowblack} alt='vector ilustraion of a black right arrow' aria-hidden='true'/></button></Link>
                 </div>
             </motion.div>
         </>

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, createContext } from "react";
+import React, { useContext, useState, useEffect, createContext, useRef } from "react";
 import Header from "../header";
 import Footer from "../footer";
 import Navigation from "../Homepage/navigation";
@@ -6,10 +6,8 @@ import { useParams, Link } from "react-router-dom";
 import { NavigationContext } from "../../App";
 import { motion } from "framer-motion";
 import quote from '../../images/quote.png';
-import nextArticle from '../../images/Blogpage/Article1/nextArticle.png';
 import Morearticles from "./morearticles";
 import Comment from "./comment";
-import dummyImage from '../../images/Blogpage/dummyImage.jpg';
 import searchIcon from '../../images/Icons/Icon_search_black.svg';
 import Categories from "./categories";
 import Recentcomments from "./recentcomments";
@@ -19,142 +17,16 @@ import Tags from "./tags";
 import threeBars from '../../images/Icons/bars-solid.svg';
 import xicon from '../../images/NaviClose.svg';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getDatabase, ref, get, child, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-
-const comments = [
-    {
-        commentAuthor: 'Leslie Alexander',
-        commentAuthorImage: dummyImage,
-        commentDate: 'March 12, 2022',
-        commentTime: '8:08pm',
-        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet.'
-    },
-    {
-        commentAuthor: 'Jane Cooper',
-        commentAuthorImage: dummyImage,
-        commentDate: 'March 22, 2022',
-        commentTime: '10:58pm',
-        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet.'
-    },
-    {
-        commentAuthor: 'Jenny Wilson',
-        commentAuthorImage: dummyImage,
-        commentDate: 'August 2, 2022',
-        commentTime: '10:58pm',
-        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem id penatibus imperdiet.'
-    }
-]
-
-const numOfArticles = [
-    {
-        tag: 'Fashion',
-        number: 16
-    },
-    {
-        tag: 'Food',
-        number: 20
-    },
-    {
-        tag: 'Music',
-        number: 12
-    },
-    {
-        tag: 'Travel',
-        number: 36
-    }
-]
-
-const recentComments = [
-    {
-        commentAuthor: 'Jenny Wilson',
-        comment: 'Vegan baked oatmeal with fresh berries'
-    },
-    {
-        commentAuthor: 'Ana',
-        comment: '50 Foods That Are Super Healthy'
-    },
-    {
-        commentAuthor: 'Camilla',
-        comment: 'How Many Carbs Should You Eat for Weight Loss'
-    }
-]
-
-// const archives = [
-//     {
-//         date: 'November, 2022',
-//         number: 15
-//     },
-//     {
-//         date: 'October, 2022',
-//         number: 2
-//     },
-//     {
-//         date: 'September, 2022',
-//         number: 10
-//     },
-// ]
-
-const recentposts = [
-    {
-        imageUrl: nextArticle,
-        title: 'Vegan baked oatmeal with fresh berries',
-        author: 'Julie Christie',
-        date: 'October 17, 2021'
-    },
-    {
-        imageUrl: nextArticle,
-        title: 'Making freshly baked bread for breakfast',
-        author: 'Julie Christie',
-        date: 'October 12, 2021'
-    },
-    {
-        imageUrl: nextArticle,
-        title: "Health benefits of garlic and ginger in one's meals",
-        author: 'Julie Christie',
-        date: 'October 10, 2021'
-    },
-    {
-        imageUrl: nextArticle,
-        title: 'Why you should stop taking cereals for breakfast',
-        author: 'Julie Christie',
-        date: 'October 09, 2021'
-    }
-]
-
-const articletag = [
-    {
-        name: 'Design'
-    },
-    {
-        name: 'Explore'
-    },
-    {
-        name: 'Travel'
-    }
-]
-
-const tag = [
-    {
-        name: 'Design'
-    },
-    {
-        name: 'Food'
-    },
-    {
-        name: 'Travel'
-    },
-    {
-        name: 'Explore'
-    },
-    {
-        name: 'Home'
-    }
-]
 
 export default function Article(){
     const [showNavigation] = useContext(NavigationContext);
     const params = useParams();
+    const email = useRef(null);
+    const name = useRef(null);
+    const comment = useRef(null);
+    const website = useRef(null);
     const [callData, setCallData] = useState(false);
     const [showAside, setShowAside] = useState(false);
     const [articleTitle, setArticleTitle] = useState([]);
@@ -162,7 +34,15 @@ export default function Article(){
     const [authorDetails, setAuthorDetails] = useState([]);
     const [changeArticleData, setChangeArticleData] = useState([]);
     const [articleText, setArticleText] = useState([]);
-    const [archives, setArchives] = useState([])
+    const [archives, setArchives] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [articleTags, setArticleTags] = useState([]);
+    const [recentPosts, setRecentPosts] = useState([]);
+    const [recentComments, setRecentComments] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [newComments, setNewComments] = useState(undefined);
+    const [newRecentComments, setNewRecentComments] = useState(undefined);
 
     useEffect(() => {
         const firebaseConfig = {
@@ -189,11 +69,12 @@ export default function Article(){
         
         const retrieveAndOutputDatabase = () => {
             const dbRef = ref(getDatabase());
-            let path = ["articleTitle", "articleImages", "authorDetails", "changeArticleData", "articleText"];
-            for (let i = 0, z = path.length; i < z; i++){
-                get(child(dbRef, `/AllArticles/${params.articletitle}/${path[i]}`)).then((snapshot) => {
+            let childrenPath = ["articleTitle", "articleImages", "authorDetails", "changeArticleData", "articleText", "articleTags", "recentComments", "comments"];
+            let parentPath = ["Archives", "Categories", "AllTags", "RecentPosts"]
+            for (let i = 0, z = childrenPath.length; i < z; i++){
+                get(child(dbRef, `/AllArticles/${params.articletitle}/${childrenPath[i]}`)).then((snapshot) => {
                     if (snapshot.exists()) {
-                        switch(path[i]){
+                        switch(childrenPath[i]){
                             case "articleTitle":
                                 setArticleTitle(Object.values(snapshot.val()));
                                 break;
@@ -209,22 +90,170 @@ export default function Article(){
                             case "articleText":
                                 setArticleText(Object.values(snapshot.val()));
                                 break;
+                            case "articleTags":
+                                setArticleTags(snapshot.val());
+                                break;
+                            case "recentComments":
+                                setRecentComments(snapshot.val());
+                                break;
+                            case "comments":
+                                setComments(snapshot.val());
+                                break;
                         }
-                        setCallData(false)
                     }
                 }).catch((error) => {
                     console.log(error)
                 });
             }
-            get(child(dbRef, '/Archives')).then((snapshot) => {
-                if (snapshot.exists()) {
-                    setArchives(snapshot.val());
-                }
-            }).catch((error) => {
-                console.log(error)
-            });
+            for (let i = 0, z = parentPath.length; i < z; i++){
+                get(child(dbRef, `/${parentPath[i]}`)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        switch(parentPath[i]){
+                            case "Archives":
+                                setArchives(snapshot.val());
+                                break;
+                            case "Categories":
+                                setCategories(snapshot.val());
+                                break;
+                            case "AllTags":
+                                setTags(snapshot.val());
+                                break;
+                            case "RecentPosts":
+                                setRecentPosts(snapshot.val());
+                                break;
+                        }
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                });
+            }
+            setCallData(false)
         }
-    }, [callData])
+    }, [callData]);
+
+    useEffect(() => {
+        if(newComments !== undefined){
+            updateDatabaseComments();
+        }
+    }, [newComments]);
+
+    useEffect(() => {
+        if(newRecentComments !== undefined){
+            updateDatabaseRecentComments()
+        }
+    }, [newRecentComments]);
+
+    const createNewComment = (time, currentDate) => {
+        setNewComments([
+            ...comments,
+            {
+                "comment": comment.current.value,
+                "commentAuthor": comment.current.value,
+                "commentAuthorImage": "https://github.com/CodeDeveloper19/FoodZero-Restuarant-and-Food-Website/blob/main/src/images/Blogpage/dummyImage.jpg?raw=true",
+                "commentDate": currentDate,
+                "commentTime": time
+            }
+        ]);
+        setComments([
+            ...comments,
+            {
+                "comment": comment.current.value,
+                "commentAuthor": name.current.value,
+                "commentAuthorImage": "https://github.com/CodeDeveloper19/FoodZero-Restuarant-and-Food-Website/blob/main/src/images/Blogpage/dummyImage.jpg?raw=true",
+                "commentDate": currentDate,
+                "commentTime": time
+            }
+        ])
+    };
+
+    const createNewRecentComment = () => {
+        if (recentComments.length < 3){
+            setNewRecentComments([
+                ...recentComments,
+                {
+                    "commentAuthor": comment.current.value,
+                    "comment": name.current.value
+                }
+            ]);
+            setRecentComments([
+                ...recentComments,
+                {
+                    "comment": comment.current.value,
+                    "commentAuthor": name.current.value
+                }
+            ])
+        } else {
+            recentComments.shift();
+            setNewRecentComments([
+                ...recentComments,
+                {
+                    "commentAuthor": comment.current.value,
+                    "comment": name.current.value
+                }
+            ]);
+            setRecentComments([
+                ...recentComments,
+                {
+                    "comment": comment.current.value,
+                    "commentAuthor": name.current.value
+                }
+            ])
+        }
+    };
+
+    const updateDatabaseComments = () => {
+        const db = getDatabase();
+        const updates = {};
+        updates['/AllArticles/' + params.articletitle + '/comments'] = comments;
+        return update(ref(db), updates);
+    };
+
+    const updateDatabaseRecentComments = () => {
+        const db = getDatabase();
+        const updates = {};
+        updates['/AllArticles/' + params.articletitle + '/recentComments'] = newRecentComments;
+        return update(ref(db), updates);
+    };
+
+    const checkDateAndTimeOnline = () => {
+        fetch('https://api.ipgeolocation.io/ipgeo?apiKey=6a3b77d7f8984eb4ae1518bc4c8b5e82&ip=192.99.34.64')
+        .then(response => response.json())
+        .then(data => {
+            let currentDate = data.time_zone.current_time.split(" ")[0];
+            let preTime = data.time_zone.current_time.split(" ")[1];
+            preTime = preTime.split(":");
+            let time = convertTimeFormat(preTime);
+            createNewComment(time, currentDate);
+            createNewRecentComment();
+            updateNumberOfComments();
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+    };
+
+    const updateNumberOfComments = () => {
+        console.log("A")
+        const db = getDatabase();
+        const updates = {};
+        updates['/ListofArticles/' + params.articletitle + '/numberOfComments'] = comments.length + 1;
+        console.log("B")
+        return update(ref(db), updates);
+    }
+
+    const convertTimeFormat = (preTime) => {
+        let hour = parseInt(preTime[0]) % 12;
+        let amPm = parseInt(preTime[0]) / 12;
+        if (amPm > 1){
+            amPm = 'pm'
+        } else if (amPm === 1){
+            hour = 12;
+            amPm = 'pm';
+        } else {
+            amPm = 'am'
+        }
+        return `${hour}:${preTime[1]}${amPm}`
+    };
 
     return(
         <>
@@ -245,7 +274,7 @@ export default function Article(){
                         <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
                         <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[5]}</p>
                         <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{`${articleTitle[3]} comments`}</p>
+                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{`${comments.length} comments`}</p>
                     </motion.div>
                 </div>
             </header>
@@ -296,8 +325,8 @@ export default function Article(){
                         <h2 className="font-bold font-rufina text-xxl mr-[10px]">Tags:</h2>
                         <div className="flex flex-row flex-wrap w-full h-fit">
                             {
-                                articletag.map((articletag) => {
-                                    return <Tags key={articletag.name} {...articletag}/>
+                                articleTags.map((articleTags) => {
+                                    return <Tags key={articleTags.name} {...articleTags}/>
                                 })
                             }
                         </div>
@@ -329,8 +358,8 @@ export default function Article(){
                         <h2 className="font-rufina font-bold text-xxl">Categories</h2>
                         <hr className='text-black border-dotted border-2 w-full mt-[5px]'/>
                         {
-                            numOfArticles.map((numOfArticles) => {
-                                return <Categories key={numOfArticles.tag} {...numOfArticles}/>
+                            categories.map((categories) => {
+                                return <Categories key={categories.tag} {...categories}/>
                             })
                         }
                     </div>
@@ -355,19 +384,21 @@ export default function Article(){
                     <div className="w-full h-fit mb-[100px]">
                         <h2 className="font-rufina font-bold text-xxl">Recently Posted</h2>
                         <hr className='text-black border-dotted border-2 w-full mt-[5px] mb-[30px]'/>
-                        {
-                            recentposts.map((recentposts) => {
-                                return <Recentposts key={recentposts.title} {...recentposts}/>
-                            })
-                        }
+                        <CallDataContext.Provider value={[setCallData]}>
+                            {
+                                recentPosts.map((recentPosts) => {
+                                    return <Recentposts key={recentPosts.title} {...recentPosts}/>
+                                })
+                            }
+                        </CallDataContext.Provider>
                     </div>
                     <div className="w-full h-fit mb-[100px]">
                         <h2 className="font-rufina font-bold text-xxl">Tags</h2>
                         <hr className='text-black border-dotted border-2 w-full mt-[5px] mb-[5px]'/>
                         <div className="flex flex-row flex-wrap w-full h-fit">
                             {
-                                tag.map((tag) => {
-                                    return <Tags key={tag.name} {...tag}/>
+                                tags.map((tags) => {
+                                    return <Tags key={tags.name} {...tags}/>
                                 })
                             }
                         </div>
@@ -385,7 +416,7 @@ export default function Article(){
             </section>
             <section className="flex justify-center w-full normal:w-[1349px] h-fit mb-[180px]" style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
                 <div className="h-fit flex-col w-full max-w-[900px] mx-[50px]">
-                    <h2 className="w-full font-bold text-center h-fit font-rufina text-xxxl">{`${articleTitle[3]} comments`}</h2>
+                    <h2 className="w-full font-bold text-center h-fit font-rufina text-xxxl">{`${comments.length} comments`}</h2>
                     <div className="flex flex-col w-full h-fit pb-[100px] pt-[70px]">
                         {
                             comments.map((comments) => {
@@ -397,15 +428,18 @@ export default function Article(){
                     <form onSubmit={(e) => {e.preventDefault()}}>
                         <h2 className="w-full font-bold text-center h-fit font-rufina text-xxl mb-[100px]">Leave a Reply</h2>
                         <label htmlFor="comment" className="font-lato font-bold text-base">Comment</label>
-                        <textarea id="comment" className="w-full h-[200px] border outline-0 mt-[20px] mb-[50px] p-[10px]"></textarea>
+                        <textarea ref={comment} id="comment" className="w-full h-[200px] border outline-0 mt-[20px] mb-[50px] p-[10px]"></textarea>
                         <label htmlFor="name" className="font-lato font-bold text-base">Name*</label>
-                        <input type='text' id="name" className="w-full h-[50px] border mt-[20px] mb-[50px] p-[10px] outline-0"></input>
+                        <input ref={name} type='text' id="name" className="w-full h-[50px] border mt-[20px] mb-[50px] p-[10px] outline-0" required></input>
                         <label htmlFor="e-mail" className="font-lato font-bold text-base">Email*</label>
-                        <input type='email' id="e-mail" className="w-full h-[50px] border mt-[20px] mb-[50px] p-[10px] outline-0"></input>
+                        <input ref={email} type='email' id="e-mail" className="w-full h-[50px] border mt-[20px] mb-[50px] p-[10px] outline-0" required></input>
                         <label htmlFor="website" className="font-lato font-bold text-base">Website</label>
-                        <input type='text' id="website" className="w-full h-[50px] border mt-[20px] mb-[70px] p-[10px] outline-0"></input>
+                        <input ref={website} type='text' id="website" className="w-full h-[50px] border mt-[20px] mb-[70px] p-[10px] outline-0"></input>
                         <motion.button whileHover={{ scale: 1.05 }}
-                        className='hover:bg-darkwhite border px-[10px] w-full max-w-[200px] min-h-[50px] h-fit font-rufina font-bold text-xxl' type='submit'>Post Comment</motion.button>  
+                        className='hover:bg-darkwhite border px-[10px] w-full max-w-[200px] min-h-[50px] h-fit font-rufina font-bold text-xxl' type='submit'
+                        onClick={() => checkDateAndTimeOnline()}>
+                            Post Comment
+                        </motion.button>  
                     </form>
                 </div>
             </section>
