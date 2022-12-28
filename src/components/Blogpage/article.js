@@ -17,7 +17,7 @@ import Tags from "./tags";
 import threeBars from '../../images/Icons/bars-solid.svg';
 import xicon from '../../images/NaviClose.svg';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, child } from "firebase/database";
+import { getDatabase, ref, get, child, update } from "firebase/database";
 import { getAuth, signInAnonymously} from "firebase/auth";
 
 export default function Article(){
