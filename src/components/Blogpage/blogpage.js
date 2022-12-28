@@ -6,9 +6,9 @@ import { NavigationContext } from "../../App";
 import HeaderImage from '../../images/Blogpage/HeaderImage.png'
 import { Link } from "react-router-dom";
 import Postlisting from "../Homepage/postlisting";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, get, child } from "firebase/database";
+import { getAuth, signInAnonymously} from "firebase/auth";
 
 
 export default function Blogpage(){

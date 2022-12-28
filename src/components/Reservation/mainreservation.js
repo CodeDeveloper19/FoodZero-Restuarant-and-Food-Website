@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useState, createContext } from "react";
 import { NavigationContext } from "../../App";
 import Header from "../header";
 import Navigation from "../Homepage/navigation";
@@ -8,14 +8,54 @@ import { motion } from "framer-motion";
 import { Countdown } from "../countdownhook";
 
 export default function Mainreservation(){
-    const [[showNavigation], [], [reservationDetails]] = useContext(NavigationContext);
-    const months = useRef(null);
-    const days = useRef(null);
-    const hours = useRef(null);
-    const minutes = useRef(null);
-    const seconds = useRef(null);
-    Countdown([months, days, hours, minutes, seconds]);
+    const [[showNavigation], [], [reservationDetails, setReservationDetails]] = useContext(NavigationContext);
+    const [months, setMonths] = useState("00");
+    const [days, setDays] = useState("00");
+    const [hours, setHours] = useState("00");
+    const [minutes, setMinutes] = useState("00");
+    const [seconds, setSeconds] = useState("00");
+    const values = Countdown();
 
+    useEffect(() => {
+        if (values !== undefined){
+            setDays(values[0]);
+            setMonths(values[1]);
+            setHours(values[2]);
+            setMinutes(values[3]);
+            setSeconds(values[4]);
+        }
+    }, [values])
+
+    useEffect(() => {
+        if (seconds !== "00"){
+            if (months === 0 && days === 0 && hours === 0 && minutes === 0 && seconds === 0){
+                alert("It's time for your reservation");
+                setReservationDetails(null);
+                localStorage.clear();
+                return;
+            }
+            const interval = setInterval(() => {
+                if (days === 0 && hours === 0 && minutes === 0 && seconds === 0){
+                    setMonths(months => months - 1);
+                    setDays(31);
+                }
+                if (hours === 0 && minutes === 0 && seconds === 0){
+                    setDays(days => days - 1);
+                    setHours(24);
+                }
+                if (minutes === 0 && seconds === 0){
+                    setHours(hours => hours - 1);
+                    setMinutes(60);
+                }
+                if (seconds === 0){
+                    setMinutes(minutes => minutes - 1);
+                    setSeconds(60);
+                }
+                setSeconds(seconds => seconds - 1);
+              }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [seconds]);
 
     useEffect(() => {
         let reservationdetails;
@@ -31,6 +71,13 @@ export default function Mainreservation(){
             localStorage.setItem('time', reservationdetails[1]);
             localStorage.setItem('numberofpersons', reservationdetails[2]);
         }
+
+        const timer = setTimeout(() => {
+            if (localStorage.getItem('date') === null){
+                alert("You don't have a reservation with us");
+            };
+          }, 1000);
+          return () => clearTimeout(timer);
 
     }, []);
 
@@ -50,23 +97,23 @@ export default function Mainreservation(){
                     <hr className="text-white border-dashed border w-full mt-[20px]"></hr>
                     <div className="w-full h-fit flex flex-col phone:flex-row justify-between items-center mt-[20px] mb-[70px]">
                         <div className="w-fit h-fit text-white">
-                            <p ref={months} className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p className="font-bold font-rufina text-xxxxxxl">{months}</p>
                             <p className="font-lato font-normal text-base text-center">Month</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p ref={days} className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p className="font-bold font-rufina text-xxxxxxl">{days}</p>
                             <p className="font-lato font-normal text-base text-center">Days</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p ref={hours} className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p className="font-bold font-rufina text-xxxxxxl">{hours}</p>
                             <p className="font-lato font-normal text-base text-center">Hours</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p ref={minutes} className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p className="font-bold font-rufina text-xxxxxxl">{minutes}</p>
                             <p className="font-lato font-normal text-base text-center">Minutes</p>
                         </div>
                         <div className="w-fit h-fit text-white">
-                            <p ref={seconds} className="font-bold font-rufina text-xxxxxxl">02</p>
+                            <p className="font-bold font-rufina text-xxxxxxl">{seconds}</p>
                             <p className="font-lato font-normal text-base text-center">Second</p>
                         </div>
                     </div>
@@ -77,6 +124,12 @@ export default function Mainreservation(){
                         <motion.button className="h-fit min-h-[60px] w-full max-w-[300px] hover:bg-darkwhite px-[10px] border border-white mt-[30px] minTablet:mt-0" whileHover={{scale: 1.05}}
                         onClick={() => {
                             localStorage.clear();
+                            setReservationDetails(null);
+                            setDays("00");
+                            setMonths("00");
+                            setHours("00");
+                            setMinutes("00");
+                            setSeconds("00");
                         }}>
                             Cancel Reservation
                         </motion.button>
@@ -86,3 +139,5 @@ export default function Mainreservation(){
         </>
     )
 }
+
+export const CountdownContext = createContext();

@@ -16,9 +16,9 @@ import Recentposts from "./recentposts";
 import Tags from "./tags";
 import threeBars from '../../images/Icons/bars-solid.svg';
 import xicon from '../../images/NaviClose.svg';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase, ref, get, child, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, get, child } from "firebase/database";
+import { getAuth, signInAnonymously} from "firebase/auth";
 
 export default function Article(){
     const [showNavigation] = useContext(NavigationContext);
@@ -149,7 +149,7 @@ export default function Article(){
             {
                 "comment": comment.current.value,
                 "commentAuthor": comment.current.value,
-                "commentAuthorImage": "https://github.com/CodeDeveloper19/FoodZero-Restuarant-and-Food-Website/blob/main/src/images/Blogpage/dummyImage.jpg?raw=true",
+                "commentAuthorImage": "https://github.com/CodeDeveloper19/Images/blob/main/FoodZero/AuthorImages/blank-profile-picture-973460_640.png?raw=true",
                 "commentDate": currentDate,
                 "commentTime": time
             }
@@ -159,7 +159,7 @@ export default function Article(){
             {
                 "comment": comment.current.value,
                 "commentAuthor": name.current.value,
-                "commentAuthorImage": "https://github.com/CodeDeveloper19/FoodZero-Restuarant-and-Food-Website/blob/main/src/images/Blogpage/dummyImage.jpg?raw=true",
+                "commentAuthorImage": "https://github.com/CodeDeveloper19/Images/blob/main/FoodZero/AuthorImages/blank-profile-picture-973460_640.png?raw=true",
                 "commentDate": currentDate,
                 "commentTime": time
             }

@@ -28,9 +28,9 @@ import fish from '../../images/Icons/fishdark.svg';
 import carrot from '../../images/Icons/carrotdark.svg';
 import lemon from '../../images/Icons/lemondark.svg';
 import reviewer1 from '../../images/reviewer1.png';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-import { getAuth, signInAnonymously} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, get, child } from "firebase/database";
+import { getAuth, signInAnonymously} from "firebase/auth";
 
 const priceListData = [
     {
@@ -350,7 +350,7 @@ export default function Homepage(){
             <section className='grid justify-between w-full h-fit grid-cols-full laptop:grid-cols-450 pt-[50px] pb-[150px] px-[60px] bg-white'>
                 {
                     postListData.map((postListData) => {
-                        return <Postlisting key={postListData.id} {...postListData} />
+                        return <Postlisting key={postListData.imageUrl} {...postListData} />
                     })
                 }   
             </section>
