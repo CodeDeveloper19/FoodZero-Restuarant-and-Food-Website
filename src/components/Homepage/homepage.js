@@ -264,128 +264,142 @@ export default function Homepage(){
 
     return (
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-            <Header />
-            <div className='flex flex-col relative w-full h-fit min-h-[750px] minTablet:min-h-[500px] mt-[50px] px-[60px]'>
-                    <motion.div animate={{ x: 600 }} initial={{ left: -600 }} transition={{ delay: 1, type: 'spring'}} className='relative flex flex-col justify-between w-full minTablet:w-[500px] mb-[70px] minTablet:mb-0 h-fit z-10'>
-                        <h1 className='leading-tight text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl'>Healthy Eating is important part of lifestyle</h1>
-                        <p className='w-3/5 text-base text-white font-lato'>By taking healthy meals, fruits and vegetables that are full of nutrients, we reduce the chances of diseases</p>
-                    </motion.div>
-                    <motion.div animate={{ opacity: 1}} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 2}} className='relative minTablet:absolute w-fit h-fit hidden microPhone:flex flex-row items-center rotate-90 -bottom-[85px] smartPhone:-bottom-[115px] minTablet:bottom-[70px] -left-[60px] smartPhone:-left-[90px] minTablet:-left-[30px]'>
-                        <p className='text-white font-rufina text-xxxl'>Scroll</p>
-                        <hr className='text-white border-dashed w-[60px] smartPhone:w-[120px] ml-[10px]'/>
-                    </motion.div>
-                    <motion.div animate={{ opacity: 1}} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 3}} className='relative minTablet:absolute minTablet:top-[50px] minTablet:right-[60px] items-end flex flex-col w-full minTablet:w-fit'>
-                        <img className='w-[70%] h-[30%] minTablet:w-[350px] minTablet:h-[400px] object-cover' src={cuisine1} alt='image of a cuisine' aria-hidden='true'/>            
-                        <div className='absolute -bottom-[15px] smartPhone:-bottom-[20px] minTablet:-bottom-[20px] minTablet:absolute minTablet:-left-[150px] flex flex-row minTablet:justify-between w-full minTablet:w-[350px] mr-[0px]'>
-                            <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px]' src={spice1} alt='image of a spice' aria-hidden='true'/>
-                            <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px] mx-[20px] minTablet:mx-0' src={spice2} alt='image of a spice' aria-hidden='true'/>
-                            <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px]' src={spice3} alt='image of a spice' aria-hidden='true'/>
-                        </div>
-                    </motion.div>
+        <header className='relative w-full h-fit flex justify-center bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <div className='relative w-full normal:w-[1349px] h-fit flex flex-col'>
+                <Header />
+                <div className='flex flex-col relative w-full h-fit min-h-[750px] minTablet:min-h-[500px] mt-[50px] px-[60px]'>
+                        <motion.div animate={{ x: 600 }} initial={{ left: -600 }} transition={{ delay: 1, type: 'spring'}} className='relative flex flex-col justify-between w-full minTablet:w-[500px] mb-[70px] minTablet:mb-0 h-fit z-10'>
+                            <h1 className='leading-tight text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl'>Healthy Eating is important part of lifestyle</h1>
+                            <p className='w-3/5 text-base text-white font-lato'>By taking healthy meals, fruits and vegetables that are full of nutrients, we reduce the chances of diseases</p>
+                        </motion.div>
+                        <motion.div animate={{ opacity: 1}} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 2}} className='relative minTablet:absolute w-fit h-fit hidden microPhone:flex flex-row items-center rotate-90 -bottom-[85px] smartPhone:-bottom-[115px] minTablet:bottom-[70px] -left-[60px] smartPhone:-left-[90px] minTablet:-left-[30px]'>
+                            <p className='text-white font-rufina text-xxxl'>Scroll</p>
+                            <hr className='text-white border-dashed w-[60px] smartPhone:w-[120px] ml-[10px]'/>
+                        </motion.div>
+                        <motion.div animate={{ opacity: 1}} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 3}} className='relative minTablet:absolute minTablet:top-[50px] minTablet:right-[60px] items-end flex flex-col w-full minTablet:w-fit'>
+                            <img className='w-[70%] h-[30%] minTablet:w-[350px] minTablet:h-[400px] object-cover' src={cuisine1} alt='image of a cuisine' aria-hidden='true'/>            
+                            <div className='absolute -bottom-[15px] smartPhone:-bottom-[20px] minTablet:-bottom-[20px] minTablet:absolute minTablet:-left-[150px] flex flex-row minTablet:justify-between w-full minTablet:w-[350px] mr-[0px]'>
+                                <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px]' src={spice1} alt='image of a spice' aria-hidden='true'/>
+                                <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px] mx-[20px] minTablet:mx-0' src={spice2} alt='image of a spice' aria-hidden='true'/>
+                                <img className='w-[20%] h-[40%] minTablet:w-[100px] minTablet:h-[95px]' src={spice3} alt='image of a spice' aria-hidden='true'/>
+                            </div>
+                        </motion.div>
+                </div>
             </div>
         </header>
             <Navigation />
-        <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-            <section className='flex flex-col tablet:flex-row justify-between w-full h-fit min-h-[500px] mt-[80px] px-[60px]'>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2 }} viewport={{ once: true }} 
-                className='flex flex-col justify-between w-full minTablet:w-[490px] h-fit smartPhone:h-[470px]'>
-                    <img className='w-full h-[200px] smartPhone:h-[300px] object-cover' src={cuisine2} alt='image of a cuisine' aria-hidden='true'/>
-                    <h2 className='text-white font-rufina text-xxxxxl w-full smartPhone:w-[220px]'>
-                        Start to plan your diet today
-                    </h2>
-                    <p className='text-white font-lato text-base w-full smartPhone:w-[250px]'>
-                        Our menus are well-designed to help you eat healthy
-                    </p>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }} viewport={{ once: true }} 
-                className='flex flex-col justify-between w-[70%] smartPhone:w-[260px] h-fit smartPhone:h-[450px] mt-[100px] tablet:mt-0 self-end tablet:self-center'>
-                    <p className='text-white font-lato text-base w-full smartPhone:w-[200px]'>
-                        Get that peppery taste and tanginess in our meals made with specially curated spices and pepper
-                    </p>
-                    <img className='w-full h-[300px] smartPhone:h-[370px] object-cover mt-[20px] smartPhone:mt-0' src={saltpepper} alt='image of a cuisine' aria-hidden='true'/>
-                </motion.div>
-            </section>
-            <section className='overflow-hidden relative flex flex-col justify-between w-full h-fit min-h-[700px] mt-[80px] px-[60px] bg-white pb-[150px]'>
-                <img className='absolute top-0 right-0 w-[500px] h-[550px]' src={leaves} alt='image of green leaves' aria-hidden='true'/>
-                <motion.div initial={{ top: -200 }}  whileInView={{ y: 200 }} transition={{ duration: 2 }} viewport={{ once: true }}
-                className='relative mt-[100px] w-full smartPhone:w-[235px] h-fit'>
-                    <h2 className='font-bold text-black font-rufina text-xxxxxxxl'>Our Menu</h2>
-                    <p className='text-base font-normal text-black font-lato'>Designed by only the best dieticians and master chefs one can find</p>
-                </motion.div>
-                <div className='flex flex-col justify-between w-full h-fit laptop:h-[400px] my-[50px]'>
-                    {
-                        priceListData.map((priceListData) => {
-                            return <Pricelist key={priceListData.id} {...priceListData}/>
-                        })
-                    }
-                </div>
-            </section>
-            <section className='relative flex flex-col minLaptop:flex-row justify-between w-full h-fit min-h-[500px] pt-[50px] px-[60px] bg-lightwhite'>
-                <motion.div initial={{ left: -240 }} whileInView={{ x: 240 }} transition={{ duration: 1 }} viewport={{ once: true }}
-                className='relative flex flex-col w-full minTablet:w-fit h-fit'>
-                    <img className='relative w-full minTablet:w-[450px] h:-[200px] microPhone:h-[250px] smartPhone:h-[300px] phone:h-[450px] z-10 -bottom-[40px] left-[47px] object-cover' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
-                    <img className='absolute w-[100px] microPhone:w-[150px] smartPhone:w-[200px] h-[100px] microPhone:h-[150px] smartPhone:h-[200px] left-[40px] phone:left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
-                </motion.div>
-                <motion.div initial={{ right: -250 }} whileInView={{ x: -250 }} transition={{ duration: 1}} viewport={{ once: true }}
-                className='relative flex flex-col items-end justify-between w-full smartPhone:w-fit h-fit mr-[100px] mt-[100px] minLaptop:mt-0'>
-                    <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-full smartPhone:w-[250px] mr-0 smartPhone:mr-[40px]'>
-                        Excellent cook
-                    </h2>
-                    <p className='font-lato font-normal text-base w-full smartPhone:w-[290px]'>
-                        Cooking is an art where every meal or dish made has a story to tell about the way of life of the people it represents. 
-                    </p>
-                    <img className='w-[150px] microPhone:w-[200px] smartPhone:w-[250px] h-[150px] microPhone:h-[200px] smartPhone:h-[250px] mt-[20px] ml-0 smartPhone:ml-[70px]' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
-                </motion.div>
-            </section>
-            <section className='w-full h-fit py-[120px] px-[60px] bg-white'>
-                <div className='flex flex-col justify-between w-full minTablet:flex-row h-fit'>
-                    {
-                        produceListData.map((produceListData) => {
-                            return <Producelisting key={produceListData.id} {...produceListData} />
-                        })
-                    }   
-                </div>
-            </section>
-            <section className='grid justify-between w-full h-fit grid-cols-full laptop:grid-cols-450 pt-[50px] pb-[150px] px-[60px] bg-white'>
-                {
-                    postListData.map((postListData) => {
-                        return <Postlisting key={postListData.imageUrl} {...postListData} />
-                    })
-                }   
-            </section>
-            <Reservation />
-            <section className='flex flex-col items-center w-full h-fit min-h-[500px] py-[60px] px-[60px] bg-white'>
-                <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2}} viewport={{ once: true }}  
-                className='font-rufina font-bold text-xxxxxxxl text-center w-full smartPhone:w-[365px]'>
-                    Calories Energy Balance
-                </motion.h2>
-                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2}} viewport={{ once: true }}  
-                className='text-base font-normal text-center font-lato'>
-                    We get the energy to perfom our daily tasks through nutritious meals
-                </motion.p>
-                <div className='overflow-hidden w-full h-fit laptop:mt-[100px] flex flex-col laptop:flex-row justify-between'>
-                    <WindowSizeContext.Provider value={[[windowSize]]}>
-                        {
-                            cuisineListData.map((cuisineListData) => {
-                                return <Cuisinelisting key={cuisineListData.id} {...cuisineListData}/>
-                            })
-                        }
-                    </WindowSizeContext.Provider>
-                </div>
-            </section>
-            <section className='w-full min-h-[500px] h-fit bg-white overflow-x-hidden'>
-                <motion.div ref={review} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2 }} viewport={{ once: true }}
-                className='flex flex-row w-fit h-full bg-white relative transition-[left] duration-1000' style={{left: sliderPosition}}>
-                    <WindowSizeSliderPositionContext.Provider value={[[setsliderPosition], [nextSlide], [prevSlide]]}>
+        <main className='overflow-hidden w-full h-fit flex flex-col items-center bg-darkgreen' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+                <section className='flex flex-col tablet:flex-row justify-between w-full normal:w-[1349px] h-fit min-h-[500px] my-[80px] px-[60px]'>
+                    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2 }} viewport={{ once: true }} 
+                    className='flex flex-col justify-between w-full minTablet:w-[490px] h-fit smartPhone:h-[470px]'>
+                        <img className='w-full h-[200px] smartPhone:h-[300px] object-cover' src={cuisine2} alt='image of a cuisine' aria-hidden='true'/>
+                        <h2 className='text-white font-rufina text-xxxxxl w-full smartPhone:w-[220px]'>
+                            Start to plan your diet today
+                        </h2>
+                        <p className='text-white font-lato text-base w-full smartPhone:w-[250px]'>
+                            Our menus are well-designed to help you eat healthy
+                        </p>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }} viewport={{ once: true }} 
+                    className='flex flex-col justify-between w-[70%] smartPhone:w-[260px] h-fit smartPhone:h-[450px] mt-[100px] tablet:mt-0 self-end tablet:self-center'>
+                        <p className='text-white font-lato text-base w-full smartPhone:w-[200px]'>
+                            Get that peppery taste and tanginess in our meals made with specially curated spices and pepper
+                        </p>
+                        <img className='w-full h-[300px] smartPhone:h-[370px] object-cover mt-[20px] smartPhone:mt-0' src={saltpepper} alt='image of a cuisine' aria-hidden='true'/>
+                    </motion.div>
+                </section>
+                <section className='overflow-hidden relative w-full h-fit min-h-[700px] bg-white flex justify-center'>
+                    <div className='relative flex flex-col justify-between w-full normal:w-[1349px] h-fit px-[60px] pb-[150px]'>
+                        <img className='absolute top-0 right-0 w-[500px] h-[550px]' src={leaves} alt='image of green leaves' aria-hidden='true'/>
+                        <motion.div initial={{ top: -200 }}  whileInView={{ y: 200 }} transition={{ duration: 2 }} viewport={{ once: true }}
+                        className='relative mt-[100px] w-full smartPhone:w-[235px] h-fit'>
+                            <h2 className='font-bold text-black font-rufina text-xxxxxxxl'>Our Menu</h2>
+                            <p className='text-base font-normal text-black font-lato'>Designed by only the best dieticians and master chefs one can find</p>
+                        </motion.div>
+                        <div className='flex flex-col justify-between w-full h-fit laptop:h-[400px] my-[50px]'>
                             {
-                                reviewListData.map((reviewListData) => {
-                                    return <Reviewlisting key={reviewListData.id} {...reviewListData}/>
+                                priceListData.map((priceListData) => {
+                                    return <Pricelist key={priceListData.id} {...priceListData}/>
                                 })
                             }
-                        </WindowSizeSliderPositionContext.Provider>
-                </motion.div>
-            </section>
+                        </div>
+                    </div>
+                </section>
+                <section className='relative flex justify-center w-full h-fit min-h-[500px] bg-lightwhite'>
+                    <div className='flex flex-col minLaptop:flex-row justify-between w-full normal:w-[1349px] h-fit pt-[50px] px-[60px]'>
+                        <motion.div initial={{ left: -240 }} whileInView={{ x: 240 }} transition={{ duration: 1 }} viewport={{ once: true }}
+                        className='relative flex flex-col w-full minTablet:w-fit h-fit'>
+                            <img className='relative w-full minTablet:w-[450px] h:-[200px] microPhone:h-[250px] smartPhone:h-[300px] phone:h-[450px] z-10 -bottom-[40px] left-[47px] object-cover' src={manseasoning} alt='image of a man seasoning' aria-hidden='true'/>
+                            <img className='absolute w-[100px] microPhone:w-[150px] smartPhone:w-[200px] h-[100px] microPhone:h-[150px] smartPhone:h-[200px] left-[40px] phone:left-[37px]' src={leaf2} alt='skeleton image of a leaf' aria-hidden='true'/>
+                        </motion.div>
+                        <motion.div initial={{ right: -250 }} whileInView={{ x: -250 }} transition={{ duration: 1}} viewport={{ once: true }}
+                        className='relative flex flex-col items-end justify-between w-full smartPhone:w-fit h-fit mr-[100px] mt-[100px] minLaptop:mt-0'>
+                            <h2 className='font-rufina font-bold text-xxxxxxxl leading-tight w-full smartPhone:w-[250px] mr-0 smartPhone:mr-[40px]'>
+                                Excellent cook
+                            </h2>
+                            <p className='font-lato font-normal text-base w-full smartPhone:w-[290px]'>
+                                Cooking is an art where every meal or dish made has a story to tell about the way of life of the people it represents. 
+                            </p>
+                            <img className='w-[150px] microPhone:w-[200px] smartPhone:w-[250px] h-[150px] microPhone:h-[200px] smartPhone:h-[250px] mt-[20px] ml-0 smartPhone:ml-[70px]' src={leaf} alt='skeleton image of a leaf' aria-hidden='true'/>
+                        </motion.div>
+                    </div>
+                </section>
+                <section className='w-full h-fit bg-white flex justify-center'>
+                    <div className='w-full normal:w-[1349px] h-fit py-[120px] px-[60px]'>
+                        <div className='flex flex-col justify-between w-full minTablet:flex-row h-fit'>
+                            {
+                                produceListData.map((produceListData) => {
+                                    return <Producelisting key={produceListData.id} {...produceListData} />
+                                })
+                            }   
+                        </div>
+                    </div>
+                </section>
+                <section className='w-full h-fit flex justify-center bg-white'>
+                    <div className='grid justify-between w-full normal:w-[1349px] h-fit grid-cols-full laptop:grid-cols-450 pt-[50px] pb-[150px] px-[60px]'>
+                        {
+                            postListData.map((postListData) => {
+                                return <Postlisting key={postListData.imageUrl} {...postListData} />
+                            })
+                        }   
+                    </div>
+                </section>
+                <Reservation />
+                <section className='w-full h-fit flex justify-center bg-white'>
+                    <div className='flex flex-col items-center w-full normal:w-[1349px] h-fit min-h-[500px] py-[60px] px-[60px]'>
+                        <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2}} viewport={{ once: true }}  
+                        className='font-rufina font-bold text-xxxxxxxl text-center w-full smartPhone:w-[365px]'>
+                            Calories Energy Balance
+                        </motion.h2>
+                        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2}} viewport={{ once: true }}  
+                        className='text-base font-normal text-center font-lato'>
+                            We get the energy to perfom our daily tasks through nutritious meals
+                        </motion.p>
+                        <div className='overflow-hidden w-full h-fit laptop:mt-[100px] flex flex-col laptop:flex-row justify-between'>
+                            <WindowSizeContext.Provider value={[[windowSize]]}>
+                                {
+                                    cuisineListData.map((cuisineListData) => {
+                                        return <Cuisinelisting key={cuisineListData.id} {...cuisineListData}/>
+                                    })
+                                }
+                            </WindowSizeContext.Provider>
+                        </div>
+                    </div>
+                </section>
+                <section className='w-full h-fit flex justify-center bg-white'>
+                    <div className='w-full normal:w-[1349px] min-h-[500px] h-fit overflow-x-hidden'>
+                        <motion.div ref={review} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2 }} viewport={{ once: true }}
+                        className='flex flex-row w-fit h-full bg-white relative transition-[left] duration-1000' style={{left: sliderPosition}}>
+                            <WindowSizeSliderPositionContext.Provider value={[[setsliderPosition], [nextSlide], [prevSlide]]}>
+                                    {
+                                        reviewListData.map((reviewListData) => {
+                                            return <Reviewlisting key={reviewListData.id} {...reviewListData}/>
+                                        })
+                                    }
+                                </WindowSizeSliderPositionContext.Provider>
+                        </motion.div>
+                    </div>
+                </section>
         </main>
         <Footer />
         </>

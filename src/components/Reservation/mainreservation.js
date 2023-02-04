@@ -72,6 +72,12 @@ export default function Mainreservation(){
             localStorage.setItem('numberofpersons', reservationdetails[2]);
         }
 
+        if (months <= 0 || days <= 0 || hours <= 0 || minutes <= 0 || seconds <= 0){
+            setReservationDetails(null);
+            localStorage.clear();
+            return;
+        }
+
         const timer = setTimeout(() => {
             if (localStorage.getItem('date') === null){
                 alert("You don't have a reservation with us");
@@ -92,29 +98,29 @@ export default function Mainreservation(){
                 <Navigation/>
                 <img className='absolute top-0 object-cover w-full h-full' src={reservationbg} alt='image of a dinning table' aria-hidden='true'/>
                 <div className='absolute top-0 w-full h-full bg-darkgreen/80'></div>
-                <main className='z-10 mt-[10px] px-[50px] w-full max-w-[700px] h-fit flex flex-col items-center' style={{display : (showNavigation) ? 'none' : 'flex'}}> 
+                <main className='z-10 mt-[10px] mb-[50px] px-[50px] w-full max-w-[700px] h-fit flex flex-col items-center' style={{display : (showNavigation) ? 'none' : 'flex'}}> 
                     <h1 className="text-white font-rufina font-bold text-xxxxxxl text-center tracking-[.25em]">COMING SOON</h1>  
                     <hr className="text-white border-dashed border w-full mt-[20px]"></hr>
-                    <div className="w-full h-fit flex flex-col phone:flex-row justify-between items-center mt-[20px] mb-[70px]">
+                    <div className="w-full h-fit flex flex-col phone:flex-row justify-between items-center mt-[20px] mb-[70px] text-center">
                         <div className="w-fit h-fit text-white">
                             <p className="font-bold font-rufina text-xxxxxxl">{months}</p>
-                            <p className="font-lato font-normal text-base text-center">Month</p>
+                            <p className="font-lato font-normal text-base">Month</p>
                         </div>
                         <div className="w-fit h-fit text-white">
                             <p className="font-bold font-rufina text-xxxxxxl">{days}</p>
-                            <p className="font-lato font-normal text-base text-center">Days</p>
+                            <p className="font-lato font-normal text-base">Days</p>
                         </div>
                         <div className="w-fit h-fit text-white">
                             <p className="font-bold font-rufina text-xxxxxxl">{hours}</p>
-                            <p className="font-lato font-normal text-base text-center">Hours</p>
+                            <p className="font-lato font-normal text-base">Hours</p>
                         </div>
                         <div className="w-fit h-fit text-white">
                             <p className="font-bold font-rufina text-xxxxxxl">{minutes}</p>
-                            <p className="font-lato font-normal text-base text-center">Minutes</p>
+                            <p className="font-lato font-normal text-base">Minutes</p>
                         </div>
                         <div className="w-fit h-fit text-white">
                             <p className="font-bold font-rufina text-xxxxxxl">{seconds}</p>
-                            <p className="font-lato font-normal text-base text-center">Second</p>
+                            <p className="font-lato font-normal text-base">Second</p>
                         </div>
                     </div>
                     <div className="w-full h-fit flex flex-col minTablet:flex-row justify-between text-white font-rufina font-bold text-xxl">

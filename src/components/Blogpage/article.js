@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, createContext, useRef } from "react";
+import React, { useContext, useState, useEffect, createContext, useRef} from "react";
 import Header from "../header";
 import Footer from "../footer";
 import Navigation from "../Homepage/navigation";
@@ -14,6 +14,7 @@ import Recentcomments from "./recentcomments";
 import Archives from "./archives";
 import Recentposts from "./recentposts";
 import Tags from "./tags";
+import SearchResults from "./searchresult";
 import threeBars from '../../images/Icons/bars-solid.svg';
 import xicon from '../../images/NaviClose.svg';
 import { initializeApp } from 'firebase/app';
@@ -27,6 +28,7 @@ export default function Article(){
     const name = useRef(null);
     const comment = useRef(null);
     const website = useRef(null);
+    const searchBox = useRef(null);
     const [callData, setCallData] = useState(false);
     const [showAside, setShowAside] = useState(false);
     const [articleTitle, setArticleTitle] = useState([]);
@@ -43,6 +45,10 @@ export default function Article(){
     const [comments, setComments] = useState([]);
     const [newComments, setNewComments] = useState(undefined);
     const [newRecentComments, setNewRecentComments] = useState(undefined);
+    const [allArticles, setAllArticles] = useState([]);
+    const [articles, setArticles] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
+    const [userSearch, setUserSearch] = useState(null);
 
     useEffect(() => {
         const firebaseConfig = {
@@ -56,7 +62,7 @@ export default function Article(){
             measurementId: "G-PH4Z3MYKGQ"
         };
         
-        const app = initializeApp(firebaseConfig);
+        initializeApp(firebaseConfig);
         
         const auth = getAuth();
         signInAnonymously(auth)
@@ -127,6 +133,23 @@ export default function Article(){
                     console.log(error)
                 });
             }
+            get(child(dbRef, `/AllArticles`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    let tempdata = [];
+                    setArticles(Object.keys(snapshot.val()));
+                    for (let i = 0, z = Object.keys(snapshot.val()).length; i < z; i++){
+                        tempdata.push(
+                            {
+                                "title": `${Object.keys(snapshot.val())[i]}`,
+                                "hide": undefined
+                            }
+                        )
+                    }
+                    setAllArticles(tempdata);
+                }
+            }).catch((error) => {
+                console.log(error)
+            });
             setCallData(false)
         }
     }, [callData]);
@@ -143,6 +166,44 @@ export default function Article(){
         }
     }, [newRecentComments]);
 
+    useEffect(() => {
+        if(isSearching === false){
+            searchBox.current.value = '';
+        }
+    }, [isSearching]);
+
+    useEffect(() => {
+        if (userSearch !== null && articles !== null && allArticles !== null){
+            for (let i = 0; i < articles.length; i++){
+                if (articles[i].toLowerCase().includes(userSearch) || userSearch === ''){
+                    allArticles[i].hide = true;
+                } else {
+                    allArticles[i].hide = false;
+                }
+            }
+        }
+    }, [userSearch, articles, allArticles]);
+    
+    useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (searchBox.current && !searchBox.current.contains(event.target) && isSearching === true) {
+            const timer = setTimeout(() => {
+                setIsSearching(false);
+              }, 100);
+              return () => clearTimeout(timer); 
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [searchBox, isSearching, userSearch]);
+      
     const createNewComment = (time, currentDate) => {
         setNewComments([
             ...comments,
@@ -171,8 +232,8 @@ export default function Article(){
             setNewRecentComments([
                 ...recentComments,
                 {
-                    "commentAuthor": comment.current.value,
-                    "comment": name.current.value
+                    "comment": comment.current.value,
+                    "commentAuthor": name.current.value
                 }
             ]);
             setRecentComments([
@@ -187,8 +248,8 @@ export default function Article(){
             setNewRecentComments([
                 ...recentComments,
                 {
-                    "commentAuthor": comment.current.value,
-                    "comment": name.current.value
+                    "comment": comment.current.value,
+                    "commentAuthor": name.current.value
                 }
             ]);
             setRecentComments([
@@ -214,6 +275,14 @@ export default function Article(){
         updates['/AllArticles/' + params.articletitle + '/recentComments'] = newRecentComments;
         return update(ref(db), updates);
     };
+
+    const checkIfComplete = () => {
+        if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(email.current.value)){
+            checkDateAndTimeOnline();
+        } else {
+            alert("You have entered an invalid email address!");
+        }
+    }
 
     const checkDateAndTimeOnline = () => {
         fetch('https://api.ipgeolocation.io/ipgeo?apiKey=6a3b77d7f8984eb4ae1518bc4c8b5e82&ip=192.99.34.64')
@@ -255,27 +324,35 @@ export default function Article(){
         return `${hour}:${preTime[1]}${amPm}`
     };
 
+    const searching = (event) => {
+        let input;
+        input = event.target.value.toLowerCase();
+        setUserSearch(input);
+    }
+
     return(
         <>
-            <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
-                <Header/>
+            <header className="relative w-full h-fit flex justify-center" style={{display: (showNavigation[0]) ? 'none' : 'flex'}}>
                 <img className='absolute object-cover w-full h-full' src={articleImages[3]} alt='image of a cuisine' aria-hidden='true'/>
-                <div className="top-0 bottom-0 left-0 right-0 z-10 flex flex-col mx-[50px] minTablet:mx-auto my-[100px] minTablet:my-auto text-white h-fit w-fit">
-                    <div className='w-[120px] h-[40px] border border-white flex justify-center items-center px-[10px] minTablet:ml-0 ml-[10px]'>
-                        <p className='text-xl text-white font-rufina'>{articleTitle[2]}</p>
+                <div className='w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+                    <Header/>
+                    <div className="top-0 bottom-0 left-0 right-0 z-10 flex flex-col mx-[50px] minTablet:mx-auto my-[100px] minTablet:my-auto text-white h-fit w-fit">
+                        <div className='w-[120px] h-[40px] border border-white flex justify-center items-center px-[10px] minTablet:ml-0 ml-[10px]'>
+                            <p className='text-xl text-white font-rufina'>{articleTitle[2]}</p>
+                        </div>
+                        <h1 className="font-rufina text-white font-bold text-xxxxxxl mt-[30px] mb-[10px] w-full max-w-[550px]">{params.articletitle}</h1>
+                        <motion.div
+                        className='flex flex-col phone:flex-row justify-between items-start phone:items-center h-fit w-full max-w-fit'>
+                            <img className='h-[70px] w-[70px] rounded-full object-cover' src={articleTitle[0]} alt='image of the author' aria-hidden='true'/> 
+                            <p className='text-white font-lato text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[1]}</p>
+                            <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
+                            <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[4]}</p>
+                            <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
+                            <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[5]}</p>
+                            <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
+                            <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{`${comments.length} comments`}</p>
+                        </motion.div>
                     </div>
-                    <h1 className="font-rufina text-white font-bold text-xxxxxxl mt-[30px] mb-[10px] w-full max-w-[550px]">{params.articletitle}</h1>
-                    <motion.div
-                    className='flex flex-col phone:flex-row justify-between items-start phone:items-center h-fit w-full max-w-fit'>
-                        <img className='h-[70px] w-[70px] rounded-full object-cover' src={articleTitle[0]} alt='image of the author' aria-hidden='true'/> 
-                        <p className='text-white font-lato text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[1]}</p>
-                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[4]}</p>
-                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{articleTitle[5]}</p>
-                        <div className='bg-white w-[2px] h-[2px] rounded-full hidden phone:flex ml-[10px]'></div>
-                        <p className='font-lato text-white text-xxxsm mt-[7px] phone:mt-0 ml-[10px]'>{`${comments.length} comments`}</p>
-                    </motion.div>
                 </div>
             </header>
             <Navigation/>
@@ -348,8 +425,17 @@ export default function Article(){
                     <button className='absolute mb-[100px] w-[40px] h-[40px] top-[20px] left-[20px] flex tablet:hidden' aria-label='close navigation button' onClick={() => setShowAside(false)}>
                         <img className='w-full h-full' src={xicon} alt='image of an x' aria-hidden='true'/>
                     </button>
-                    <form className="w-full max-w-[257px] h-fit border-b flex flex-row items-center self-end" onSubmit={(e) => {e.preventDefault()}}>
-                        <input type="search" id="searcharticle" name="searcharticle" className="w-full h-[30px] outline-none font-lato font-normal text-base bg-lightwhite tablet:bg-white" placeholder="Search....."/>
+                    <form className="relative w-full max-w-[257px] h-fit border-b flex flex-row items-center self-end" onSubmit={(e) => {e.preventDefault()}}>
+                        <input ref={searchBox} type="search" id="searcharticle" name="searcharticle" className="w-full h-[30px] outline-none font-lato font-normal text-base bg-lightwhite tablet:bg-white" autoComplete="off" placeholder="Search....." onKeyDown={() => {setIsSearching(true)}} onChange={searching}/>
+                        <ul className="absolute w-full h-[300px] bg-lightwhite border-slate border-[1px] rounded-md top-[28px] overflow-y-scroll pt-[10px] px-[15px] font-normal font-lato text-base flex-col" style={{display: (isSearching) ? 'flex' : 'none'}}>
+                        <SearchLinkContext.Provider value={[[setCallData]]}>
+                            {
+                                allArticles.map((allArticles) => {
+                                    return <SearchResults key={allArticles.title} {...allArticles}/>
+                                })
+                            }
+                        </SearchLinkContext.Provider>
+                        </ul>
                         <button className="w-[15px] h-[15px]" aria-label="search button" aria-expanded='false'>
                             <img className='w-full h-full' src={searchIcon} alt='search icon' aria-hidden='true'/>
                         </button>
@@ -367,8 +453,8 @@ export default function Article(){
                         <h2 className="font-rufina font-bold text-xxl">Recent Comments</h2>
                         <hr className='text-black border-dotted border-2 w-full mt-[5px]'/>
                         {
-                            recentComments.map((recentComments) => {
-                                return <Recentcomments key={recentComments.commentAuthor} {...recentComments}/>
+                            recentComments.map((recentComments, index) => {
+                                return <Recentcomments key={index} {...recentComments}/>
                             })
                         }
                     </div>
@@ -419,16 +505,16 @@ export default function Article(){
                     <h2 className="w-full font-bold text-center h-fit font-rufina text-xxxl">{`${comments.length} comments`}</h2>
                     <div className="flex flex-col w-full h-fit pb-[100px] pt-[70px]">
                         {
-                            comments.map((comments) => {
-                                return <Comment key={comments.commentAuthor} {...comments}/>
+                            comments.map((comments, index) => {
+                                return <Comment key={index} {...comments}/>
                             })
                         }
                     </div>
                     <hr className='border-dashed w-full mb-[100px]'/>
                     <form onSubmit={(e) => {e.preventDefault()}}>
                         <h2 className="w-full font-bold text-center h-fit font-rufina text-xxl mb-[100px]">Leave a Reply</h2>
-                        <label htmlFor="comment" className="font-lato font-bold text-base">Comment</label>
-                        <textarea ref={comment} id="comment" className="w-full h-[200px] border outline-0 mt-[20px] mb-[50px] p-[10px]"></textarea>
+                        <label htmlFor="comment" className="font-lato font-bold text-base">Comment*</label>
+                        <textarea ref={comment} id="comment" className="w-full h-[200px] border outline-0 mt-[20px] mb-[50px] p-[10px]" required></textarea>
                         <label htmlFor="name" className="font-lato font-bold text-base">Name*</label>
                         <input ref={name} type='text' id="name" className="w-full h-[50px] border mt-[20px] mb-[50px] p-[10px] outline-0" required></input>
                         <label htmlFor="e-mail" className="font-lato font-bold text-base">Email*</label>
@@ -437,7 +523,7 @@ export default function Article(){
                         <input ref={website} type='text' id="website" className="w-full h-[50px] border mt-[20px] mb-[70px] p-[10px] outline-0"></input>
                         <motion.button whileHover={{ scale: 1.05 }}
                         className='hover:bg-darkwhite border px-[10px] w-full max-w-[200px] min-h-[50px] h-fit font-rufina font-bold text-xxl' type='submit'
-                        onClick={() => checkDateAndTimeOnline()}>
+                        onClick={() => checkIfComplete()}>
                             Post Comment
                         </motion.button>  
                     </form>
@@ -448,3 +534,4 @@ export default function Article(){
     )
 }
 export const CallDataContext = createContext();
+export const SearchLinkContext = createContext();

@@ -63,17 +63,19 @@ export default function Menupage(){
     
     return(
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-            <Header/>
-            <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
-            <motion.div initial={{opacity: 0, left: -300 }}  whileInView={{ opacity: 1, x: 300 }} transition={{ duration: .5, delay:  1}} viewport={{ once: true }}
-            className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px] py-[100px]'>
-                <h1 className='text-white font-rufina font-bold text-xxxxxxxxl h-fit max-w-[400px] w-full'>View Our New Menu</h1>
-                <p className='font-bold text-white font-rufina text-xxl'>The freshest ingredients for you every day</p>
-            </motion.div>
+        <header className="relative w-full h-fit flex justify-center" style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>      
+            <div className='w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+                <Header/>
+                <motion.div initial={{opacity: 0, left: -300 }}  whileInView={{ opacity: 1, x: 300 }} transition={{ duration: .5, delay:  1}} viewport={{ once: true }}
+                className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 px-[60px] py-[100px]'>
+                    <h1 className='text-white font-rufina font-bold text-xxxxxxxxl h-fit max-w-[400px] w-full'>View Our New Menu</h1>
+                    <p className='font-bold text-white font-rufina text-xxl'>The freshest ingredients for you every day</p>
+                </motion.div>
+            </div>
         </header>
         <Navigation/>
-        <main className='relative overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[80px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+        <main className='relative overflow-hidden w-full h-fit flex flex-col pt-[80px] items-center' style={{display: (showNavigation) ? 'none' : 'flex'}}>
             <img className='absolute -top-[20px] right-[50px] h-[133px] phone:h-[185px] tablet:h-[250px] w-[140px] phone:w-[180px] tablet:w-[270px]' src={BlueberryImage} alt='illustration of a blueberry' aria-hidden='true'/>
             {
                 menuCuisineData.map((menuCuisineData) => {

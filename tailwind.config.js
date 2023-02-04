@@ -18,7 +18,7 @@ module.exports = {
         '450': '500px 500px',
         'full': '1fr',
         '60': '65% 30%',
-      },
+      }
     },
     colors: {
       white: '#FFFFFF',
@@ -29,6 +29,7 @@ module.exports = {
       lightgreen: '#9CAA00',
       green: '#5E6600',
       darkgreen: '#233000',
+      slate: 'rgb(241 245 249)'
     },
     fontFamily: {
       rufina: ['Rufina', 'serif'],

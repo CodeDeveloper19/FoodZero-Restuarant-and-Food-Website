@@ -90,24 +90,26 @@ export default function Aboutpage(){
 
     return(
         <>
-        <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-            <Header/>
-            <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
-            <div className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 py-[100px] px-[60px] self-end'>
-                <h1 ref={text} className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-full minTablet:w-[400px]' aria-label='Who We Are'></h1>
-                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
-                className='text-white font-rufina font-bold text-xxl w-full minTablet:w-[500px]'>
-                    The most important thing for us is to give you the comfortable dining experience you deserve
-                </motion.p>
-                <motion.button initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
-                className='hover:!scale-105 w-full microPhone:w-[200px] px-[20px] h-fit min-h-[60px] border-2 border-white text-white font-rufina font-bold text-xxl mt-[20px] hover:bg-darkwhite'>
-                    <Link to='/about/portfolio'>Our Portfolio</Link>
-                </motion.button>
+        <header className='relative w-full h-fit flex justify-center' style={{display : (showNavigation) ? 'none' : 'flex'}}>
+            <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of a cuisine' aria-hidden='true'/>
+            <div className='w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+                <Header/>
+                <div className='relative top-0 bottom-0 my-auto flex flex-col h-fit w-fit z-10 py-[100px] px-[60px] self-end'>
+                    <h1 ref={text} className='text-white font-rufina font-bold text-xxxxxxxxl h-fit w-full minTablet:w-[400px]' aria-label='Who We Are'></h1>
+                    <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
+                    className='text-white font-rufina font-bold text-xxl w-full minTablet:w-[500px]'>
+                        The most important thing for us is to give you the comfortable dining experience you deserve
+                    </motion.p>
+                    <motion.button initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 1 }} viewport={{ once: true }} 
+                    className='hover:!scale-105 w-full microPhone:w-[200px] px-[20px] h-fit min-h-[60px] border-2 border-white text-white font-rufina font-bold text-xxl mt-[20px] hover:bg-darkwhite'>
+                        <Link to='/about/portfolio'>Our Portfolio</Link>
+                    </motion.button>
+                </div>
             </div>
         </header>
         <Navigation/>
-        <main className='overflow-hidden w-full normal:w-[1349px] h-fit flex flex-col pt-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-            <section className='relative flex flex-col minTablet:flex-row justify-between items-center w-full h-fit px-[60px] py-[100px]'>
+        <main className='overflow-hidden w-full h-fit flex flex-col pt-[100px] items-center' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <section className='relative flex flex-col minTablet:flex-row justify-between items-center w-full normal:w-[1349px] h-fit px-[60px] py-[100px]'>
                 <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5}} viewport={{ once: true }} 
                 className='absolute top-[50px] phone:top-0 left-[50%] phone:left-[38%] w-[101px] phone:w-[150px] tablet:w-[200px] h-[85px] phone:h-[128px] tablet:h-[170px] object-cover' src={TomatoBlack} alt='illustration of a tomato' aria-hidden='true'/>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2}} viewport={{ once: true }} 
@@ -118,7 +120,7 @@ export default function Aboutpage(){
                 <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1}} viewport={{ once: true }} 
                 className='w-full minTablet:w-[50%] h-[200px] smartPhone:h-[250px] phone:h-[300px] laptop:h-[400px] object-cover mt-[100px] minTablet:mt-0' src={ChefSeasoning} alt='image of a cuisine' aria-hidden='true'/>
             </section>
-            <section className='relative flex flex-col w-full h-fit px-[60px] pt-[100px] pb-[100px] tablet:pb-0'>
+            <section className='relative flex flex-col w-full normal:w-[1349px] h-fit px-[60px] pt-[100px] pb-[100px] tablet:pb-0'>
                 {
                     employeesData.map((employeesData) => {
                         return <Employees key={employeesData.id} {...employeesData}/>
@@ -139,53 +141,55 @@ export default function Aboutpage(){
                     </button>
                 </div>
             </section>
-            <section className='relative w-full h-fit px-[60px] py-[150px] overflow-hidden'>
-                <img className='absolute w-[251px] tablet:w-[400px] h-[200px] tablet:h-[319px] top-0 -right-[60px]' src={RosemaryRight} alt='illustration of a rosemary leaf' aria-hidden='true'/>
-                <motion.h2 initial={{ top: -220 }} whileInView={{ y: 220 }} transition={{ duration: 1.5 }} viewport={{ once: true }}
-                className='relative font-bold text-center font-rufina text-xxxxxl smartPhone:text-xxxxxxxl'>Sophisticated Process</motion.h2>
-                <div className='flex flex-col minTablet:flex-row items-center justify-between w-full h-fit mt-[150px] mb-[50px]'>
-                    <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1 }} viewport={{ once: true }}
-                    className='w-full minTablet:w-[50%] tablet:w-[45%] h-[250px] smartPhone:h-[300px] tablet:h-[400px] object-cover' src={ManSlicing} alt='image of a man slicing' aria-hidden='true'/>
-                    <div className='flex flex-col w-full minTablet:w-[45%] h-full mt-[30px] minTablet:mt-0'>
-                        <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1.5 }} viewport={{ once: true }}
-                        className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>01.Slice</motion.h3>
-                        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2 }} viewport={{ once: true }}
-                        className='text-base font-normal text-left font-lato'>         
-                            Every excellent cooking starts with a good slicing technique. Just like our chefs, it is best advised to chefs use the knuckle of your middle finger as a width guide for slices. But be careful not to cut yourself   
-                        </motion.p>
-                    </div>
-                </div>
-                <div className='flex flex-col-reverse items-center justify-between w-full minTablet:flex-row h-fit'>
-                    <div className='flex flex-col-reverse w-full minTablet:w-[400px] h-fit mt-0 minTablet:mt-[50px] mb-[50px] mx-[40px] tablet:mx-[70px]'>
-                        <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 3.5 }} viewport={{ once: true }}
-                        className='w-full h-[178px] smartPhone:h-[228px] tablet:h-[328px] object-cover' src={GrilledMeat} alt='image of a man slicing' aria-hidden='true'/>
-                        <div className='flex flex-col h-full mb-[30px]'>
-                            <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2.5 }} viewport={{ once: true }}
-                            className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>
-                                03.Bake
-                            </motion.h3>
-                            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 3 }} viewport={{ once: true }}
-                            className='text-base font-normal text-left font-lato'>
-                                Baking is a culinary art that requires the best attention to detail and precise measurement of ingredients such as flour. Any one can be a master in such arts with time and practice.
-                            </motion.p>
-                        </div>
-                    </div>
-                    <div className='flex flex-col items-center w-full minTablet:w-[45%] h-fit mb-[50px]'>
+            <section className='relative w-full h-fit flex justify-center overflow-hidden'>
+                <div className='w-full normal:w-[1349px] h-fit px-[60px] py-[150px]'>
+                    <img className='absolute w-[251px] tablet:w-[400px] h-[200px] tablet:h-[319px] top-0 -right-[60px]' src={RosemaryRight} alt='illustration of a rosemary leaf' aria-hidden='true'/>
+                    <motion.h2 initial={{ top: -220 }} whileInView={{ y: 220 }} transition={{ duration: 1.5 }} viewport={{ once: true }}
+                    className='relative font-bold text-center font-rufina text-xxxxxl smartPhone:text-xxxxxxxl'>Sophisticated Process</motion.h2>
+                    <div className='flex flex-col minTablet:flex-row items-center justify-between w-full h-fit mt-[150px] mb-[50px]'>
                         <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1 }} viewport={{ once: true }}
-                        className='w-full minTablet:w-[400px] h-[178px] smartPhone:h-[228px] tablet:h-[328px] object-cover' src={SeasonedMeat} alt='image of a man slicing' aria-hidden='true'/>
-                        <div className='flex flex-col h-full mt-[30px]'>
+                        className='w-full minTablet:w-[50%] tablet:w-[45%] h-[250px] smartPhone:h-[300px] tablet:h-[400px] object-cover' src={ManSlicing} alt='image of a man slicing' aria-hidden='true'/>
+                        <div className='flex flex-col w-full minTablet:w-[45%] h-full mt-[30px] minTablet:mt-0'>
                             <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1.5 }} viewport={{ once: true }}
-                            className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>
-                                02.Pickled
-                            </motion.h3>
+                            className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>01.Slice</motion.h3>
                             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2 }} viewport={{ once: true }}
-                            className='font-lato font-normal text-base text-left w-full minTablet:w-[230px]'>
-                                Using the right and wrong seasoning can make and break a dish. The right amount of seasoning is what it takes to make your dish top-tier like ours. Check and use the right type of salt when cooking.
+                            className='text-base font-normal text-left font-lato'>         
+                                Every excellent cooking starts with a good slicing technique. Just like our chefs, it is best advised to chefs use the knuckle of your middle finger as a width guide for slices. But be careful not to cut yourself   
                             </motion.p>
                         </div>
                     </div>
+                    <div className='flex flex-col-reverse items-center justify-between w-full minTablet:flex-row h-fit'>
+                        <div className='flex flex-col-reverse w-full minTablet:w-[400px] h-fit mt-0 minTablet:mt-[50px] mb-[50px] mx-[40px] tablet:mx-[70px]'>
+                            <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 3.5 }} viewport={{ once: true }}
+                            className='w-full h-[178px] smartPhone:h-[228px] tablet:h-[328px] object-cover' src={GrilledMeat} alt='image of a man slicing' aria-hidden='true'/>
+                            <div className='flex flex-col h-full mb-[30px]'>
+                                <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2.5 }} viewport={{ once: true }}
+                                className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>
+                                    03.Bake
+                                </motion.h3>
+                                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 3 }} viewport={{ once: true }}
+                                className='text-base font-normal text-left font-lato'>
+                                    Baking is a culinary art that requires the best attention to detail and precise measurement of ingredients such as flour. Any one can be a master in such arts with time and practice.
+                                </motion.p>
+                            </div>
+                        </div>
+                        <div className='flex flex-col items-center w-full minTablet:w-[45%] h-fit mb-[50px]'>
+                            <motion.img initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1 }} viewport={{ once: true }}
+                            className='w-full minTablet:w-[400px] h-[178px] smartPhone:h-[228px] tablet:h-[328px] object-cover' src={SeasonedMeat} alt='image of a man slicing' aria-hidden='true'/>
+                            <div className='flex flex-col h-full mt-[30px]'>
+                                <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1.5 }} viewport={{ once: true }}
+                                className='font-bold font-rufina text-xxxxl smartPhone:text-xxxxxxl'>
+                                    02.Pickled
+                                </motion.h3>
+                                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, delay: 2 }} viewport={{ once: true }}
+                                className='font-lato font-normal text-base text-left w-full minTablet:w-[230px]'>
+                                    Using the right and wrong seasoning can make and break a dish. The right amount of seasoning is what it takes to make your dish top-tier like ours. Check and use the right type of salt when cooking.
+                                </motion.p>
+                            </div>
+                        </div>
+                    </div>
+                    <img className='absolute w-[182px] tablet:w-[300px] h-[100px] tablet:h-[165px] bottom-0 -left-[60px]' src={RosemaryLeft} alt='illustration of a rosemary leaf' aria-hidden='true'/>
                 </div>
-                <img className='absolute w-[182px] tablet:w-[300px] h-[100px] tablet:h-[165px] bottom-0 -left-[60px]' src={RosemaryLeft} alt='illustration of a rosemary leaf' aria-hidden='true'/>
             </section>
             <Reservation />
         </main>

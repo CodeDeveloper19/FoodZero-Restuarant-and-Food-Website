@@ -58,14 +58,16 @@ export default function Blogpage(){
 
     return(
         <>
-            <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
+        <header className="relative w-full h-fit flex justify-center" style={{display: (showNavigation) ? 'none' : 'flex'}}>
+            <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
+            <div className='w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
                 <Header/>
-                <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
                 <div className="top-0 bottom-0 left-0 right-0 z-10 flex flex-col w-full mx-auto my-auto text-white h-fit">
                     <h1 className="w-full font-bold text-center text-white font-rufina text-xxxxxxxxl h-fit">Our Blog</h1>
                     <p className="w-full text-base font-normal text-center text-white font-lato h-fit">Come and learn how we do some of our cooking</p>
                 </div>
-            </header>
+            </div>
+        </header>
             <Navigation/>
             <main className="w-full normal:w-[1349px] h-fit flex flex-col items-center my-[100px] px-[60px]" style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <nav className="w-full h-fit">

@@ -63,52 +63,54 @@ export default function Reservation(){
 
     return(
         <>
-            <section id='reservation' className='flex flex-col items-center w-full h-fit py-[150px] px-[60px] bg-lightwhite'>
-                <h2 className='font-rufina font-bold text-xxxxxxxl text-center'>Make a Reservation</h2>
-                <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
-                <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
-                    <div className='mt-[70px] mb-[100px] w-full h-fit flex flex-col tablet:flex-row justify-between'>
-                        <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base'>
-                            <input ref={date} className='w-full h-full bg-lightwhite outline-0' type='date' aria-label='reservation date' required></input>
+            <section id='reservation' className='w-full h-fit flex justify-center bg-lightwhite'>
+                <div className='flex flex-col items-center w-full normal:w-[1349px] h-fit py-[150px] px-[60px]'>
+                    <h2 className='font-rufina font-bold text-xxxxxxxl text-center'>Make a Reservation</h2>
+                    <p className='font-lato font-normal text-base'>Get in touch with restaurant</p>
+                    <form className='h-fit w-full flex flex-col items-center' onSubmit={(e) => {e.preventDefault()}}>
+                        <div className='mt-[70px] mb-[100px] w-full h-fit flex flex-col tablet:flex-row justify-between'>
+                            <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] font-lato font-normal text-base'>
+                                <input ref={date} className='w-full h-full bg-lightwhite outline-0' type='date' aria-label='reservation date' required></input>
+                            </div>
+                            <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] my-[50px] tablet:my-0'>
+                                <select ref={time} className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
+                                    <option value="">Time for Reservation</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="21:00">21:00</option>
+                                    <option value="22:00">22:00</option>
+                                    <option value="23:00">23:00</option>
+                                </select>
+                            </div>
+                            <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px]'>
+                                <select ref={numberOfPersons} className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='number of persons' required>
+                                    <option value="">Number Of Persons</option>
+                                    <option value="1 person">1 person</option>
+                                    <option value="2 persons">2 persons</option>
+                                    <option value="3 persons">3 persons</option>
+                                    <option value="4 persons">4 persons</option>
+                                    <option value="5 persons">5 persons</option>
+                                </select>
+                            </div>
                         </div>
-                        <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px] my-[50px] tablet:my-0'>
-                            <select ref={time} className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='reservation time' required>
-                                <option value="">Time for Reservation</option>
-                                <option value="08:00">08:00</option>
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="21:00">21:00</option>
-                                <option value="22:00">22:00</option>
-                                <option value="23:00">23:00</option>
-                            </select>
-                        </div>
-                        <div className='h-[50px] w-full tablet:w-1/4 border bg-lightwhite px-[20px]'>
-                            <select ref={numberOfPersons} className='h-full w-full bg-lightwhite outline-none font-lato font-normal text-base' aria-label='number of persons' required>
-                                <option value="">Number Of Persons</option>
-                                <option value="1 person">1 person</option>
-                                <option value="2 persons">2 persons</option>
-                                <option value="3 persons">3 persons</option>
-                                <option value="4 persons">4 persons</option>
-                                <option value="5 persons">5 persons</option>
-                            </select>
-                        </div>
-                    </div>
-                    <Link
-                    onClick={(e) => checkIfComplete(e)}>
-                        <motion.button whileHover={{ scale: 1.2 }}
-                        className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</motion.button>   
-                    </Link>  
-                </form>
+                        <Link
+                        onClick={(e) => checkIfComplete(e)}>
+                            <motion.button whileHover={{ scale: 1.2 }}
+                            className='bg-darkgreen hover:bg-green w-[200px] h-[50px] text-white' type='submit'>BOOK NOW</motion.button>   
+                        </Link>  
+                    </form>
+                </div>
             </section>
         </>
     )

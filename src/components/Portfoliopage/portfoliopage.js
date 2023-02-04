@@ -207,7 +207,7 @@ const dataComponents = [
 ]
 
 export default function Portfoliopage(){
-    const [[showNavigation]] = useContext(NavigationContext);
+    const [[showNavigation], [windowSize]] = useContext(NavigationContext);
     const [clickedOnAll, setClickedOnAll] = useState('border-b-2');
     const [clickedOnStarter, setClickedOnStarter] = useState(null);
     const [clickedOnLunch, setClickedOnLunch] = useState(null);
@@ -253,20 +253,22 @@ export default function Portfoliopage(){
 
     const settingPosition = (num) => {
         if (clickedOnAll || clickedOnStarter || clickedOnLunch || clickedOnDinner || clickedOnDrinks || clickedOnSweets || clickedOnFruits){
-            setPositionOfContainer(`${-num}vw`)
+            setPositionOfContainer(`${-num}px`)
         }
     }
     
     return (
         <>
-            <header className='relative w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]' style={{display: (showNavigation) ? 'none' : 'flex'}}>
-                <Header/>
+            <header className="relative w-full h-fit flex justify-center" style={{display: (showNavigation) ? 'none' : 'flex'}}>
                 <img className='absolute object-cover w-full h-full' src={HeaderImage} alt='image of the interior of a restaurant' aria-hidden='true'/>
-                <h1 ref={text}
-                className='flex relative top-0 bottom-0 left-0 right-0 z-10 mx-auto my-auto font-bold text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl h-fit w-fit text-center pb-[50px] px-[30px]'>Our Portfolio</h1>
-                <div className='relative w-fit h-fit flex flex-row items-center rotate-90 bottom-[-20px] left-0 right-0 mx-auto'>
-                    <p className='text-white font-rufina text-xxxl'>Scroll</p>
-                    <hr className='text-white border-dashed w-[120px] ml-[10px]'/>
+                <div className='w-full normal:w-[1349px] h-fit min-h-[657px] flex flex-col pb-[100px]'>
+                    <Header/>
+                    <h1 ref={text}
+                    className='flex relative top-0 bottom-0 left-0 right-0 z-10 mx-auto my-auto font-bold text-white font-rufina text-xxxxxxxl smartPhone:text-xxxxxxxxl h-fit w-fit text-center pb-[50px] px-[30px]'>Our Portfolio</h1>
+                    <div className='relative w-fit h-fit flex flex-row items-center rotate-90 bottom-[-20px] left-0 right-0 mx-auto'>
+                        <p className='text-white font-rufina text-xxxl'>Scroll</p>
+                        <hr className='text-white border-dashed w-[120px] ml-[10px]'/>
+                    </div>
                 </div>
             </header>
             <Navigation/>
@@ -277,12 +279,12 @@ export default function Portfoliopage(){
                     </button>
                     <ul className='minTablet:!flex flex-col minTablet:flex-row justify-between minTablet:min-h-0  min-h-[240px] h-fit w-full' style={{display: (collapseNav) ? 'none' : 'flex'}}>
                         <li><button className={`border-dotted ${clickedOnAll}`} onClick={() => {resetBorders(); setClickedOnAll('border-b-2'); settingPosition(0)}}>All</button></li>
-                        <li><button className={`border-dotted ${clickedOnStarter}`} onClick={() => {resetBorders(); setClickedOnStarter('border-b-2'); settingPosition(100)}}>Starter</button></li>
-                        <li><button className={`border-dotted ${clickedOnLunch}`} onClick={() => {resetBorders(); setClickedOnLunch('border-b-2'); settingPosition(200)}}>Lunch</button></li>
-                        <li><button className={`border-dotted ${clickedOnDinner}`} onClick={() => {resetBorders(); setClickedOnDinner('border-b-2'); settingPosition(300)}}>Dinner</button></li>
-                        <li><button className={`border-dotted ${clickedOnDrinks}`} onClick={() => {resetBorders(); setClickedOnDrinks('border-b-2'); settingPosition(400)}}>Drinks</button></li>
-                        <li><button className={`border-dotted ${clickedOnSweets}`} onClick={() => {resetBorders(); setClickedOnSweets('border-b-2'); settingPosition(500)}}>Sweets</button></li>
-                        <li><button className={`border-dotted ${clickedOnFruits}`} onClick={() => {resetBorders(); setClickedOnFruits('border-b-2'); settingPosition(600)}}>Fruits</button></li>
+                        <li><button className={`border-dotted ${clickedOnStarter}`} onClick={() => {resetBorders(); setClickedOnStarter('border-b-2'); (windowSize.innerWidth > 1367) ? settingPosition(1349) : settingPosition(windowSize.innerWidth)}}>Starter</button></li>
+                        <li><button className={`border-dotted ${clickedOnLunch}`} onClick={() => {resetBorders(); setClickedOnLunch('border-b-2'); (windowSize.innerWidth > 1367) ? settingPosition(1349*2) : settingPosition(windowSize.innerWidth*2)}}>Lunch</button></li>
+                        <li><button className={`border-dotted ${clickedOnDinner}`} onClick={() => {resetBorders(); setClickedOnDinner('border-b-2'); (windowSize.innerWidth > 1367) ? settingPosition(1349*3) : settingPosition(windowSize.innerWidth*3)}}>Dinner</button></li>
+                        <li><button className={`border-dotted ${clickedOnDrinks}`} onClick={() => {resetBorders(); setClickedOnDrinks('border-b-2'); (windowSize.innerWidth > 1367) ? settingPosition(1349*4) : settingPosition(windowSize.innerWidth*4)}}>Drinks</button></li>
+                        <li><button className={`border-dotted ${clickedOnSweets}`} onClick={() => {resetBorders(); setClickedOnSweets('border-b-2'); (windowSize.innerWidth > 1367) ? settingPosition(1349*5) : settingPosition(windowSize.innerWidth*5)}}>Sweets</button></li>
+                        <li><button className={`border-dotted ${clickedOnFruits}`} onClick={() => {resetBorders(); setClickedOnFruits('border-b-2'); (windowSize.innerWidth > 1367) ? settingPosition(1349*6) : settingPosition(windowSize.innerWidth*6)}}>Fruits</button></li>
                     </ul>
                 </nav>
                 <section className="w-full h-fit">
