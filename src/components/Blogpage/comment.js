@@ -10,7 +10,6 @@ export default function Comment(props){
                     <p className="text-base font-normal font-lato text-darkwhite my-[5px]">{`${props.commentDate}, ${props.commentTime}`}</p>
                     <p className="text-base font-normal font-lato">{props.comment}</p>
                 </div>
-                <button className="text-base font-bold font-lato h-fit">Reply</button>
             </div>
         </>
     )

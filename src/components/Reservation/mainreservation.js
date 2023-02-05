@@ -72,9 +72,14 @@ export default function Mainreservation(){
             localStorage.setItem('numberofpersons', reservationdetails[2]);
         }
 
-        if (months <= 0 || days <= 0 || hours <= 0 || minutes <= 0 || seconds <= 0){
+        if (months < 0 || days < 0 || hours < 0 || minutes < 0 || seconds < 0){
             setReservationDetails(null);
             localStorage.clear();
+            setDays("00");
+            setMonths("00");
+            setHours("00");
+            setMinutes("00");
+            setSeconds("00");
             return;
         }
 
@@ -85,7 +90,7 @@ export default function Mainreservation(){
           }, 1000);
           return () => clearTimeout(timer);
 
-    }, []);
+    }, [months, days, hours, minutes, seconds]);
 
 
 

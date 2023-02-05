@@ -1,7 +1,6 @@
 import React, { useState, useContext, createContext, useEffect, useRef } from 'react';
 import { NavigationContext } from '../../App';
 import { motion } from 'framer-motion';
-import { Viewportcheckerhook } from '../viewportcheckerhook';
 import spice1 from '../../images/Spices/spices1.png';
 import spice2 from '../../images/Spices/spices2.png';
 import spice3 from '../../images/Spices/spices3.png';
@@ -181,31 +180,12 @@ export default function Homepage(){
         }
     }, [])
 
-    // const [isOnScreen, setIsOnScreen] = useState(false);
-
     const [[showNavigation], [windowSize]] = useContext(NavigationContext);
     const review = useRef(null);
-    // let firstValue = Viewportcheckerhook(review);
 
     useEffect(() => {
         setsliderPosition('0px');
     }, [windowSize]);
-
-    // useEffect(() => {
-    //     // console.log("A");
-    //     // console.log(nextSlide)
-    //     let repeatMovementOfSlider; 
-    //     const initialDelay = setTimeout(() => {
-    //         repeatMovementOfSlider = setInterval(() => {
-    //             sliderShift();
-    //             if (nextSlide !== undefined) {
-    //                 setsliderPosition(nextSlide);
-    //             }
-    //             // console.log(nextSlide)
-    //         }, 1000);
-    //     }, 1000);
-    //     return () => {clearInterval(repeatMovementOfSlider); clearTimeout(initialDelay)};
-    // }, [sliderPosition])
 
     useEffect(() => {
         sliderShift();
@@ -253,14 +233,6 @@ export default function Homepage(){
             setNextSlide(`${-1349}px`);
         }
     }
-
-    // useEffect(() => {
-    //     if (firstValue === true) {
-    //         setIsOnScreen(firstValue);
-    //     }
-    // }, [firstValue])
-
-
 
     return (
         <>
