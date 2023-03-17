@@ -135,10 +135,9 @@ export const WindowSizeContext = createContext();
 export const WindowSizeSliderPositionContext = createContext();
 
 export default function Homepage(){
-    const [sliderPosition, setsliderPosition] = useState('0px');
-    const [nextSlide, setNextSlide] = useState(undefined);
-    const [prevSlide, setPrevSlide] = useState(undefined);
+    const [sliderPosition, setSliderPosition] = useState('0px');
     const [postListData, setPostListData] = useState([]);
+    const [currentSlide, setCurrentSlide] = useState(1);
 
     useEffect(() => {
         const firebaseConfig = {
@@ -184,55 +183,19 @@ export default function Homepage(){
     const review = useRef(null);
 
     useEffect(() => {
-        setsliderPosition('0px');
+        setSliderPosition('0px');
     }, [windowSize]);
 
     useEffect(() => {
-        sliderShift();
-    }, [sliderPosition])
-
-    let positionOfSlider = -parseInt(sliderPosition.slice(1, sliderPosition.length - 2));
-
-    const sliderShift = () => {
-        if (sliderPosition === '0px') {
-            isAtFirstSlide();
-            return;
-        } else if (sliderPosition === '-2732px') {
-            isAtLastSlide();
-            return;
-        } else {
-            isAtOtherSlides();
-            return;
-        }
-    }
-
-    const isAtOtherSlides = () => {
-        if (windowSize.innerWidth < 1367){
-            setPrevSlide(`${positionOfSlider + windowSize.innerWidth}px`);
-            setNextSlide(`${positionOfSlider - windowSize.innerWidth}px`);
-        } else {
-            setPrevSlide(`${positionOfSlider + 1349}px`);
-            setNextSlide(`${positionOfSlider - 1349}px`);
-        }
-    }
-
-    const isAtLastSlide = () => {
-        setNextSlide('0px');
-        if (windowSize.innerWidth < 1367){
-            setPrevSlide(`${positionOfSlider + windowSize.innerWidth}px`);
-        } else {
-            setPrevSlide(`${positionOfSlider + 1349}px`);
-        }
-    }
-
-    const isAtFirstSlide = () => {
-        setPrevSlide('0px');
-        if (windowSize.innerWidth < 1367){
-            setNextSlide(`${-windowSize.innerWidth}px`);
-        } else {
-            setNextSlide(`${-1349}px`);
-        }
-    }
+        let repeatMovementOfSlider = setInterval(() => {
+            if (currentSlide < 3){
+                setCurrentSlide(currentSlide => currentSlide + 1);
+            } else if (currentSlide === 3){
+                setCurrentSlide(1)
+            }
+        }, 3000);
+        return () => {clearInterval(repeatMovementOfSlider)};
+    }, [currentSlide])
 
     return (
         <>
@@ -362,7 +325,7 @@ export default function Homepage(){
                     <div className='w-full normal:w-[1349px] min-h-[500px] h-fit overflow-x-hidden'>
                         <motion.div ref={review} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2 }} viewport={{ once: true }}
                         className='flex flex-row w-fit h-full bg-white relative transition-[left] duration-1000' style={{left: sliderPosition}}>
-                            <WindowSizeSliderPositionContext.Provider value={[[setsliderPosition], [nextSlide], [prevSlide]]}>
+                            <WindowSizeSliderPositionContext.Provider value={[[setSliderPosition], [currentSlide, setCurrentSlide]]}>
                                     {
                                         reviewListData.map((reviewListData) => {
                                             return <Reviewlisting key={reviewListData.id} {...reviewListData}/>

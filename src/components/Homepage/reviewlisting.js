@@ -1,22 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { WindowSizeSliderPositionContext } from './homepage';
 import quote from '../../images/quote.png';
 import rightarrowblack from '../../images/Icons/rightarrowblack.svg';
 import leftarrowblack from '../../images/Icons/leftarrowblack.svg';
 
 export default function Reviewlisting(props){
-    const [[setsliderPosition], [nextSlide], [prevSlide]] = useContext(WindowSizeSliderPositionContext);
+    const [[setSliderPosition], [currentSlide, setCurrentSlide]] = useContext(WindowSizeSliderPositionContext);
 
-    // useEffect(() => {
-    //     console.log("A")
-    //     let repeatMovementOfSlider; 
-    //     const initialDelay = setTimeout(() => {
-    //         repeatMovementOfSlider = setInterval(() => {
-    //             moveSlide();
-    //         }, 3000);
-    //     }, 1000);
-    //     return () => {clearInterval(repeatMovementOfSlider); clearTimeout(initialDelay)};
-    // }, [])
+    useEffect(() => {
+        setSliderPosition(`-${(100 * (currentSlide - 1))}%`);
+    }, [currentSlide]);
 
     return(
         <>
@@ -34,14 +27,18 @@ export default function Reviewlisting(props){
                     <div className='w-fit tablet:w-2/4 h-[100px] flex flex-col microPhone:flex-row items-center tablet:justify-end mt-[10px] microPhone:mt-0'>
                         <button
                         onClick={() => {
-                            setsliderPosition(prevSlide);
+                            if (currentSlide > 1){
+                                setCurrentSlide(currentSlide - 1)
+                            }
                         }}>
                             <img className='w-[30px] h-[30px]' src={leftarrowblack} alt="left arrow icon" aria-hidden='true'/>
                         </button>
                         <p className='mx-0 microPhone:mx-[20px] smartPhone:mx-[30px] font-rufina font-bold text-xxl'>{props.pageNumber}</p>
                         <button
                         onClick={() => {
-                            setsliderPosition(nextSlide);
+                            if (currentSlide < 3){
+                                setCurrentSlide(currentSlide => currentSlide + 1);
+                            } 
                         }}>
                             <img className='w-[30px] h-[30px]' src={rightarrowblack} alt="right arrow icon" aria-hidden='true'/>
                         </button>

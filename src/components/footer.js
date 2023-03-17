@@ -37,6 +37,7 @@ export default function Footer(){
                     </div>
                     <div className='w-full h-fit min-h-[100px] px-[60px] flex flex-col minTablet:flex-row justify-between pt-[30px] pb-[30px] minTablet:pb-0'>
                         <p className='font-lato font-normal text-base text-white'>© 2022 Zero Inc. All rights Reserved</p>
+                        <p className='font-lato font-normal text-base text-white'>Developed with <i className="fa fa-heart-o" aria-hidden="true"></i> by <a className="text-[#007bff]" target='_blank' rel="noopener noreferrer" href='https://www.linkedin.com/in/okoli-akachukwu-6b321b178/'>CodeDeveloper19</a></p>
                         <div className='flex flex-row justify-between h-[20px] w-[70%] microPhone:w-[120px] mr-[50px] mt-[20px] minTablet:mt-0'>
                             <a href='https://www.instagram.com/' target='_blank' rel="noopener noreferrer"><img className='w-[20px] h-full' src={instagram} alt="instagram logo"/></a>
                             <a href='https://www.twitter.com/' target='_blank' rel="noopener noreferrer"><img className='w-[20px] h-full' src={twitter} alt="twitter logo"/></a>
